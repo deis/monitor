@@ -1,0 +1,15 @@
+[Unit]
+Description=deis-monitor-daemon
+
+[Service]
+EnvironmentFile=/etc/environment
+TimeoutStartSec=20m
+ExecStartPre=/bin/sh -c "IMAGE=deis/monitor-daemon:latest && docker history $IMAGE >/dev/null 2>&1 || flock -w 1200 /var/run/lock/monitor-daemon docker pull $IMAGE" # fixme: IMAGE handling
+ExecStartPre=/bin/sh -c "docker inspect deis-monitor-daemon >/dev/null 2>&1 && docker rm -f deis-monitor-daemon >/dev/null 2>&1 || true"
+ExecStart=/bin/sh -c "IMAGE=deis/monitor-daemon:latest && docker run --name deis-monitor-daemon --rm -e HOST=$COREOS_PRIVATE_IPV4 -p 9090:9090 $IMAGE" # fixme, port shouldnt be exposed for all to see.
+ExecStop=-/usr/bin/docker stop deis-monitor-daemon
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

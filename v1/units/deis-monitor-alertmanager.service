@@ -1,0 +1,16 @@
+[Unit]
+Description=deis-monitor-alertmanager
+
+[Service]
+EnvironmentFile=/etc/environment
+TimeoutStartSec=20m
+ExecStartPre=/bin/sh -c "IMAGE=`deis/monitor-alertmanager:latest` && docker history $IMAGE >/dev/null 2>&1 || flock -w 1200 /var/run/lock/monitor-alertmanager docker pull $IMAGE" # fixme: IMAGE handling
+ExecStartPre=/bin/sh -c "docker inspect deis-monitor-alertmanager >/dev/null 2>&1 && docker rm -f deis-monitor-alertmanager >/dev/null 2>&1 || true"
+ExecStart=/bin/sh -c "IMAGE=deis/monitor-daemon:latest && docker run --name deis-monitor-alertmanager --rm -e HOST=$COREOS_PRIVATE_IPV4 -p 9093:9093 $IMAGE"
+ExecStartPost=/bin/sh -c "etcdctl set /deis/monitor/alertManagerUri http://$COREOS_PRIVATE_IPV4:9093 >/dev/null" # <- fixme hax
+ExecStop=-/usr/bin/docker stop deis-monitor-alertmanager
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

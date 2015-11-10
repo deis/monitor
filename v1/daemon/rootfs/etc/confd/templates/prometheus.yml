@@ -1,0 +1,36 @@
+### prometheus.yml ###
+
+global:
+  scrape_interval: 15s # By default, scrape targets every 15 seconds.
+  evaluation_interval: 15s # By default, scrape targets every 15 seconds.
+  external_labels:
+    monitor: 'deis-monitor'
+
+rule_files:
+  - '/etc/prometheus/alert.rules'
+
+scrape_configs:
+  # monitor cadvisor, etcd, node exporter and controller endpoints
+  - job_name: 'cadvisor'
+    scrape_interval: 5s
+    scrape_timeout: 10s
+    target_groups:
+      - targets:
+{{ range gets "/deis/monitor/endpoints/cadvisor/*" }}        - {{ base .Key }}:{{ .Value }}
+{{ end }} # rename key from hosts
+
+  - job_name: 'etcd'
+    scrape_interval: 5s
+    scrape_timeout: 10s
+    target_groups:
+      - targets:
+{{ range gets "/deis/monitor/endpoints/etcd/*" }}        - {{ base .Key }}:{{ .Value }}
+{{ end }}
+
+  - job_name: 'node-exporter'
+    scrape_interval: 5s
+    scrape_timeout: 10s
+    target_groups:
+      - targets:
+{{ range gets "/deis/monitor/endpoints/nodeexporter/*" }}        - {{ base .Key }}:{{ .Value }}
+{{ end }}

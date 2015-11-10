@@ -1,0 +1,10 @@
+[template]
+src   = "alertmanager.yml"
+dest  = "/etc/alertmanager/alertmanager.yml"
+uid = 0
+gid = 0
+mode  = "0644"
+keys = [
+  "/deis/monitor",
+]
+reload_cmd = "kill -HUP `cat /var/spool/alertmanager.pid`" # does this even work?

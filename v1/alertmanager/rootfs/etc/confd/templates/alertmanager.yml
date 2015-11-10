@@ -1,0 +1,16 @@
+# expand to all the things
+{{ if exists "/deis/monitor/slack_webhook_url" }}
+notification_config {
+  name: "alertmanager_slack"
+  slack_config {
+    webhook_url: "{{ getv "/deis/monitor/slack_webhook_url" }}"
+    channel: "#{{ getv "/deis/monitor/slack_webhook_channel" }}"
+    send_resolved: true
+  }
+}
+
+aggregation_rule {
+  repeat_rate_seconds: 3600
+  notification_config_name: "alertmanager_slack"
+}
+{{ end }}
