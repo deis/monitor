@@ -1,6 +1,4 @@
-FROM prom/alertmanager:0.0.4
-
-USER root
+FROM prom/prometheus:0.16.1
 
 WORKDIR /tmp
 
@@ -16,9 +14,7 @@ RUN cp /tmp/etcd-v2.2.1-linux-amd64/etcdctl /usr/local/bin/etcdctl && chmod +x /
 RUN curl -sSL -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/releases/download/v0.10.0/confd-0.10.0-linux-amd64 \
     && chmod +x /usr/local/bin/confd
 
-COPY rootfs /
-
-EXPOSE      9093
+COPY . /
 
 ENTRYPOINT [ "/bin/boot.sh" ]
 
