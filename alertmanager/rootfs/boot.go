@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"os"
 	"strconv"
@@ -12,41 +13,42 @@ import (
 )
 
 func main() {
-	var etcd_ttl int
-	var etcd_port string
+	var etcdTTL int
+	var etcdPort string
 
 	if os.Getenv("ETCD_PORT") == "" {
-		etcd_port = "4001"
+		etcdPort = "4001"
 	} else {
-		etcd_port = os.Getenv("ETCD_PORT")
+		etcdPort = os.Getenv("ETCD_PORT")
 	}
 
 	if os.Getenv("ETCD_TTL") == "" {
-		etcd_ttl = 20
+		etcdTTL = 20
 	} else {
-		etcd_ttl, _ = strconv.Atoi(os.Getenv("ETCD_TTL"))
+		etcdTTL, _ = strconv.Atoi(os.Getenv("ETCD_TTL"))
 	}
-	// export ETCD_PORT="${ETCD_PORT:-4001}"
-	// export ETCD="$HOST:$ETCD_PORT"
-	// export ETCD_PATH="${ETCD_PATH:-/deis/monitor}"
-	// export ETCD_TTL="${ETCD_TTL:-20}"
 
 	cfg := client.Config{
-		Endpoints: []string{"http://" + os.Getenv("HOST") + ":" + etcd_port},
+		Endpoints: []string{"http://" + os.Getenv("HOST") + ":" + etcdPort},
 		Transport: client.DefaultTransport,
 		// set timeout per request to fail fast when the target endpoint is unavailable
-		HeaderTimeoutPerRequest: time.Duration(etcd_ttl),
+		HeaderTimeoutPerRequest: time.Duration(time.Second),
 	}
+
 	c, err := client.New(cfg)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	kapi := client.NewKeysAPI(c)
-	// set "/foo" key with "bar" value
-	log.Print("Setting '/foo' key with 'bar' value")
 
 	ctx, _ := context.WithTimeout(context.TODO(), 100*time.Millisecond)
 
-	resp, err := kapi.Get(ctx, "/", &client.GetOptions{Recursive: false, Sort: false, Quorum: true})
+	etcdErr := errors.New("waiting for etcd")
+
+	for etcdErr != nil {
+		log.Print(etcdErr.Error())
+		_, etcdErr = kapi.Get(ctx, "/", &client.GetOptions{Recursive: false, Sort: false, Quorum: true})
+		time.Sleep(time.Duration(etcdTTL) * time.Second)
+	}
 }
