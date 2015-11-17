@@ -10,7 +10,6 @@ export ETCD="$HOST:$ETCD_PORT"
 export ETCD_PATH="${ETCD_PATH:-/deis/monitor}"
 export ETCD_TTL="${ETCD_TTL:-20}"
 
-
 until etcdctl --no-sync -C "$ETCD" ls >/dev/null 2>&1; do
 	echo "alertmanager: waiting for etcd at ${ETCD}..."
 	sleep $((ETCD_TTL/2))  # sleep for half the TTL
