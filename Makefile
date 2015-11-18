@@ -50,8 +50,8 @@ kube-delete-alertmanager:
 
 kube-delete-all: kube-delete-alertmanager kube-delete-prometheus
 
-kube-create-prometheus:
-	kubectl create -f manifests/deis-monitor-prometheus-rc.yaml
+kube-create-prometheus: update-manifests
+	kubectl create -f manifests/deis-monitor-prometheus-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-prometheus-service.yaml
 
 kube-create-alertmanager:
