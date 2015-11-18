@@ -19,6 +19,12 @@ check-docker:
 	  exit 2; \
 	fi
 
+dev-registry: check-docker
+	@docker inspect registry >/dev/null 2>&1 && docker start registry || docker run --restart="always" -d -p 5000:5000 --name registry registry:0.9.1
+	@echo
+	@echo "To use a local registry for Deis development:"
+	@echo "    export DEV_REGISTRY=`docker-machine ip $$(docker-machine active 2>/dev/null) 2>/dev/null || echo $(HOST_IPADDR) `:5000"
+
 build: docker-build
 
 push: docker-push

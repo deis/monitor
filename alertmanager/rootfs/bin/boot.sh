@@ -5,11 +5,11 @@ set -eo pipefail
 [[ $DEBUG ]] && set -x
 
 # configure etcd
-export ETCD_PORT="${ETCD_PORT:-4001}"
-export ETCD="$HOST:$ETCD_PORT"
-export ETCD_PATH="${ETCD_PATH:-/deis/monitor}"
-export ETCD_TTL="${ETCD_TTL:-20}"
-
+export ETCD_PORT=${DEIS_ETCD_1_SERVICE_PORT_CLIENT:-4001}
+export ETCD_HOST=${DEIS_ETCD_1_SERVICE_HOST:-$HOST}
+export ETCD="$ETCD_HOST:$ETCD_PORT"
+export ETCD_PATH=${ETCD_PATH:-/deis/monitor}
+export ETCD_TTL=${ETCD_TTL:-20}
 
 until etcdctl --no-sync -C "$ETCD" ls >/dev/null 2>&1; do
 	echo "alertmanager: waiting for etcd at ${ETCD}..."
