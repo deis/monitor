@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: deis-monitor-prometheus
+  labels:
+    heritage: deis
+spec:
+  replicas: 1
+  selector:
+    app: deis-monitor-prometheus
+  template:
+    metadata:
+      labels:
+        app: deis-monitor-prometheus
+    spec:
+      containers:
+        - name: deis-prometheus
+          image: "quay.io/deis/monitor-prometheus:latest"
+          ports:
+            - containerPort: 9090
+              name: http
+          command:
+            - boot.sh
