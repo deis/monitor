@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: deis-monitor-alert
+  labels:
+    heritage: deis
+spec:
+  replicas: 1
+  selector:
+    app: deis-monitor-alert
+  template:
+    metadata:
+      labels:
+        app: deis-monitor-alert
+    spec:
+      containers:
+        - name: deis-monitor-alert
+          image: "quay.io/deis/monitor-alertmanager:latest"
+          ports:
+            - containerPort: 9093
+              name: http
+          command:
+            - boot.sh

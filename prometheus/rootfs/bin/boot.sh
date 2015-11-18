@@ -4,11 +4,11 @@ set -eo pipefail
 
 [[ $DEBUG ]] && set -x
 
-# configure etcd
-export ETCD_PORT="${ETCD_PORT:-4001}"
-export ETCD="$HOST:$ETCD_PORT"
-export ETCD_PATH="${ETCD_PATH:-/deis/monitor}"
-export ETCD_TTL="${ETCD_TTL:-20}"
+export ETCD_PORT=${DEIS_ETCD_1_SERVICE_PORT_CLIENT:-4001}
+export ETCD_HOST=${DEIS_ETCD_1_SERVICE_HOST:-$HOST}
+export ETCD="$ETCD_HOST:$ETCD_PORT"
+export ETCD_PATH=${ETCD_PATH:-/deis/monitor}
+export ETCD_TTL=${ETCD_TTL:-20}
 
 until etcdctl --no-sync -C "$ETCD" ls >/dev/null 2>&1; do
 	echo "monitor: waiting for etcd at ${ETCD}..."
@@ -38,15 +38,17 @@ SERVICE_PID=$!
 echo $SERVICE_PID > /var/spool/prometheus.pid
 echo "monitor: monitor has been started in background with pid: ${SERVICE_PID}"
 
-# @fixme: hax. how else can we accomplish this?.
-echo "monitor: updating etcd node list in... etcd"
-while true; do
-  for uri in $(etcdctl -C "$ETCD" member list | awk '{print $4}' | awk -F= '{print $2}' | awk -F, '{print $1}'); do
-    host=$(echo $uri | awk -F: '{print $2}')
-    port=$(echo $uri | awk -F: '{print $3}')
-    if ! etcdctl -C "$ETCD" get /deis/monitor/endpoints/etcd/$host >/dev/null 2>&1; then
-      etcdctl  -C "$ETCD" set /deis/monitor/endpoints/etcd/$host $port >/dev/null 2>&1;
-    fi
-  done
-  sleep 60
-done
+wait
+
+# fixme: the below was for v1 - how can we do this better in v2?
+#echo "monitor: updating etcd node list in... etcd"
+#while true; do
+#  for uri in $(etcdctl -C "$ETCD" member list | awk '{print $4}' | awk -F= '{print $2}' | awk -F, '{print $1}'); do
+#    host=$(echo $uri | awk -F: '{print $2}')
+#    port=$(echo $uri | awk -F: '{print $3}')
+#    if ! etcdctl -C "$ETCD" get /deis/monitor/endpoints/etcd/$host >/dev/null 2>&1; then
+#      etcdctl  -C "$ETCD" set /deis/monitor/endpoints/etcd/$host $port >/dev/null 2>&1;
+#    fi
+#  done
+#  sleep 60
+#done
