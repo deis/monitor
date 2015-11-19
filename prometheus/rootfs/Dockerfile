@@ -1,4 +1,4 @@
-FROM prom/prometheus:0.16.1
+FROM prom/prometheus:master
 
 WORKDIR /tmp
 
