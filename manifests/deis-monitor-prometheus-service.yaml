@@ -10,5 +10,6 @@ spec:
     port: 9090
     targetPort: 9090
     protocol: TCP
+  type: NodePort
   selector:
-    name: deis-monitor-prometheus
+    app: deis-monitor-prometheus
