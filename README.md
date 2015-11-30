@@ -36,7 +36,7 @@ This will require a Docker restart to take effect.
 Now set up your environment:
 ```console
 eval "$(docker-machine env deis-registry)"
-export DEV_REGISTRY=192.168.99.101:5000
+export DEV_REGISTRY=$(docker-machine ip deis-registry):5000
 ```
 
 Next install the [deis/etcd cluster according to its documentation](https://github.com/deis/etcd#usage), push the image to your new local dev registry and ensure its started by inspecting its pods.
