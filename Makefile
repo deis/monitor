@@ -57,7 +57,16 @@ kube-create-alertmanager:
 	kubectl create -f manifests/deis-monitor-alert-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-alert-service.yaml
 
+kube-replace-prometheus: push update-manifests
+	kubectl replace --force -f manifests/deis-monitor-prometheus-rc.tmp.yaml
+	kubectl replace --force -f manifests/deis-monitor-prometheus-service.yaml
+
+kube-replace-alertmanager: push update-manifests
+	kubectl replace --force -f manifests/deis-monitor-alert-rc.tmp.yaml
+	kubectl replace --force -f manifests/deis-monitor-alert-service.yaml
+
 kube-create-all: kube-create-alertmanager kube-create-prometheus
+kube-replace-all: kube-replace-alertmanager kube-replace-prometheus
 
 update-manifests:
 	sed 's#\(image:\) .*#\1 $(PROM_DEV_IMAGE)#' manifests/deis-monitor-prometheus-rc.yaml \
