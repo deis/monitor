@@ -27,7 +27,7 @@ dev-registry: check-docker
 
 build: docker-build
 
-push: docker-push
+push: build docker-push
 
 docker-build: check-docker
 	docker build --rm -t $(PROM_IMAGE) prometheus/rootfs
@@ -37,7 +37,6 @@ docker-push: update-manifests
 	docker tag -f $(PROM_IMAGE) $(PROM_DEV_IMAGE)
 	docker push $(PROM_DEV_IMAGE)
 	docker tag -f $(ALERTMANAGER_IMAGE) $(ALERTMANAGER_DEV_IMAGE)
-	docker push ${PROM_DEV_IMAGE}
 	docker push ${ALERTMANAGER_DEV_IMAGE}
 
 kube-delete-prometheus:
@@ -50,12 +49,12 @@ kube-delete-alertmanager:
 
 kube-delete-all: kube-delete-alertmanager kube-delete-prometheus
 
-kube-create-prometheus:
+kube-create-prometheus: update-manifests
 	kubectl create -f manifests/deis-monitor-prometheus-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-prometheus-service.yaml
 
 kube-create-alertmanager:
-	kubectl create -f manifests/deis-monitor-alert-rc.yaml
+	kubectl create -f manifests/deis-monitor-alert-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-alert-service.yaml
 
 kube-create-all: kube-create-alertmanager kube-create-prometheus
@@ -77,4 +76,3 @@ test-unit:
 
 test-functional:
 	@echo "Implement functional tests in _tests directory"
-
