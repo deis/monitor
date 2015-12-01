@@ -22,20 +22,10 @@ done
 
 set +e
 
-# @fixme: how do we fix race conditions for components being started in random orders
-# right now, the order is etcd, alertmanager and then prometheus.
-OPTS=""
-
-if ALERT_MANAGER="$(etcdctl -C "$ETCD" get /deis/monitor/alertManagerUri)"; then
-  OPTS="-alertmanager.url=$ALERT_MANAGER"
-fi
-
-set -e
-
 confd -node "$ETCD" --confdir /etc/confd --log-level info --interval 5 &
 
 echo "monitor: starting prometheus"
-/bin/prometheus -config.file=/etc/prometheus/prometheus.yml $OPTS &
+/bin/prometheus -config.file=/etc/prometheus/prometheus.yml -alertmanager.url=http://deis-monitor-alert.default.cluster.local:9093/ &
 SERVICE_PID=$!
 echo $SERVICE_PID > /var/spool/prometheus.pid
 echo "monitor: monitor has been started in background with pid: ${SERVICE_PID}"
