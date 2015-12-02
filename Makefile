@@ -35,7 +35,6 @@ docker-build: check-docker
 
 docker-push: update-manifests
 	docker tag -f $(PROM_IMAGE) $(PROM_DEV_IMAGE)
-	docker push $(PROM_DEV_IMAGE)
 	docker tag -f $(ALERTMANAGER_IMAGE) $(ALERTMANAGER_DEV_IMAGE)
 	docker push ${PROM_DEV_IMAGE}
 	docker push ${ALERTMANAGER_DEV_IMAGE}
@@ -55,7 +54,7 @@ kube-create-prometheus:
 	kubectl create -f manifests/deis-monitor-prometheus-service.yaml
 
 kube-create-alertmanager:
-	kubectl create -f manifests/deis-monitor-alert-rc.yaml
+	kubectl create -f manifests/deis-monitor-alert-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-alert-service.yaml
 
 kube-create-all: kube-create-alertmanager kube-create-prometheus

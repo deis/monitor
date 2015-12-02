@@ -22,6 +22,8 @@ done
 
 set +e
 
+# @fixme: how do we fix race conditions for components being started in random orders
+# right now, the order is etcd, alertmanager and then prometheus.
 OPTS=""
 
 if ALERT_MANAGER="$(etcdctl -C "$ETCD" get /deis/monitor/alertManagerUri)"; then
@@ -39,16 +41,3 @@ echo $SERVICE_PID > /var/spool/prometheus.pid
 echo "monitor: monitor has been started in background with pid: ${SERVICE_PID}"
 
 wait
-
-# fixme: the below was for v1 - how can we do this better in v2?
-#echo "monitor: updating etcd node list in... etcd"
-#while true; do
-#  for uri in $(etcdctl -C "$ETCD" member list | awk '{print $4}' | awk -F= '{print $2}' | awk -F, '{print $1}'); do
-#    host=$(echo $uri | awk -F: '{print $2}')
-#    port=$(echo $uri | awk -F: '{print $3}')
-#    if ! etcdctl -C "$ETCD" get /deis/monitor/endpoints/etcd/$host >/dev/null 2>&1; then
-#      etcdctl  -C "$ETCD" set /deis/monitor/endpoints/etcd/$host $port >/dev/null 2>&1;
-#    fi
-#  done
-#  sleep 60
-#done
