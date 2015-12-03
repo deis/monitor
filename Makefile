@@ -35,7 +35,6 @@ docker-build: check-docker
 
 docker-push: update-manifests
 	docker tag -f $(PROM_IMAGE) $(PROM_DEV_IMAGE)
-	docker push $(PROM_DEV_IMAGE)
 	docker tag -f $(ALERTMANAGER_IMAGE) $(ALERTMANAGER_DEV_IMAGE)
 	docker push ${ALERTMANAGER_DEV_IMAGE}
 

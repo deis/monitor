@@ -4,7 +4,6 @@ set -eo pipefail
 
 [[ $DEBUG ]] && set -x
 
-# configure etcd
 export ETCD_PORT=${DEIS_ETCD_1_SERVICE_PORT_CLIENT:-4001}
 export ETCD_HOST=${DEIS_ETCD_1_SERVICE_HOST:-$HOST}
 export ETCD="$ETCD_HOST:$ETCD_PORT"
