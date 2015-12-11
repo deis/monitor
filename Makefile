@@ -37,6 +37,7 @@ docker-push: update-manifests
 	docker tag -f $(PROM_IMAGE) $(PROM_DEV_IMAGE)
 	docker tag -f $(ALERTMANAGER_IMAGE) $(ALERTMANAGER_DEV_IMAGE)
 	docker push ${ALERTMANAGER_DEV_IMAGE}
+	docker push ${PROM_DEV_IMAGE}
 
 kube-delete-prometheus:
 	-kubectl delete service deis-monitor-prometheus
@@ -46,7 +47,11 @@ kube-delete-alertmanager:
 	-kubectl delete service deis-monitor-alert
 	-kubectl delete rc deis-monitor-alert
 
-kube-delete-all: kube-delete-alertmanager kube-delete-prometheus
+kube-delete-exporter:
+	-kubectl delete service deis-monitor-exporter
+	-kubectl delete daemonsets deis-monitor-exporter
+
+kube-delete-all: kube-delete-alertmanager kube-delete-prometheus kube-delete-exporter
 
 kube-create-prometheus: update-manifests
 	kubectl create -f manifests/deis-monitor-prometheus-rc.tmp.yaml
@@ -56,6 +61,10 @@ kube-create-alertmanager:
 	kubectl create -f manifests/deis-monitor-alert-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-alert-service.yaml
 
+kube-create-exporter:
+	kubectl create --validate=false -f manifests/deis-monitor-exporter-rc.yaml
+	kubectl create --validate=false -f manifests/deis-monitor-exporter-service.yaml
+
 kube-replace-prometheus: push update-manifests
 	kubectl replace --force -f manifests/deis-monitor-prometheus-rc.tmp.yaml
 	kubectl replace --force -f manifests/deis-monitor-prometheus-service.yaml
@@ -64,8 +73,12 @@ kube-replace-alertmanager: push update-manifests
 	kubectl replace --force -f manifests/deis-monitor-alert-rc.tmp.yaml
 	kubectl replace --force -f manifests/deis-monitor-alert-service.yaml
 
-kube-create-all: kube-create-alertmanager kube-create-prometheus
-kube-replace-all: kube-replace-alertmanager kube-replace-prometheus
+kube-replace-exporter: push update-manifests
+	kubectl replace --validate=false -f manifests/deis-monitor-exporter-rc.yaml
+	kubectl replace --validate=false -f manifests/deis-monitor-exporter-service.yaml
+
+kube-create-all: kube-create-exporter kube-create-alertmanager kube-create-prometheus
+kube-replace-all: kube-replace-exporter kube-replace-alertmanager kube-replace-prometheus
 
 update-manifests:
 	sed 's#\(image:\) .*#\1 $(PROM_DEV_IMAGE)#' manifests/deis-monitor-prometheus-rc.yaml \

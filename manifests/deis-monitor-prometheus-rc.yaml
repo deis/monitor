@@ -16,6 +16,7 @@ spec:
       containers:
         - name: deis-prometheus
           image: "quay.io/deis/monitor-prometheus:latest"
+          imagePullPolicy: Always
           ports:
             - containerPort: 9090
               name: http
