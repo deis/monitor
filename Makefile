@@ -1,6 +1,4 @@
-ifndef BUILD_TAG
-  BUILD_TAG = git-$(shell git rev-parse --short HEAD)
-endif
+BUILD_TAG ?= git-$(shell git rev-parse --short HEAD)
 
 # images name spaced under monitor, for now.
 COMPONENT = monitor
@@ -57,7 +55,7 @@ kube-create-prometheus: update-manifests
 	kubectl create -f manifests/deis-monitor-prometheus-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-prometheus-service.yaml
 
-kube-create-alertmanager:
+kube-create-alertmanager: update-manifests
 	kubectl create -f manifests/deis-monitor-alert-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-alert-service.yaml
 
@@ -81,9 +79,9 @@ kube-create-all: kube-create-exporter kube-create-alertmanager kube-create-prome
 kube-replace-all: kube-replace-exporter kube-replace-alertmanager kube-replace-prometheus
 
 update-manifests:
-	sed 's#\(image:\) .*#\1 $(PROM_DEV_IMAGE)#' manifests/deis-monitor-prometheus-rc.yaml \
+	-sed 's#\(image:\) .*#\1 $(PROM_DEV_IMAGE)#' manifests/deis-monitor-prometheus-rc.yaml \
 		> manifests/deis-monitor-prometheus-rc.tmp.yaml
-	sed 's#\(image:\) .*#\1 $(ALERTMANAGER_DEV_IMAGE)#' manifests/deis-monitor-alert-rc.yaml \
+	-sed 's#\(image:\) .*#\1 $(ALERTMANAGER_DEV_IMAGE)#' manifests/deis-monitor-alert-rc.yaml \
 		> manifests/deis-monitor-alert-rc.tmp.yaml
 
 clean: check-docker
