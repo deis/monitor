@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: deis-monitor-alert
+  namespace: deis
+  labels:
+    heritage: deis
+spec:
+  replicas: 1
+  selector:
+    app: deis-monitor-alert
+  template:
+    metadata:
+      labels:
+        app: deis-monitor-alert
+      annotations:
+        deis.io/slackwebhookurl: somewhere
+        deis.io/slackroom: alerts
+    spec:
+      containers:
+        - name: deis-monitor-alert
+          image: quay.io/deis/monitor-alert:v2-beta
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9093
+              name: http
+          command:
+            - /usr/local/bin/boot
+          volumeMounts:
+             - name: podinfo
+               mountPath: /mnt
+               readOnly: false
+      volumes:
+        - name: podinfo
+          downwardAPI:
+            items:
+              - path: "annotations"
+                fieldRef:
+                  fieldPath: metadata.annotations

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deis-monitor-alert
+  namespace: deis
+  labels:
+    heritage: deis
+spec:
+  ports:
+  - name: http
+    port: 9093
+    targetPort: 9093
+    protocol: TCP
+  selector:
+    name: deis-monitor-alert

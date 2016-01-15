@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: deis-monitor-exporter
+  namespace: deis
+spec:
+  template:
+    metadata:
+      name: deis-monitor-exporter
+      labels:
+        app: deis-monitor-exporter
+    spec:
+      containers:
+      - name: deis-monitor-exporter
+        image: prom/node-exporter
+        ports:
+        - containerPort: 9100
+          hostPort: 9100
+          name: serverport

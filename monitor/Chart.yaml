@@ -1,0 +1,8 @@
+name: deis-monitoring
+home: https://deis.io/
+version: 0.1.0
+description: Prometheus monitoring system for Kubernetes.
+maintainers:
+- Ian Coffey <icoffey@deis.com>
+details: |-
+  This package creates a Prometheus RC, an Alertmanager RC along with cadvisor and node exporter.
