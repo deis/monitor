@@ -12,12 +12,27 @@ spec:
     metadata:
       labels:
         app: deis-monitor-alert
+      annotations:
+        deis.io/slackwebhookurl: somewhere
+        deis.io/slackroom: alerts
     spec:
       containers:
         - name: deis-monitor-alert
-          image: "quay.io/deis/monitor-alertmanager:latest"
+          image: quay.io/deisci/monitor-alert:v2-beta
+          imagePullPolicy: Always
           ports:
             - containerPort: 9093
               name: http
           command:
-            - boot.sh
+            - /usr/local/bin/boot
+          volumeMounts:
+             - name: podinfo
+               mountPath: /mnt
+               readOnly: false
+      volumes:
+        - name: podinfo
+          downwardAPI:
+            items:
+              - path: "annotations"
+                fieldRef:
+                  fieldPath: metadata.annotations

@@ -4,26 +4,6 @@ set -eo pipefail
 
 [[ $DEBUG ]] && set -x
 
-export ETCD_PORT=${DEIS_ETCD_1_SERVICE_PORT_CLIENT:-4001}
-export ETCD_HOST=${DEIS_ETCD_1_SERVICE_HOST:-$HOST}
-export ETCD="$ETCD_HOST:$ETCD_PORT"
-export ETCD_PATH=${ETCD_PATH:-/deis/monitor}
-export ETCD_TTL=${ETCD_TTL:-20}
-
-until etcdctl --no-sync -C "$ETCD" ls >/dev/null 2>&1; do
-	echo "monitor: waiting for etcd at ${ETCD}..."
-	sleep $((ETCD_TTL/2))  # sleep for half the TTL
-done
-
-until confd -onetime -node "$ETCD" --confdir /etc/confd --log-level error; do
-	echo "monitor: waiting for confd to write initial templates..."
-	sleep $((ETCD_TTL/2))  # sleep for half the TTL
-done
-
-set +e
-
-confd -node "$ETCD" --confdir /etc/confd --log-level info --interval 5 &
-
 echo "monitor: starting prometheus"
 /bin/prometheus -config.file=/etc/prometheus/prometheus.yml -alertmanager.url=http://deis-monitor-alert.default.cluster.local:9093/ &
 SERVICE_PID=$!
