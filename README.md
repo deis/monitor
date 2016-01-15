@@ -52,13 +52,16 @@ Now set up your environment:
 eval "$(docker-machine env deis-registry)"
 export DEV_REGISTRY=$(docker-machine ip deis-registry):5000
 ```
-
-Next install the [deis/etcd cluster according to its documentation](https://github.com/deis/etcd#usage), push the image to your new local dev registry and ensure its started by inspecting its pods.
-
-Now, you can build the Docker images for the project, push to the local dev registry.
+Now you need to build the project.
 
 ```console
-$ make build && make push
+$ make build
+```
+
+Next you can build the projects Docker images and push them to the local dev registry.
+
+```console
+$ make docker-build && make push
 ```
 
 Finally, start the services like so:
