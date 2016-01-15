@@ -4,12 +4,18 @@ BUILD_TAG ?= git-$(shell git rev-parse --short HEAD)
 COMPONENT = monitor
 
 # all this naming needs more thought
-REGISTRY = $(shell if [ "$$DEV_REGISTRY" == "registry.hub.docker.com" ]; then echo; else echo $$DEV_REGISTRY/; fi)
+DEIS_REGISTRY ?= ${DEV_REGISTRY}/
 IMAGE_PREFIX = deis/
 PROM_IMAGE = $(IMAGE_PREFIX)$(COMPONENT)-prometheus:$(BUILD_TAG)
-PROM_DEV_IMAGE = $(REGISTRY)$(PROM_IMAGE)
+PROM_DEV_IMAGE = $(DEIS_REGISTRY)$(PROM_IMAGE)
 ALERTMANAGER_IMAGE = $(IMAGE_PREFIX)$(COMPONENT)-alert:$(BUILD_TAG)
-ALERTMANAGER_DEV_IMAGE = $(REGISTRY)$(ALERTMANAGER_IMAGE)
+ALERTMANAGER_DEV_IMAGE = $(DEIS_REGISTRY)$(ALERTMANAGER_IMAGE)
+ALERT_MANAGER_BINDIR := alertmanager/rootfs/usr/local/bin
+LDFLAGS := "-s -X main.version=${BUILD_TAG}"
+
+# Non-optional environment variables
+export GO15VENDOREXPERIMENT=1
+export CGO_ENABLED=0
 
 check-docker:
 	@if [ -z $$(which docker) ]; then \
@@ -23,9 +29,10 @@ dev-registry: check-docker
 	@echo "To use a local registry for Deis development:"
 	@echo "    export DEV_REGISTRY=`docker-machine ip $$(docker-machine active 2>/dev/null) 2>/dev/null || echo $(HOST_IPADDR) `:5000"
 
-build: docker-build
+build:
+	GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ${ALERT_MANAGER_BINDIR}/boot -a -ldflags ${LDFLAGS} alertmanager_boot.go
 
-push: build docker-push
+push: docker-push
 
 docker-build: check-docker
 	docker build --rm -t $(PROM_IMAGE) prometheus/rootfs
@@ -51,11 +58,11 @@ kube-delete-exporter:
 
 kube-delete-all: kube-delete-alertmanager kube-delete-prometheus kube-delete-exporter
 
-kube-create-prometheus: update-manifests
+kube-create-prometheus:
 	kubectl create -f manifests/deis-monitor-prometheus-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-prometheus-service.yaml
 
-kube-create-alertmanager: update-manifests
+kube-create-alertmanager:
 	kubectl create -f manifests/deis-monitor-alert-rc.tmp.yaml
 	kubectl create -f manifests/deis-monitor-alert-service.yaml
 
@@ -83,6 +90,11 @@ update-manifests:
 		> manifests/deis-monitor-prometheus-rc.tmp.yaml
 	-sed 's#\(image:\) .*#\1 $(ALERTMANAGER_DEV_IMAGE)#' manifests/deis-monitor-alert-rc.yaml \
 		> manifests/deis-monitor-alert-rc.tmp.yaml
+
+# TODO: remove manifests/ and update-manifests if chart will indeed live here and not deis/deis
+update-chart:
+	sed -i '' 's#\(image:\) .*#\1 $(PROM_DEV_IMAGE)#' charts/monitor/manifests/deis-monitor-prometheus-rc.yaml
+	sed -i '' 's#\(image:\) .*#\1 $(ALERTMANAGER_DEV_IMAGE)#' charts/monitor/manifests/deis-monitor-alert-rc.yaml
 
 clean: check-docker
 	docker rmi $(PROM_IMAGE)

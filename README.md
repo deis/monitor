@@ -8,7 +8,21 @@ Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy an
 
 Deis Monitor is changing quickly. Your feedback and participation are more than welcome, but be aware that this project is considered a work in progress.
 
-## Hacking Workflow
+## Installing with Helm
+
+Install [helm](http://helm.sh) and add the monitor repository to your chart list:
+
+```console
+$ helm repo add monitor https://github.com/deis/monitor
+```
+
+Then, install the monitor platform.
+
+```console
+$ helm install monitor
+```
+
+## Hacking Monitor
 
 To hack on Monitor, it is necessary to have a local Kubernetes cluster up. Follow the [Kubernetes docs](https://github.com/kubernetes/kubernetes/blob/master/docs/getting-started-guides/vagrant.md#setup) to a Vagrant cluster booted.
 

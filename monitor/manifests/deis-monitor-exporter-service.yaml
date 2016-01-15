@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deis-monitor-exporter
+  namespace: deis
+  labels:
+    heritage: deis
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9100"
+spec:
+  ports:
+  - name: http
+    port: 9100
+    targetPort: 9100
+    protocol: TCP
+  selector:
+    app: deis-monitor-exporter

@@ -17,5 +17,3 @@ RUN curl -sSL -o /usr/local/bin/confd https://github.com/kelseyhightower/confd/r
 COPY . /
 
 ENTRYPOINT [ "/bin/boot.sh" ]
-
-ENV DEIS_RELEASE 1.12.0-dev

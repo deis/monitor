@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   name: deis-monitor-alert
+  namespace: deis
   labels:
     heritage: deis
 spec:
@@ -18,7 +19,7 @@ spec:
     spec:
       containers:
         - name: deis-monitor-alert
-          image: quay.io/deisci/monitor-alert:v2-beta
+          image: quay.io/deis/monitor-alert:v2-beta
           imagePullPolicy: Always
           ports:
             - containerPort: 9093
