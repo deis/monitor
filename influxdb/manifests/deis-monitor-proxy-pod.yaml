@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: deis-monitor-proxy
+  namespace: deis
+  labels:
+    heritage: deis
+spec:
+  containers:
+  - name: http-ui
+    image: gcr.io/google_containers/proxy-to-service:v2
+    args: [ "tcp", "8083", "deis-monitor-influxdb.deis.svc.cluster.local" ]
+    ports:
+    - name: http-ui
+      protocol: TCP
+      containerPort: 8083
+      hostPort: 8083
+  - name: http-api
+    image: gcr.io/google_containers/proxy-to-service:v2
+    args: [ "tcp", "8086", "deis-monitor-influxdb.deis.svc.cluster.local" ]
+    ports:
+    - name: http-api
+      protocol: TCP
+      containerPort: 8086
+      hostPort: 8086
+atom

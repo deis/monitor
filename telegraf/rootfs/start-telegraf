@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "Building config.toml!"
+./envtpl -in config.toml.tpl >> config.toml
+echo "Finished building toml..."
+cat config.toml
+echo "Starting telegraf..."
+exec /telegraf -config config.toml

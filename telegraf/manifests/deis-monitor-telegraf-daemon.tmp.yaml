@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: deis-monitor-telegraf
+  namespace: deis
+  labels:
+    heritage: deis
+spec:
+  template:
+    metadata:
+      labels:
+        app: deis-monitor-telegraf
+    spec:
+      containers:
+        - name: deis-monitor-telegraf
+          image: quay.io/jchauncey/telegraf:git-f58b4c0
+          imagePullPolicy: Always
+          volumeMounts:
+          - mountPath: /var/run/docker.sock
+            name: docker-socket
+          env:
+          - name: "INFLUXDB_URLS"
+            value: http://$(DEIS_MONITOR_INFLUXDB_SERVICE_HOST):$(DEIS_MONITOR_INFLUXDB_PORT_8086_TCP_PORT)
+          - name: "KUBERNETES_DOCKER_ENDPOINT"
+            value: "unix:///var/run/docker.sock"
+      volumes:
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock

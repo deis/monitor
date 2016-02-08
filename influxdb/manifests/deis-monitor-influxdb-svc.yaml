@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deis-monitor-influxdb
+  namespace: deis
+  labels:
+    heritage: deis
+    app: deis-monitor-influxdb
+spec:
+  ports:
+  - port: 8083
+    name: admin
+    targetPort: admin
+  - port: 8086
+    name: transport
+    targetPort: transport
+    protocol: TCP
+  - port: 8084
+    name: ssltransport
+    targetPort: ssltransport
+    protocol: TCP
+  selector:
+    app: deis-monitor-influxdb
