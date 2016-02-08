@@ -19,13 +19,13 @@ docker-push:
 
 kube-delete: update-manifests
 	-kubectl delete -f manifests/deis-monitor-influxdb-svc.yaml
-	-kubectl delete -f manifests/deis-monitor-proxy-pod.yaml
+	-kubectl delete -f manifests/deis-monitor-influxdb-proxy-pod.yaml
 	-kubectl delete -f manifests/deis-monitor-influxdb-rc.tmp.yaml
 
 kube-create: update-manifests
 	kubectl create -f manifests/deis-monitor-influxdb-svc.yaml
 	kubectl create -f manifests/deis-monitor-influxdb-rc.tmp.yaml
-	kubectl create -f manifests/deis-monitor-proxy-pod.yaml
+	kubectl create -f manifests/deis-monitor-influxdb-proxy-pod.yaml
 
 kube-update: update-manifests
 	kubectl delete -f manifests/deis-monitor-influxdb-rc.tmp.yaml
