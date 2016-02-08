@@ -2,3 +2,6 @@
 *.swp
 *.swo
 .DS_Store
+
+telegraf/manifests/*.tmp.yaml
+influxdb/manifests/*.tmp.yaml
