@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: deis-monitor-influxdb
-        image: quay.io/jchauncey/influxdb:0.9.6.1
+        image: quay.io/deis/influxdb:v2-beta
         imagePullPolicy: Always
         ports:
         - containerPort: 8083

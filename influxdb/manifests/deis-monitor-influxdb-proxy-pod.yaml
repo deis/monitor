@@ -23,4 +23,3 @@ spec:
       protocol: TCP
       containerPort: 8086
       hostPort: 8086
-atom
