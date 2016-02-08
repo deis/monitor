@@ -1,4 +1,4 @@
-# deis-influxdb
+# InfluxDB
 
 ## Description
 This is an alpine 3.2 based image for running influxdb 0.10.0-rc1. Props goes to @jalatera's alpine image from which this one is based - https://github.com/jalateras/docker-influxdb.

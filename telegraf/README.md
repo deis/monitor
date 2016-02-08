@@ -1,4 +1,4 @@
-# deis-telegraf
+# Telegraf
 
 ## Description
 This is an alpine based image for running telegraf within a kubernetes cluster.
