@@ -6,6 +6,11 @@ This is an alpine based image for running telegraf within a kubernetes cluster.
 ## Configuration
 Telegraf configuration is based largely on a toml file that is passed in when the binary starts. The issue with doing this in a containerized environment is how can you "dynamically" build this file based on values passed into the container at runtime. Therefore, this image relies on a project called [envtpl](https://github.com/arschles/envtpl) to produce the telegraf configuration file. It can take environment variables and through using go templates produce the necessary stanzas in the toml file to start telegraf. Currently, the go template only supports basic if checks and outputting values that have been set.
 
+## Host information
+You must do 2 things if you want to receive host level metrics from telegraf.
+ * - Set the volume mounts for both `/sys` and `/proc`
+ * - Set the environment variables `HOST_PROC` and `HOST_SYS` to the values of where `/sys` and `/proc` are mounted in the container. Example entries can be found in the [manifest](manifests/deis-monitor-telegraf-daemon.yaml).
+
 ## Development
 There is a make file provided with the project that can build the image, push it to a registry, and deploy it to a kubernetes cluster.
 

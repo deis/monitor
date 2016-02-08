@@ -15,15 +15,29 @@ spec:
         - name: deis-monitor-telegraf
           image: quay.io/deis/telegraf:v2-beta
           imagePullPolicy: Always
-          volumeMounts:
-          - mountPath: /var/run/docker.sock
-            name: docker-socket
           env:
           - name: "INFLUXDB_URLS"
             value: http://$(DEIS_MONITOR_INFLUXDB_SERVICE_HOST):$(DEIS_MONITOR_INFLUXDB_PORT_8086_TCP_PORT)
           - name: "KUBERNETES_DOCKER_ENDPOINT"
             value: "unix:///var/run/docker.sock"
+          - name: "HOST_PROC"
+            value: "/rootfs/proc"
+          - name: "HOST_SYS"
+            value: "/rootfs/sys"
+          # volumeMounts:
+          # - name: sysro
+          #   mountPath: /rootfs/sys
+          #   readOnly: true
+          # - name: procro
+          #   mountPath: /rootfs/proc
+          #   readOnly: true
       volumes:
       - name: docker-socket
         hostPath:
           path: /var/run/docker.sock
+      # - name: sysro
+      #   hostPath:
+      #     path: /sys
+      # - name: procro
+      #   hostPath:
+      #     path: /proc
