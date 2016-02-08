@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: deis-monitor-telegraf
-          image: quay.io/jchauncey/telegraf:
+          image: quay.io/deis/telegraf:v2-beta
           imagePullPolicy: Always
           volumeMounts:
           - mountPath: /var/run/docker.sock
