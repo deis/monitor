@@ -5,3 +5,6 @@
 
 telegraf/manifests/*.tmp.yaml
 influxdb/manifests/*.tmp.yaml
+
+telegraf/rootfs/envtpl
+telegraf/rootfs/telegraf

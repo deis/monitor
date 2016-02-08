@@ -14,5 +14,6 @@ COPY config.toml.tpl /config.toml.tpl
 
 RUN chmod +x /telegraf
 RUN chmod +x /envtpl
+RUN chmod +x /start-telegraf
 
 ENTRYPOINT ["/start-telegraf"]
