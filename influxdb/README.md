@@ -22,3 +22,6 @@ There is a make file provided with the project that can build the image, push it
 * `kube-create`: Create the service, proxy pod, and replication controller in kubernetes
 * `kube-update`: Remove the replication controller and create a new one (this is useful for publishing new images)
 * `update-manifests`: This is a helpful target that is used to generate a temporary manifest with the dev image set in the `image` stanza.
+
+### Accessing Admin UI
+Included is a proxy pod that proxies the UI ports so they are accessible when doing local development. These ports are `8086` and `8083`. You can access the UI by going to the `http://<host_ip>:8083`.
