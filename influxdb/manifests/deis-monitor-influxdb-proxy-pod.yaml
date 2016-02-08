@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: deis-monitor-proxy
+  name: deis-monitor-influxdb-proxy
   namespace: deis
   labels:
     heritage: deis
