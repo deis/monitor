@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: deis-monitor-chronograf
+  namespace: deis
+  labels:
+    heritage: deis
+spec:
+  replicas: 1
+  selector:
+    app: deis-monitor-chronograf
+  template:
+    metadata:
+      labels:
+        app: deis-monitor-chronograf
+    spec:
+      containers:
+      - name: deis-monitor-chronograf
+        image: quay.io/jchauncey/chronograf:git-e7ac6e5
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 10000
+          name: admin
