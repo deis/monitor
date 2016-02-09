@@ -2,6 +2,9 @@
 echo "Building config.toml!"
 ./envtpl -in config.toml.tpl >> config.toml
 echo "Finished building toml..."
+echo "###########################################"
+echo "###########################################"
 cat config.toml
-echo "Starting telegraf..."
+echo "###########################################"
+echo "###########################################"
 exec /telegraf -config config.toml
