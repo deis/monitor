@@ -24,8 +24,8 @@ kube-create: update-manifests
 	kubectl create -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
 
 kube-update: update-manifests
-	kubectl delete -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
-	kubectl create -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
+	-kubectl delete -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
+	-kubectl create -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
 
 update-manifests:
 	sed 's#\(image:\) .*#\1 $(IMAGE)#' manifests/deis-monitor-telegraf-daemon.yaml > manifests/deis-monitor-telegraf-daemon.tmp.yaml
