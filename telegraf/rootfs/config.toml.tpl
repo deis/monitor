@@ -166,7 +166,7 @@
 
 {{if .INFLUXDB_URLS}}
 [[inputs.influxdb]]
-  urls = ["{{.INFLUXDB_URLS}}"]
+  urls = ["{{.INFLUXDB_URLS}}/debug/vars"]
 {{end}}
 
 {{if .MEMCACHED_SERVERS}}
