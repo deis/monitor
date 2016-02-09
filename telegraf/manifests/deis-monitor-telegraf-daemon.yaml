@@ -24,7 +24,9 @@ spec:
           #   value: "/rootfs/proc"
           # - name: "HOST_SYS"
           #   value: "/rootfs/sys"
-          # volumeMounts:
+          volumeMounts:
+          - mountPath: /var/run/docker.sock
+            name: docker-socket
           # - name: sysro
           #   mountPath: /rootfs/sys
           #   readOnly: true
