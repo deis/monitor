@@ -155,6 +155,7 @@
 
 {{ if .HTTP_JSON_SERVERS }}
 [[inputs.httpjson]]
+<<<<<<< Updated upstream
   name = "{{ .HTTP_JSON_NAME }}"
   servers = [{{ .HTTP_JSON_SERVERS }}]
   method = "{{ .HTTP_JSON_METHOD }}"
@@ -163,6 +164,16 @@
     event_type = "{{ .HTTP_JSON_EVENT_TYPE }}"
     threshold = "{{ .HTTP_JSON_THRESHOLD }}"
 {{ end }}
+=======
+  name = "{{.HTTP_JSON_NAME}}"
+  servers = [{{.HTTP_JSON_SERVERS}}]
+  method = "{{.HTTP_JSON_METHOD}}"
+  tag_keys = [{{.HTTP_JSON_TAG_KEYS}}]
+  [json.parameters]
+    event_type = "{{.HTTP_JSON_EVENT_TYPE}}"
+    threshold = "{{.HTTP_JSON_THRESHOLD}}"
+{{end}}
+>>>>>>> Stashed changes
 
 {{ if .INFLUXDB_URLS }}
 [[inputs.influxdb]]
