@@ -11,7 +11,7 @@
   flush_jitter = "{{ default "0s" .AGENT_FLUSH_JITTER }}"
   debug = {{ default "false" .AGENT_DEBUG }}
   quiet = {{ default "false" .AGENT_QUIET }}
-  {{ if .AGENT_HOSTNAME }} hostname = {{ .AGENT_HOSTNAME }} {{ end }}
+  {{ if .AGENT_HOSTNAME }}hostname = "{{ .AGENT_HOSTNAME }}"{{ end }}
 
 # Set output configuration
 {{ if .AMON_INSTANCE }}
@@ -135,12 +135,6 @@
   container_names = [{{ if .DOCKER_CONTAINER_NAMES }}{{ .DOCKER_CONTAINER_NAMES }}{{ end }}]
 {{ end }}
 
-{{ if .KUBERNETES_SERVICE_HOST}}
-[[inputs.kubernetes]]
-  docker_endpoint = "{{ .KUBERNETES_DOCKER_ENDPOINT }}"
-  container_names = [{{ if .KUBERNETES_CONTAINER_NAMES }}{{ .KUBERNETES_CONTAINER_NAMES }}{{ end }}]
-{{ end }}
-
 {{ if .ELASTIC_SEARCH_SERVERS }}
 [[inputs.elasticsearch]]
   servers = [{{ .ELASTIC_SEARCH_SERVERS }}]
@@ -198,6 +192,12 @@
 [[inputs.postgresql]]
   address = "{{ .POSTGRESQL_ADDRESS }}"
   {{ if .POSTGRESQL_DATABASES }} databases = [{{ .POSTGRESQL_DATABASES }}]  {{ end }}
+{{ end }}
+
+{{ if .PROMETHEUS_URLS }}
+[[inputs.prometheus]]
+  urls = [{{ .PROMETHEUS_URLS }}]
+  bearer_token = "{{ .PROMETHEUS_BEARER_TOKEN }}"
 {{ end }}
 
 {{ if .RABBITMQ_URL }}
