@@ -3,7 +3,7 @@ MAINTAINER Jonathan Chauncey "<jchauncey@deis.com>"
 
 ENV TELEGRAF_VERSION "0.10.0_linux_amd64"
 
-RUN apk --update add bash
+RUN apk --update add bash curl
 
 # The download links for the zip of telegraf are broken.
 # So for now Im building this locally and copying it into the build context.

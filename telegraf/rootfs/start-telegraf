@@ -1,4 +1,13 @@
 #!/bin/bash
+export PROMETHEUS_BEARER_TOKEN=/var/run/secrets/kubernetes.io/serviceaccount/token
+export TOKEN=$(cat $PROMETHEUS_BEARER_TOKEN)
+export POD_API_URL=https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$POD_NAMESPACE/pods/$HOSTNAME
+export NODE_NAME=$(curl -s $POD_API_URL --header "Authorization: Bearer $TOKEN" --insecure | grep nodeName | cut -c 18- | tr -d '"')
+export AGENT_HOSTNAME=$NODE_NAME
+echo "Setting Agent Hostname to: $AGENT_HOSTNAME"
+export PROMETHEUS_URLS="\"https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/proxy/nodes/$NODE_NAME/metrics\", \"https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/metrics\""
+echo "Setting PROMETHEUS_URLS to: $PROMETHEUS_URLS"
+
 echo "Building config.toml!"
 ./envtpl -in config.toml.tpl >> config.toml
 echo "Finished building toml..."
