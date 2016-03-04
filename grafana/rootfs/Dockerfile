@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get install -y curl && \
     rm /etc/grafana/grafana.ini
 
-ADD https://github.com/arschles/envtpl/releases/download/0.1.1/envtpl_linux_amd64 /usr/share/grafana/envtpl
+ADD https://github.com/arschles/envtpl/releases/download/0.1.2/envtpl_linux_amd64 /usr/share/grafana/envtpl
 
 COPY dashboards /usr/share/grafana/dashboards
 COPY start-grafana /usr/share/grafana/start-grafana
