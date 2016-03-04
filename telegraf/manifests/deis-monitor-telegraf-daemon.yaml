@@ -11,6 +11,7 @@ spec:
       labels:
         app: deis-monitor-telegraf
     spec:
+      serviceAccount: deis-monitor-telegraf
       containers:
         - name: deis-monitor-telegraf
           image: quay.io/deis/telegraf:v2-beta
