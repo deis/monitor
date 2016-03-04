@@ -8,7 +8,7 @@ RUN apk --update add bash curl
 # The download links for the zip of telegraf are broken.
 # So for now Im building this locally and copying it into the build context.
 ADD https://bintray.com/artifact/download/jchauncey/telegraf/telegraf/telegraf /telegraf
-ADD https://github.com/arschles/envtpl/releases/download/0.1.1/envtpl_linux_amd64 /envtpl
+ADD https://github.com/arschles/envtpl/releases/download/0.1.2/envtpl_linux_amd64 /envtpl
 COPY start-telegraf /start-telegraf
 COPY config.toml.tpl /config.toml.tpl
 
