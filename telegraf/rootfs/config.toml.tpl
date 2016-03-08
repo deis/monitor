@@ -11,6 +11,7 @@
   flush_jitter = {{ default "0s" .AGENT_FLUSH_JITTER | quote }}
   debug = {{ default false .AGENT_DEBUG }}
   quiet = {{ default false .AGENT_QUIET }}
+  flush_buffer_when_full = {{ default true .AGENT_FLUSH_BUFFER }}
   {{ if .AGENT_HOSTNAME }}hostname = {{ .AGENT_HOSTNAME | quote }} {{ end }}
 
 # Set output configuration
@@ -159,7 +160,7 @@
 
 {{ if .INFLUXDB_URLS }}
 [[inputs.influxdb]]
-  urls = [{{ .INFLUXDB_URLS }}/debug/vars"]
+  urls = [{{ (print .INFLUXDB_URLS "/debug/vars") | quote }}]
 {{ end }}
 
 {{ if .MEMCACHED_SERVERS }}
