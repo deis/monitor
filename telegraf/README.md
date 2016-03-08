@@ -11,6 +11,22 @@ You must do 2 things if you want to receive host level metrics from telegraf.
  * - Set the volume mounts for both `/sys` and `/proc`
  * - Set the environment variables `HOST_PROC` and `HOST_SYS` to the values of where `/sys` and `/proc` are mounted in the container. Example entries can be found in the [manifest](manifests/deis-monitor-telegraf-daemon.yaml).
 
+ ## Environment Variables
+ The configuration is driven via environment variables which are published to the `config.toml` file passed to telegraf when it starts. The following table gives the environment variable name and the default value if it is not set.
+
+ | Name | Default | Description |
+ |-----------|---------------|---------------|
+ | AGENT_INTERVAL | 10s | Default data collection interval for all inputs |
+ | AGENT_ROUND_INTERVAL | true | Rounds collection interval to 'interval' ie, if interval="10s" then always collect on :00, :10, :20, etc. |
+ | AGENT_BUFFER_LIMIT | 10000 | Telegraf will cache metric_buffer_limit metrics for each output, and will flush this buffer on a successful write. |
+ | AGENT_COLLECTION_JITTER | 0s | Collection jitter is used to jitter the collection by a random amount. Each plugin will sleep for a random time within jitter before collecting. This can be used to avoid many plugins querying things like sysfs at the same time, which can have a measurable effect on the system. |
+ | AGENT_FLUSH_INTERVAL | 10s | Default data flushing interval for all outputs. You should not set this below interval. Maximum flush_interval will be flush_interval + flush_jitter |
+ | AGENT_FLUSH_JITTER | 0s | Jitter the flush interval by a random amount. This is primarily to avoid large write spikes for users running a large number of telegraf instances. ie, a jitter of 5s and flush_interval 10s means flushes will happen every 10-15s. |
+ | AGENT_DEBUG | false | Run telegraf in debug mode. |
+ | AGENT_QUIET | false | Run telegraf in quiet mode. |
+ | AGENT_HOSTNAME | NodeName | Override default hostname |
+ 
+
 ## Development
 There is a make file provided with the project that can build the image, push it to a registry, and deploy it to a kubernetes cluster.
 
