@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "Building config.toml!"
+./envtpl -in config.toml.tpl >> config.toml
+echo "Finished building toml..."
+echo "###########################################"
+echo "###########################################"
+cat config.toml
+echo "###########################################"
+echo "###########################################"
+exec ./influxd -config config.toml

@@ -2,7 +2,7 @@
 FROM alpine:3.2
 MAINTAINER Jonathan Chauncey "<jchauncey@deis.com>"
 
-ENV INFLUX_VERSION "v0.10.0-rc1"
+ENV INFLUX_VERSION "v0.10.2"
 ENV GOPATH /golang
 ENV INFLUXDB_HOME /influxdb
 ENV PATH $INFLUXDB_HOME:$PATH
@@ -22,9 +22,9 @@ RUN \
   adduser -S -s /bin/bash -G influxdb influxdb
 
 RUN \
-  apk add --update bash wget git mercurial bzr go && \
-  mkdir -p $GOPATH/src/github.com/influxdb && \
-  cd $GOPATH/src/github.com/influxdb && \
+  apk add --update bash wget git mercurial go && \
+  mkdir -p $GOPATH/src/github.com/influxdata && \
+  cd $GOPATH/src/github.com/influxdata && \
   git clone https://github.com/influxdata/influxdb.git && \
   cd influxdb && \
   git checkout -b $INFLUX_VERSION && \
@@ -36,13 +36,19 @@ RUN \
   chown -R influxdb:influxdb $INFLUXDB_HOME && \
   mkdir -p /data /logs /config && \
   chown -R influxdb:influxdb /data /logs /config && \
-  apk del --purge wget git mercurial bzr go  && \
+  apk del --purge wget git mercurial go  && \
   rm -rf /var/cache/apk/* /tmp/* /var/tmp/* $GOPATH
 
 RUN mkdir -p /data
 VOLUME /data
 
-COPY config.toml /influxdb/config.toml
+ADD https://github.com/arschles/envtpl/releases/download/0.1.2/envtpl_linux_amd64 /influxdb/envtpl
+COPY config.toml.tpl /influxdb/config.toml.tpl
+COPY start-influx  /influxdb/start-influx
+
+RUN chmod +x /influxdb/envtpl
+RUN chmod +x /influxdb/start-influx
 
 USER influxdb
-CMD ["/influxdb/influxd", "-config", "/influxdb/config.toml"]
+WORKDIR /influxdb
+ENTRYPOINT ["./start-influx"]
