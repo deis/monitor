@@ -57,7 +57,7 @@
 {{ if .INFLUXDB_URLS}}
 [[outputs.influxdb]]
   urls = [{{ .INFLUXDB_URLS | quote }}]
-  database = {{default "telegraf" .INFLUXDB_DATABASE | quote }}
+  database = {{default "kubernetes" .INFLUXDB_DATABASE | quote }}
   precision = {{ default "s" .INFLUXDB_PRECISION | quote }}
   timeout = {{ default "5s" .INFLUXDB_TIMEOUT | quote }}
   {{ if .INFLUXDB_USERNAME}} username = {{ .INFLUXDB_USERNAME | quote }} {{ end }}
