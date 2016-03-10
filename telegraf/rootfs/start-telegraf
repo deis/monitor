@@ -16,4 +16,4 @@ echo "###########################################"
 cat config.toml
 echo "###########################################"
 echo "###########################################"
-exec /telegraf -quiet -config config.toml
+exec /telegraf -config config.toml
