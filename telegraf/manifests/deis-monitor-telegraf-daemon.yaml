@@ -22,11 +22,13 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
           - name: "INFLUXDB_URLS"
-            value: http://$(DEIS_MONITOR_INFLUXDB_SERVICE_HOST):$(DEIS_MONITOR_INFLUXDB_SERVICE_PORT_TRANSPORT)
+            value: http://$(DEIS_MONITOR_INFLUXAPI_SERVICE_HOST):$(DEIS_MONITOR_INFLUXAPI_SERVICE_PORT_TRANSPORT)
           - name: "HOST_PROC"
             value: "/rootfs/proc"
           - name: "HOST_SYS"
             value: "/rootfs/sys"
+          - name: "AGENT_QUIET"
+            value: "true"
           volumeMounts:
           - mountPath: /var/run/docker.sock
             name: docker-socket
