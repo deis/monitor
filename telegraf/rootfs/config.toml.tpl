@@ -238,7 +238,7 @@
 [[inputs.statsd]]
   service_address = {{ .STATSD_SERVICE_ADDRESS | quote }}
   delete_gauges = {{ default false .STATSD_DELETE_GAUGES }}
-  delete_counters {{ default false .STATSD_DELETE_COUNTERS }}
+  delete_counters = {{ default false .STATSD_DELETE_COUNTERS }}
   delete_sets = {{ default false .STATSD_DELETE_SETS }}
   delete_timings = {{ default true .STATSD_DELETE_TIMINGS}}
   percentiles = [{{ default 90 .STATSD_PERCENTILES }}]
