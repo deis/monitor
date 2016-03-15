@@ -1,12 +1,18 @@
-# Deis Monitor
+# Deis Monitor v2
 
-Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy and manage
-applications on your own servers. Deis builds on [Kubernetes](http://kubernetes.io/) to provide
-a lightweight, [Heroku-inspired](http://heroku.com) workflow.
+[![Build Status](https://travis-ci.org/deis/monitor.svg?branch=master)](https://travis-ci.org/deis/monitor)
+[![Docker Repository on Quay](https://quay.io/repository/deisci/monitor/status "Docker Repository on Quay")](https://quay.io/repository/deisci/monitor)
 
-![Deis Graphic](https://s3-us-west-2.amazonaws.com/get-deis/deis-graphic-small.png)
+Deis (pronounced DAY-iss) is an open source PaaS that makes it easy to deploy and manage applications on your own servers. Deis builds on [Kubernetes][k8s-home] to provide a lightweight, easy and secure way to deploy your code to production.
 
-## Description
+For more information about the Deis workflow, please visit the main project page at https://github.com/deis/workflow.
+
+## Beta Status
+
+This Deis component is currently in beta status, and we welcome your input! If you have feedback, please submit an [issue][issues]. If you'd like to participate in development, please read the "Development" section below and submit a [pull request][prs].
+
+
+# About
 This repository aims to contain all the necessary components for a production quality monitoring solution that runs on top of the kubernetes cluster scheduler. It provides the [TICK](https://influxdata.com/time-series-platform/) stack which is produced by the influxdata team.
 
 ## Current State
@@ -28,3 +34,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+[k8s-home]: http://kubernetes.io/
+[issues]: https://github.com/deis/monitor/issues
+[prs]: https://github.com/deis/monitor/pulls
