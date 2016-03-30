@@ -105,3 +105,13 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
   separator = {{ default "." .GRAPHITE_SEPERATOR | quote }}
   {{ if .GRAPHITE_TAGS }}tags = [{{ .GRAPHITE_TAGS | quote }}]{{end}}
   {{ if .GRAPHITE_TEMPLATES }}templates = [{{ .GRAPHITE_TEMPLATES | quote }}]{{end}}
+
+[[udp]]
+  enabled = {{ default false .UDP_ENABLED }}
+  bind-address = {{ default ":8089" .GRAPHITE_BIND_ADDRESS | quote }}
+  database = {{ default "udp" .UDP_DATABASE | quote }}
+  batch-size = {{ default "1000" .UDP_BATCH_SIZE }}
+  batch-timeout = {{ default "1s" .UDP_BATCH_TIMEOUT | quote }}
+  batch-pending = {{ default "5" .UDP_BATCH_PENDING }}
+  read-buffer ={{ default "0" .UDP_READ_BUFFER }}
+
