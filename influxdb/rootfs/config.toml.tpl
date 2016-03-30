@@ -103,5 +103,5 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
   protocol = {{ default "tcp" .GRAPHITE_PROTOCOL | quote }}
   consistency-level = {{ default "one" .GRAPHITE_CONSISTENCY_LEVEL | quote }}
   separator = {{ default "." .GRAPHITE_SEPERATOR | quote }}
-  tags = [{{ default "" .GRAPHITE_TAGS | quote }}]
-  templates = [{{ default "" .GRAPHITE_TEMPLATES | quote }}]
+  {{ if .GRAPHITE_TAGS }}tags = [{{ .GRAPHITE_TAGS | quote }}]{{end}}
+  {{ if .GRAPHITE_TEMPLATES }}templates = [{{ .GRAPHITE_TEMPLATES | quote }}]{{end}}
