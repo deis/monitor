@@ -96,3 +96,12 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
   retry-interval = {{ default "1s" .HINTED_HANDOFF_RETRY_INTERVAL | quote }}
   retry-max-interval = {{ default "1m0s" .HINTED_HANDOFF_RETRY_MAX_INTERVAL | quote }}
   purge-interval = {{ default "1h0m0s" .HINTED_HANDOFF_PURGE_INTERVAL | quote }}
+
+[[graphite]]
+  enabled = {{ default false .GRAPHITE_ENABLED }}
+  bind-address = {{ default ":2003" .GRAPHITE_BIND_ADDRESS | quote }}
+  protocol = {{ default "tcp" .GRAPHITE_PROTOCOL | quote }}
+  consistency-level = {{ default "one" .GRAPHITE_CONSISTENCY_LEVEL | quote }}
+  separator = {{ default "." .GRAPHITE_SEPERATOR | quote }}
+  {{ if .GRAPHITE_TAGS }}tags = [{{ .GRAPHITE_TAGS | quote }}]{{end}}
+  {{ if .GRAPHITE_TEMPLATES }}templates = [{{ .GRAPHITE_TEMPLATES | quote }}]{{end}}
