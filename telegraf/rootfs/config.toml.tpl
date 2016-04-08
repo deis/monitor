@@ -1,6 +1,13 @@
 # Set Tag Configuration
 [tags]
 
+{{ if .GLOBAL_TAGS }}
+[global_tags]
+  {{ range $index, $item := split "," .GLOBAL_TAGS }}
+    {{ $value := split ":" $item }}{{ $value._0 }}={{ $value._1 | quote }}
+  {{end}}
+{{ end }}
+
 # Set Agent Configuration
 [agent]
   interval = {{ default "10s" .AGENT_INTERVAL | quote }}
