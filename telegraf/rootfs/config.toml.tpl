@@ -119,11 +119,11 @@
 
 
 [[inputs.diskio]]
-  {{ if .DISKIO_DEVICES }} devices = {{ .DISKIO_DEVICES }} {{ end }}
+  {{ if .DISKIO_DEVICES }} devices = [{{ .DISKIO_DEVICES }}] {{ end }}
   {{ if .DISKIO_SKIP_SERIAL_NUMBER }} skip_serial_number = {{ .DISKIO_SKIP_SERIAL_NUMBER }} {{ end }}
 
 [[inputs.net]]
-  {{ if .NET_INTERFACES }} = {{ .NET_INTERFACES}} {{ end }}
+  {{ if .NET_INTERFACES }} interfaces = [{{ .NET_INTERFACES}}] {{ end }}
 
 
 {{ if .APACHE_URLS }}
