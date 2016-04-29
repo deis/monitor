@@ -13,12 +13,14 @@ This Deis component is currently in beta status, and we welcome your input! If y
 
 
 # About
-This repository aims to contain all the necessary components for a production quality monitoring solution that runs on top of the kubernetes cluster scheduler. It provides the [TICK](https://influxdata.com/time-series-platform/) stack which is produced by the influxdata team.
+This repository aims to contain all the necessary components for a production quality monitoring solution that runs on top of the kubernetes cluster scheduler. It provides part of the [TICK](https://influxdata.com/time-series-platform/) stack which is produced by the influxdata team.
 
 ## Current State
-Currently this repo provides only 2 components (influxdb and telegraf). Telegraf is the metrics collection agent that runs using the daemon set API. For more infomation please read [this](telegraf/README.md).
+Currently this repo provides only 3 components (Influxdb, Telegraf, and Grafana). Telegraf is the metrics collection agent that runs using the daemon set API. For more infomation please read [this](telegraf/README.md).
 
-Also provided is an influxdb container which only runs 1 instance of the database. It also does not write any data to the host filesystem so it is not a durable system right now. For more information please read [this](influxdb/README.md)
+Also provided is an Influxdb container which only runs 1 instance of the database. It also does not write any data to the host filesystem so it is not a durable system right now. For more information please read [this](influxdb/README.md)
+
+Lastly, Grafana is a stand alone graphing application. It natively supports Influxdb as a datasource and provides a robust engine for creating dashboards on top of timeseries data. We provide a few out of the box dashboards for monitoring Deis Workflow and Kubernetes but please feel free to use them as a starting point for creating your own dashboards.
 
 ## License
 Copyright 2013, 2014, 2015, 2016 Engine Yard, Inc.

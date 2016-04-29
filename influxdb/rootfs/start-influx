@@ -8,4 +8,4 @@ echo "###########################################"
 cat config.toml
 echo "###########################################"
 echo "###########################################"
-exec ./influxd -config config.toml
+exec influxd -config config.toml
