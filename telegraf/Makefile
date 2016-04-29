@@ -2,7 +2,7 @@ SHELL = /bin/bash
 
 DOCKER_HOST = $(shell echo $$DOCKER_HOST)
 BUILD_TAG ?= git-$(shell git rev-parse --short HEAD)
-SHORT_NAME ?= influxdb
+SHORT_NAME ?= telegraf
 DEIS_REGISTRY ?= ${DEV_REGISTRY}
 IMAGE_PREFIX ?= deis
 
@@ -22,18 +22,17 @@ clean: check-docker
 	docker rmi $(IMAGE)
 
 update-manifests:
-	sed 's#\(image:\) .*#\1 $(IMAGE)#' manifests/deis-monitor-influxdb-rc.yaml > manifests/deis-monitor-influxdb-rc.tmp.yaml
+	sed 's#\(image:\) .*#\1 $(IMAGE)#' manifests/deis-monitor-telegraf-daemon.yaml > manifests/deis-monitor-telegraf-daemon.tmp.yaml
 
 kube-install: update-manifests
-	kubectl create -f manifests/deis-monitor-influxdb-api-svc.yaml
-	kubectl create -f manifests/deis-monitor-influxdb-ui-svc.yaml
-	kubectl create -f manifests/deis-monitor-influxdb-rc.yaml
+	kubectl create -f manifests/deis-monitor-telegraf-service-account.yaml
+	kubectl create -f manifests/deis-monitor-telegraf-daemon.yaml
 
 kube-delete:
-	kubectl delete -f manifests/deis-monitor-influxdb-api-svc.yaml
-	kubectl delete -f manifests/deis-monitor-influxdb-ui-svc.yaml
-	kubectl delete -f manifests/deis-monitor-influxdb-rc.yaml
+	kubectl delete -f manifests/deis-monitor-telegraf-service-account.yaml
+	kubectl delete -f manifests/deis-monitor-telegraf-daemon.yaml
 
 kube-update: update-manifests
-	kubectl delete -f manifests/deis-monitor-influxdb-rc.tmp.yaml
-	kubectl create -f manifests/deis-monitor-influxdb-rc.tmp.yaml
+	kubectl delete -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
+	kubectl create -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
+	
