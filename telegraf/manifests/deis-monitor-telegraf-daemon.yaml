@@ -29,6 +29,8 @@ spec:
             value: "/rootfs/sys"
           - name: "AGENT_QUIET"
             value: "true"
+          - name: "AGENT_BUFFER_LIMIT"
+            value: "100000"
           volumeMounts:
           - mountPath: /var/run/docker.sock
             name: docker-socket
@@ -37,6 +39,9 @@ spec:
             readOnly: true
           - name: procro
             mountPath: /rootfs/proc
+            readOnly: true
+          - name: varrunutmpro
+            mountPath: /var/run/utmp
             readOnly: true
       volumes:
       - name: docker-socket
@@ -48,3 +53,7 @@ spec:
       - name: procro
         hostPath:
           path: /proc
+      - name: varrunutmpro
+        hostPath:
+          path: /var/run/utmp
+          

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: deis-monitor-influxdb
-        image: quay.io/deis/influxdb:v2-beta
+        image: quay.io/deis/influxdb:canary
         imagePullPolicy: Always
         ports:
         - containerPort: 8083
@@ -27,3 +27,16 @@ spec:
         - containerPort: 8084
           name: ssltransport
           protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8086
+          initialDelaySeconds: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 8086
+          initialDelaySeconds: 1
+          timeoutSeconds: 1
+          

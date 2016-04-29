@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
       - name: deis-monitor-grafana
-        image: grafana/grafana:2.6.0
+        image: quay.io/deis/grafana:canary
         imagePullPolicy: Always
         env:
         - name: "INFLUXDB_URLS"
-          value: http://$(DEIS_MONITOR_INFLUXDB_SERVICE_HOST):$(DEIS_MONITOR_INFLUXDB_PORT_8086_TCP_PORT)
+          value: http://$(DEIS_MONITOR_INFLUXAPI_SERVICE_HOST):$(DEIS_MONITOR_INFLUXAPI_SERVICE_PORT_TRANSPORT)
         - name: "KUBERNETES_DOCKER_ENDPOINT"
           value: "unix:///var/run/docker.sock"
         - name: "BIND_PORT"

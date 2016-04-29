@@ -1,4 +1,5 @@
 # Telegraf
+[![Docker Repository on Quay](https://quay.io/repository/deisci/telegraf/status "Docker Repository on Quay")](https://quay.io/repository/deisci/telegraf)
 
 ## Description
 This is an alpine based image for running telegraf within a kubernetes cluster.
@@ -25,21 +26,25 @@ You must do 2 things if you want to receive host level metrics from telegraf.
  | AGENT_DEBUG | false | Run telegraf in debug mode. |
  | AGENT_QUIET | false | Run telegraf in quiet mode. |
  | AGENT_HOSTNAME | NodeName | Override default hostname |
- 
+
 
 ## Development
-There is a make file provided with the project that can build the image, push it to a registry, and deploy it to a kubernetes cluster.
+The provided `Makefile` has various targets to help support building and publishing new images into a kubernetes cluster.
 
-### Environment Variables
-* `DEIS_REGISTRY` : leave blank for dockerhub otherwise provide a valid url like `quay.io`
-* `BUILD_TAG`: This is the tag that will be applied to the image when built
-* `IMAGE_PREFIX`: The account in the registry (quay.io/jchauncey)
+### Environment variables
+There are a few key environment variables you should be aware of when interacting with the `make` targets.
+
+* `BUILD_TAG` - The tag provided to the docker image when it is built (defaults to the git-sha)
+* `SHORT_NAME` - The name of the image (defaults to `grafana`)
+* `DEIS_REGISTRY` - This is the registry you are using (default `dockerhub`)
+* `IMAGE_PREFIX` - This is the account for the registry you are using (default `deis`)
 
 ### Make targets
-* `info`: Print out what information will be used to build the docker image
-* `docker-build`: Builds the docker image
-* `docker-push`: Pushes the image to the specified registry
-* `kube-delete`: Remove the daemonset from kubernetes
-* `kube-create`: Create the daemonset in kubernetes
-* `kube-update`: Remove the daemonset and create a new one (this is useful for publishing new images)
-* `update-manifests`: This is a helpful target that is used to generate a temporary manifest with the dev image set in the `image` stanza.
+
+* `make build` - Build docker image
+* `make push` - Push docker image to a registry
+* `make install` - Install all necessary components into kubernetes cluster (does not install telegraf or influx)
+* `make uninstall` - Remove grafana from kubernetes
+* `make upgrade` - Replaces the running grafana instance with a new one
+
+The typical workflow will look something like this - `DEIS_REGISTRY=quay.io/ IMAGE_PREFIX=foouser make build push upgrade``
