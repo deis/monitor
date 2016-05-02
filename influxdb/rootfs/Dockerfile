@@ -16,19 +16,20 @@ RUN \
   adduser -S -s /bin/bash -G influxdb influxdb
 
 RUN \
-  mkdir -p /usr/local/bin/ && \
-  apk update && \
-  apk add ca-certificates wget curl bash && \
-  wget -q -O /etc/apk/keys/andyshinn.rsa.pub https://raw.githubusercontent.com/andyshinn/alpine-pkg-glibc/master/andyshinn.rsa.pub && \
-  wget https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-2.23-r1.apk && \
-  apk add glibc-2.23-r1.apk && \
-  curl -SL https://dl.influxdata.com/influxdb/releases/influxdb-${INFLUX_VERSION}-1_linux_amd64.tar.gz | tar xzC / && \
-  chown influxdb:influxdb /usr/bin/influx* && \
-  rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+    mkdir -p /usr/local/bin/ && \
+    apk add -U ca-certificates wget curl bash
+
+RUN curl -sSL https://raw.githubusercontent.com/andyshinn/alpine-pkg-glibc/master/andyshinn.rsa.pub -o /etc/apk/keys/andyshinn.rsa.pub && \
+    curl -sSL https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-2.23-r1.apk -O && \
+    apk add glibc-2.23-r1.apk && rm /glibc-2.23-r1.apk
+
+RUN curl -SL https://dl.influxdata.com/influxdb/releases/influxdb-${INFLUX_VERSION}-1_linux_amd64.tar.gz | tar xzC / && \
+    chown influxdb:influxdb /usr/bin/influx* && \
+    rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 RUN \
- mkdir -p /data && \
- chown influxdb:influxdb /data
+    mkdir -p /data && \
+    chown influxdb:influxdb /data
 
 VOLUME /data
 

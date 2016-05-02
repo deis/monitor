@@ -204,6 +204,7 @@
 {{ if .PROMETHEUS_URLS }}
 [[inputs.prometheus]]
   urls = [{{ .PROMETHEUS_URLS }}]
+  insecure_skip_verify = {{ default true .PROMETHEUS_INSECURE_SKIP_VERIFY }}
   bearer_token = {{ .PROMETHEUS_BEARER_TOKEN | quote }}
 {{ end }}
 

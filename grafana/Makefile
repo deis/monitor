@@ -13,7 +13,7 @@ push: docker-push
 install: kube-install
 uninstall: kube-delete
 upgrade: kube-update
-	
+
 docker-build:
 	docker build -t ${IMAGE} rootfs
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
@@ -26,11 +26,11 @@ update-manifests:
 
 kube-install: update-manifests
 	kubectl create -f manifests/deis-monitor-grafana-svc.yaml
-	kubectl create -f manifests/deis-monitor-grafana-rc.yaml
+	kubectl create -f manifests/deis-monitor-grafana-rc.tmp.yaml
 
-kube-delete:
+kube-delete: update-manifests
 	kubectl delete -f manifests/deis-monitor-grafana-svc.yaml
-	kubectl delete -f manifests/deis-monitor-grafana-rc.yaml
+	kubectl delete -f manifests/deis-monitor-grafana-rc.tmp.yaml
 
 kube-update: update-manifests
 	kubectl delete -f manifests/deis-monitor-grafana-rc.tmp.yaml
