@@ -9,7 +9,6 @@ RUN \
     apk --update add curl bash &&\
     curl -SL http://get.influxdb.org/telegraf/telegraf-${TELEGRAF_VERSION}-1_linux_amd64.tar.gz \
     | tar xzC / &&\
-    apk del --purge curl && \
     rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 # Alpine telegraf fix
 RUN mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
