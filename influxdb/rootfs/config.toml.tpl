@@ -28,7 +28,7 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
   wal-flush-interval = {{ default "10m0s" .DATA_WAL_FLUSH_INTERVAL | quote }}
   wal-partition-flush-delay = {{ default "2s" .DATA_WAL_PARTITION_FLUSH_DELAY | quote }}
   wal-dir = {{ default "/data/db/wal" .DATA_WAL_DIR | quote }}
-  wal-logging-enabled = {{ default true .DATA_WAL_LOGGING_ENABLED }}
+  wal-logging-enabled = {{ default false .DATA_WAL_LOGGING_ENABLED }}
   wal-ready-series-size = {{ default 30720 .DATA_WAL_READY_SERIES_SIZE }}
   wal-compaction-threshold = {{ default 0.5 .DATA_WAL_COMPACTION_THRESHOLD }}
   wal-max-series-size = {{ default 1048576 .DATA_WAL_MAX_SERIES_SIZE }}
@@ -75,7 +75,7 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
   enabled = {{ default true .HTTP_ENABLED }}
   bind-address = {{ default ":8086" .HTTP_BIND_ADDRESS | quote }}
   auth-enabled = {{ default false .HTTP_AUTH_ENABLED }}
-  log-enabled = {{ default true .HTTP_LOG_ENABLED }}
+  log-enabled = {{ default false .HTTP_LOG_ENABLED }}
   write-tracing = {{ default false .HTTP_WRITE_TRACING }}
   pprof-enabled = {{ default false .HTTP_PPROF_ENABLED }}
   https-enabled = {{ default false .HTTP_HTTPS_ENABLED }}
@@ -83,7 +83,7 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
 
 
 [continuous_queries]
-  log-enabled = {{ default true .CONTINUOUS_QUERIES_LOG_ENABLED }}
+  log-enabled = {{ default false .CONTINUOUS_QUERIES_LOG_ENABLED }}
   enabled = {{ default true .CONTINUOUS_QUERIES_ENABLED }}
   run-interval = {{ default "1s" .CONTINUOUS_QUERIES_RUN_INTERVAL | quote }}
 
