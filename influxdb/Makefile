@@ -27,12 +27,12 @@ update-manifests:
 kube-install: update-manifests
 	kubectl create -f manifests/deis-monitor-influxdb-api-svc.yaml
 	kubectl create -f manifests/deis-monitor-influxdb-ui-svc.yaml
-	kubectl create -f manifests/deis-monitor-influxdb-rc.yaml
+	kubectl create -f manifests/deis-monitor-influxdb-rc.tmp.yaml
 
-kube-delete:
+kube-delete: update-manifests
 	kubectl delete -f manifests/deis-monitor-influxdb-api-svc.yaml
 	kubectl delete -f manifests/deis-monitor-influxdb-ui-svc.yaml
-	kubectl delete -f manifests/deis-monitor-influxdb-rc.yaml
+	kubectl delete -f manifests/deis-monitor-influxdb-rc.tmp.yaml
 
 kube-update: update-manifests
 	kubectl delete -f manifests/deis-monitor-influxdb-rc.tmp.yaml
