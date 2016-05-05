@@ -1,0 +1,1513 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Node Health",
+    "originalTitle": "Node Health",
+    "tags": [],
+    "style": "dark",
+    "timezone": "browser",
+    "editable": true,
+    "hideControls": false,
+    "sharedCrosshair": false,
+    "rows": [
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "150px",
+        "panels": [
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": true,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "bytes",
+            "height": "150px",
+            "id": 4,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "repeat": null,
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-170.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false
+            },
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "disk",
+                "query": "SELECT last(\"free\") FROM \"disk\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "free"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": "10,50,80",
+            "title": "Disk Free - $host",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "avg"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": true,
+            "colors": [
+              "rgba(0, 154, 246, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "none",
+            "height": "150px",
+            "id": 2,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "repeat": null,
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-170.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false
+            },
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_running_pod_count",
+                "query": "SELECT last(\"gauge\") FROM \"kubelet_running_pod_count\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "gauge"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": "0",
+            "title": "Current Running Pods - $host",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": true,
+            "colors": [
+              "rgba(0, 138, 255, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "none",
+            "height": "150px",
+            "id": 1,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "repeat": null,
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-170.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false
+            },
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_running_container_count",
+                "query": "SELECT last(\"gauge\") FROM \"kubelet_running_container_count\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "gauge"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": "0",
+            "title": "Current Running Containers $host",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          }
+        ],
+        "repeat": "host",
+        "scopedVars": {
+          "host": {
+            "text": "ip-10-0-0-170.us-west-2.compute.internal",
+            "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+            "selected": true
+          }
+        },
+        "showTitle": false,
+        "title": ""
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "leftLogBase": 1,
+              "leftMax": null,
+              "leftMin": null,
+              "rightLogBase": 1,
+              "rightMax": null,
+              "rightMin": null,
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 3,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 3,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": true,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-170.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "seriesOverrides": [
+              {
+                "alias": "available",
+                "color": "#1F78C1",
+                "fill": 5,
+                "lines": true
+              },
+              {
+                "alias": "used",
+                "color": "#BF1B00",
+                "fill": 6,
+                "lines": true
+              }
+            ],
+            "span": 12,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "available",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "mem",
+                "query": "SELECT last(\"available_percent\") FROM \"mem\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "available_percent"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              },
+              {
+                "alias": "used",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "mem",
+                "query": "SELECT last(\"used_percent\") FROM \"mem\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "rawQuery": false,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "used_percent"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Usage Percent - $host",
+            "tooltip": {
+              "shared": true,
+              "value_type": "cumulative"
+            },
+            "transparent": true,
+            "type": "graph",
+            "x-axis": true,
+            "y-axis": true,
+            "y_formats": [
+              "percent",
+              "short"
+            ]
+          }
+        ],
+        "repeat": "host",
+        "scopedVars": {
+          "host": {
+            "text": "ip-10-0-0-170.us-west-2.compute.internal",
+            "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+            "selected": true
+          }
+        },
+        "title": ""
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "leftLogBase": 1,
+              "leftMax": null,
+              "leftMin": null,
+              "rightLogBase": 1,
+              "rightMax": null,
+              "rightMin": null,
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 5,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-170.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "1 minute",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "system",
+                "query": "SELECT last(\"load1\") FROM \"system\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "load1"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              },
+              {
+                "alias": "5 minute",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "system",
+                "query": "SELECT last(\"load5\") FROM \"system\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "load5"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              },
+              {
+                "alias": "15 minute",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "system",
+                "query": "SELECT last(\"load15\") FROM \"system\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "load15"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Load Average - $host",
+            "tooltip": {
+              "shared": true,
+              "value_type": "cumulative"
+            },
+            "transparent": true,
+            "type": "graph",
+            "x-axis": true,
+            "y-axis": true,
+            "y_formats": [
+              "short",
+              "short"
+            ]
+          }
+        ],
+        "repeat": "host",
+        "scopedVars": {
+          "host": {
+            "text": "ip-10-0-0-170.us-west-2.compute.internal",
+            "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+            "selected": true
+          }
+        },
+        "title": "New row"
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "150px",
+        "panels": [
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": true,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "bytes",
+            "height": "150px",
+            "id": 6,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "repeat": null,
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-27.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false
+            },
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "disk",
+                "query": "SELECT last(\"free\") FROM \"disk\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "free"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": "10,50,80",
+            "title": "Disk Free - $host",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "avg"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": true,
+            "colors": [
+              "rgba(0, 154, 246, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "none",
+            "height": "150px",
+            "id": 7,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "repeat": null,
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-27.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false
+            },
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_running_pod_count",
+                "query": "SELECT last(\"gauge\") FROM \"kubelet_running_pod_count\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "gauge"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": "0",
+            "title": "Current Running Pods - $host",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": true,
+            "colors": [
+              "rgba(0, 138, 255, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "none",
+            "height": "150px",
+            "id": 8,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "repeat": null,
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-27.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "span": 4,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false
+            },
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_running_container_count",
+                "query": "SELECT last(\"gauge\") FROM \"kubelet_running_container_count\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "gauge"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "thresholds": "0",
+            "title": "Current Running Containers $host",
+            "transparent": true,
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          }
+        ],
+        "repeat": null,
+        "scopedVars": {
+          "host": {
+            "text": "ip-10-0-0-27.us-west-2.compute.internal",
+            "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+            "selected": true
+          }
+        },
+        "showTitle": false,
+        "title": "",
+        "repeatRowId": 1,
+        "repeatIteration": 1457558069535
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "leftLogBase": 1,
+              "leftMax": null,
+              "leftMin": null,
+              "rightLogBase": 1,
+              "rightMax": null,
+              "rightMin": null,
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 9,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 3,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": true,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-27.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "seriesOverrides": [
+              {
+                "alias": "available",
+                "color": "#1F78C1",
+                "fill": 5,
+                "lines": true
+              },
+              {
+                "alias": "used",
+                "color": "#BF1B00",
+                "fill": 6,
+                "lines": true
+              }
+            ],
+            "span": 12,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "available",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "mem",
+                "query": "SELECT last(\"available_percent\") FROM \"mem\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "available_percent"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              },
+              {
+                "alias": "used",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "mem",
+                "query": "SELECT last(\"used_percent\") FROM \"mem\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "rawQuery": false,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "used_percent"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Usage Percent - $host",
+            "tooltip": {
+              "shared": true,
+              "value_type": "cumulative"
+            },
+            "transparent": true,
+            "type": "graph",
+            "x-axis": true,
+            "y-axis": true,
+            "y_formats": [
+              "percent",
+              "short"
+            ]
+          }
+        ],
+        "repeat": null,
+        "scopedVars": {
+          "host": {
+            "text": "ip-10-0-0-27.us-west-2.compute.internal",
+            "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+            "selected": true
+          }
+        },
+        "title": "",
+        "repeatRowId": 2,
+        "repeatIteration": 1457558069535
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "leftLogBase": 1,
+              "leftMax": null,
+              "leftMin": null,
+              "rightLogBase": 1,
+              "rightMax": null,
+              "rightMin": null,
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 10,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "host": {
+                "text": "ip-10-0-0-27.us-west-2.compute.internal",
+                "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+                "selected": true
+              }
+            },
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "1 minute",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "system",
+                "query": "SELECT last(\"load1\") FROM \"system\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "load1"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              },
+              {
+                "alias": "5 minute",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "system",
+                "query": "SELECT last(\"load5\") FROM \"system\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "load5"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              },
+              {
+                "alias": "15 minute",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "system",
+                "query": "SELECT last(\"load15\") FROM \"system\" WHERE \"host\" =~ /$host$/ AND $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "load15"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "host",
+                    "operator": "=~",
+                    "value": "/$host$/"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Load Average - $host",
+            "tooltip": {
+              "shared": true,
+              "value_type": "cumulative"
+            },
+            "transparent": true,
+            "type": "graph",
+            "x-axis": true,
+            "y-axis": true,
+            "y_formats": [
+              "short",
+              "short"
+            ]
+          }
+        ],
+        "repeat": null,
+        "scopedVars": {
+          "host": {
+            "text": "ip-10-0-0-27.us-west-2.compute.internal",
+            "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+            "selected": true
+          }
+        },
+        "title": "New row",
+        "repeatRowId": 3,
+        "repeatIteration": 1457558069535
+      }
+    ],
+    "time": {
+      "from": "now-5m",
+      "to": "now"
+    },
+    "timepicker": {
+      "now": true,
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "templating": {
+      "list": [
+        {
+          "allFormat": "regex wildcard",
+          "current": {
+            "tags": [],
+            "text": "ip-10-0-0-170.us-west-2.compute.internal + ip-10-0-0-27.us-west-2.compute.internal",
+            "value": [
+              "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+              "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal"
+            ]
+          },
+          "datasource": null,
+          "includeAll": false,
+          "multi": true,
+          "multiFormat": "regex values",
+          "name": "host",
+          "options": [
+            {
+              "text": "host",
+              "value": "host"
+            },
+            {
+              "text": "ip-10-0-0-170.us-west-2.compute.internal",
+              "value": "ip\\-10\\-0\\-0\\-170\\.us\\-west\\-2\\.compute\\.internal",
+              "selected": true
+            },
+            {
+              "text": "ip-10-0-0-27.us-west-2.compute.internal",
+              "value": "ip\\-10\\-0\\-0\\-27\\.us\\-west\\-2\\.compute\\.internal",
+              "selected": true
+            }
+          ],
+          "query": "SHOW TAG VALUES FROM \"system\" WITH KEY = \"host\"",
+          "refresh": true,
+          "regex": "",
+          "tagValuesQuery": "",
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": true
+        }
+      ]
+    },
+    "annotations": {
+      "list": []
+    },
+    "refresh": "10s",
+    "schemaVersion": 8,
+    "version": 4,
+    "links": []
+  }
+}
