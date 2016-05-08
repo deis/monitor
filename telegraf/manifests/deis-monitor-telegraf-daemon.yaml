@@ -31,6 +31,8 @@ spec:
             value: "true"
           - name: "AGENT_BUFFER_LIMIT"
             value: "100000"
+          - name: "ENABLE_INFLUXDB_INPUT"
+            value: "true"
           volumeMounts:
           - mountPath: /var/run/docker.sock
             name: docker-socket
