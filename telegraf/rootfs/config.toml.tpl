@@ -165,7 +165,7 @@
     threshold = {{ .HTTP_JSON_THRESHOLD | quote }}
 {{end}}
 
-{{ if .INFLUXDB_URLS }}
+{{ if .ENABLE_INFLUXDB_INPUT }}
 [[inputs.influxdb]]
   urls = [{{ (print .INFLUXDB_URLS "/debug/vars") | quote }}]
 {{ end }}
