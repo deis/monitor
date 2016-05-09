@@ -23,12 +23,6 @@
             "error": false,
             "fill": 1,
             "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
               "threshold2": null,
@@ -55,13 +49,6 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "scopedVars": {
-              "host": {
-                "text": "ip-10-0-0-26.us-west-2.compute.internal",
-                "value": "ip-10-0-0-26.us-west-2.compute.internal",
-                "selected": true
-              }
-            },
             "seriesOverrides": [],
             "span": 6,
             "stack": false,
@@ -78,10 +65,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -108,7 +95,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "90th - $tag_host",
@@ -121,10 +109,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -152,7 +140,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "99th - $tag_host",
@@ -165,10 +154,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -196,7 +185,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               }
             ],
             "timeFrom": null,
@@ -204,15 +194,29 @@
             "title": "Kubernetes API Latency",
             "tooltip": {
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "cumulative",
+              "msResolution": false
             },
             "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "ns",
-              "short"
-            ]
+            "yaxes": [
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "ns"
+              },
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            }
           },
           {
             "aliasColors": {},
@@ -222,12 +226,6 @@
             "error": false,
             "fill": 1,
             "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
               "threshold2": null,
@@ -254,13 +252,6 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "scopedVars": {
-              "host": {
-                "text": "ip-10-0-0-26.us-west-2.compute.internal",
-                "value": "ip-10-0-0-26.us-west-2.compute.internal",
-                "selected": true
-              }
-            },
             "seriesOverrides": [],
             "span": 6,
             "stack": false,
@@ -277,16 +268,16 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
+                    "type": "fill",
                     "params": [
-                      "null"
-                    ],
-                    "type": "fill"
+                      "previous"
+                    ]
                   }
                 ],
                 "measurement": "kubelet_pod_start_latency_microseconds",
@@ -307,7 +298,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "90th - $tag_host",
@@ -320,16 +312,16 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
+                    "type": "fill",
                     "params": [
-                      "null"
-                    ],
-                    "type": "fill"
+                      "previous"
+                    ]
                   }
                 ],
                 "measurement": "kubelet_pod_start_latency_microseconds",
@@ -350,7 +342,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "99th - $tag_host",
@@ -363,16 +356,16 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
+                    "type": "fill",
                     "params": [
-                      "null"
-                    ],
-                    "type": "fill"
+                      "previous"
+                    ]
                   }
                 ],
                 "measurement": "kubelet_pod_start_latency_microseconds",
@@ -393,7 +386,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               }
             ],
             "timeFrom": null,
@@ -401,25 +395,32 @@
             "title": "Kubelet Start Latency",
             "tooltip": {
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "cumulative",
+              "msResolution": false
             },
             "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "µs",
-              "short"
-            ]
+            "yaxes": [
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "µs"
+              },
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            }
           }
         ],
         "repeat": "host",
-        "scopedVars": {
-          "host": {
-            "text": "ip-10-0-0-26.us-west-2.compute.internal",
-            "value": "ip-10-0-0-26.us-west-2.compute.internal",
-            "selected": true
-          }
-        },
         "showTitle": false,
         "title": "Row"
       },
@@ -436,12 +437,6 @@
             "error": false,
             "fill": 1,
             "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
               "threshold2": null,
@@ -468,13 +463,6 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "scopedVars": {
-              "host": {
-                "text": "ip-10-0-0-26.us-west-2.compute.internal",
-                "value": "ip-10-0-0-26.us-west-2.compute.internal",
-                "selected": true
-              }
-            },
             "seriesOverrides": [],
             "span": 6,
             "stack": false,
@@ -491,10 +479,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -521,7 +509,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "90th - $tag_host",
@@ -534,10 +523,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -564,7 +553,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "99th - $tag_host",
@@ -577,10 +567,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -607,7 +597,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               }
             ],
             "timeFrom": null,
@@ -615,15 +606,29 @@
             "title": "Container Manager Latency",
             "tooltip": {
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "cumulative",
+              "msResolution": false
             },
             "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "µs",
-              "short"
-            ]
+            "yaxes": [
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "µs"
+              },
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            }
           },
           {
             "aliasColors": {},
@@ -633,12 +638,6 @@
             "error": false,
             "fill": 1,
             "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
               "threshold2": null,
@@ -665,13 +664,6 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "scopedVars": {
-              "host": {
-                "text": "ip-10-0-0-26.us-west-2.compute.internal",
-                "value": "ip-10-0-0-26.us-west-2.compute.internal",
-                "selected": true
-              }
-            },
             "seriesOverrides": [],
             "span": 6,
             "stack": false,
@@ -688,10 +680,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -718,7 +710,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "90th - $tag_host",
@@ -731,10 +724,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -761,7 +754,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "99th - $tag_host",
@@ -774,10 +768,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -804,7 +798,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               }
             ],
             "timeFrom": null,
@@ -812,25 +807,32 @@
             "title": "Docker Latency",
             "tooltip": {
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "cumulative",
+              "msResolution": false
             },
             "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "µs",
-              "short"
-            ]
+            "yaxes": [
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "µs"
+              },
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            }
           }
         ],
         "repeat": "host",
-        "scopedVars": {
-          "host": {
-            "text": "ip-10-0-0-26.us-west-2.compute.internal",
-            "value": "ip-10-0-0-26.us-west-2.compute.internal",
-            "selected": true
-          }
-        },
         "title": "New row"
       },
       {
@@ -846,209 +848,6 @@
             "error": false,
             "fill": 1,
             "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
-              "threshold1": null,
-              "threshold1Color": "rgba(216, 200, 27, 0.27)",
-              "threshold2": null,
-              "threshold2Color": "rgba(234, 112, 112, 0.22)"
-            },
-            "id": 5,
-            "isNew": true,
-            "legend": {
-              "alignAsTable": true,
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": true,
-              "show": false,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 2,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "scopedVars": {
-              "host": {
-                "text": "ip-10-0-0-26.us-west-2.compute.internal",
-                "value": "ip-10-0-0-26.us-west-2.compute.internal",
-                "selected": true
-              }
-            },
-            "seriesOverrides": [],
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Average - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "type": "tag",
-                    "params": [
-                      "host"
-                    ]
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_generate_pod_status_latency_microseconds",
-                "query": "SELECT last(\"0.5\") FROM \"kubelet_generate_pod_status_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.5"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "alias": "90th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "type": "tag",
-                    "params": [
-                      "host"
-                    ]
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_generate_pod_status_latency_microseconds",
-                "query": "SELECT last(\"0.9\") FROM \"kubelet_generate_pod_status_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.9"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "alias": "99th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "type": "tag",
-                    "params": [
-                      "host"
-                    ]
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_generate_pod_status_latency_microseconds",
-                "query": "SELECT last(\"0.99\") FROM \"kubelet_generate_pod_status_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "C",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.99"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Generate Pod Status Latency",
-            "tooltip": {
-              "shared": true,
-              "value_type": "cumulative"
-            },
-            "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "µs",
-              "short"
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "datasource": null,
-            "editable": true,
-            "error": false,
-            "fill": 1,
-            "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
               "threshold2": null,
@@ -1075,13 +874,6 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "scopedVars": {
-              "host": {
-                "text": "ip-10-0-0-26.us-west-2.compute.internal",
-                "value": "ip-10-0-0-26.us-west-2.compute.internal",
-                "selected": true
-              }
-            },
             "seriesOverrides": [],
             "span": 6,
             "stack": false,
@@ -1098,10 +890,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -1128,7 +920,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "90th - $tag_host",
@@ -1141,10 +934,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -1171,7 +964,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               },
               {
                 "alias": "99th - $tag_host",
@@ -1184,10 +978,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -1214,7 +1008,8 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
               }
             ],
             "timeFrom": null,
@@ -1222,208 +1017,29 @@
             "title": "Kubelet Pod Worker Latency",
             "tooltip": {
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "cumulative",
+              "msResolution": false
             },
             "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "µs",
-              "short"
-            ]
-          }
-        ],
-        "repeat": "host",
-        "scopedVars": {
-          "host": {
-            "text": "ip-10-0-0-26.us-west-2.compute.internal",
-            "value": "ip-10-0-0-26.us-west-2.compute.internal",
-            "selected": true
-          }
-        },
-        "title": "New row"
-      },
-      {
-        "collapse": false,
-        "editable": true,
-        "height": "250px",
-        "panels": [
-          {
-            "aliasColors": {},
-            "bars": false,
-            "datasource": null,
-            "editable": true,
-            "error": false,
-            "fill": 2,
-            "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
-              "threshold1": null,
-              "threshold1Color": "rgba(216, 200, 27, 0.27)",
-              "threshold2": null,
-              "threshold2Color": "rgba(234, 112, 112, 0.22)"
-            },
-            "id": 8,
-            "isNew": true,
-            "legend": {
-              "alignAsTable": true,
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": true,
-              "show": false,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 2,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "scopedVars": {
-              "host": {
-                "text": "ip-10-0-0-26.us-west-2.compute.internal",
-                "value": "ip-10-0-0-26.us-west-2.compute.internal",
-                "selected": true
-              }
-            },
-            "seriesOverrides": [
+            "yaxes": [
               {
-                "alias": "Received",
-                "color": "#0A50A1"
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "µs"
               },
               {
-                "alias": "Sent",
-                "color": "#890F02"
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "short"
               }
             ],
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Received - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "type": "tag",
-                    "params": [
-                      "host"
-                    ]
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "container_network_receive_bytes_total",
-                "query": "SELECT derivative(last(\"counter\"), 1s) FROM \"container_network_receive_bytes_total\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "rawQuery": false,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "counter"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    },
-                    {
-                      "params": [
-                        "1s"
-                      ],
-                      "type": "derivative"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "alias": "Sent - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "type": "tag",
-                    "params": [
-                      "host"
-                    ]
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "container_network_transmit_bytes_total",
-                "query": "SELECT derivative(last(\"counter\"), 1s) FROM \"container_network_transmit_bytes_total\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "rawQuery": false,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "counter"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    },
-                    {
-                      "params": [
-                        "1s"
-                      ],
-                      "type": "derivative"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Container Network",
-            "tooltip": {
-              "shared": true,
-              "value_type": "cumulative"
-            },
-            "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "Bps",
-              "short"
-            ]
+            "xaxis": {
+              "show": true
+            }
           },
           {
             "aliasColors": {},
@@ -1433,12 +1049,6 @@
             "error": false,
             "fill": 1,
             "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
               "threshold2": null,
@@ -1463,19 +1073,13 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "scopedVars": {
-              "host": {
-                "text": "ip-10-0-0-26.us-west-2.compute.internal",
-                "value": "ip-10-0-0-26.us-west-2.compute.internal",
-                "selected": true
-              }
-            },
             "seriesOverrides": [],
             "span": 6,
             "stack": false,
             "steppedLine": false,
             "targets": [
               {
+                "alias": "$tag_host",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1485,10 +1089,10 @@
                     "type": "time"
                   },
                   {
-                    "type": "tag",
                     "params": [
                       "host"
-                    ]
+                    ],
+                    "type": "tag"
                   },
                   {
                     "params": [
@@ -1522,7 +1126,7 @@
                   ]
                 ],
                 "tags": [],
-                "alias": "$tag_host"
+                "policy": "default"
               }
             ],
             "timeFrom": null,
@@ -1530,25 +1134,223 @@
             "title": "http requests",
             "tooltip": {
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "cumulative",
+              "msResolution": false
             },
             "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "ops",
-              "short"
-            ]
+            "yaxes": [
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "ops"
+              },
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            }
           }
         ],
         "repeat": "host",
-        "scopedVars": {
-          "host": {
-            "text": "ip-10-0-0-26.us-west-2.compute.internal",
-            "value": "ip-10-0-0-26.us-west-2.compute.internal",
-            "selected": true
+        "title": "New row"
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 2,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 8,
+            "isNew": true,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": true,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "/Received/",
+                "color": "#0A50A1"
+              },
+              {
+                "alias": "/Sent/",
+                "color": "#890F02",
+                "transform": "negative-Y"
+              }
+            ],
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Received - $tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "0"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "container_network_receive_bytes_total",
+                "query": "SELECT derivative(last(\"counter\"), 1s) FROM \"container_network_receive_bytes_total\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "counter"
+                      ]
+                    },
+                    {
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "non_negative_derivative",
+                      "params": [
+                        "5s"
+                      ]
+                    }
+                  ]
+                ],
+                "tags": [],
+                "policy": "default"
+              },
+              {
+                "alias": "Sent - $tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "0"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "container_network_transmit_bytes_total",
+                "query": "SELECT derivative(last(\"counter\"), 1s) FROM \"container_network_transmit_bytes_total\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "rawQuery": false,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "counter"
+                      ]
+                    },
+                    {
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "non_negative_derivative",
+                      "params": [
+                        "5s"
+                      ]
+                    }
+                  ]
+                ],
+                "tags": [],
+                "policy": "default"
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Container Network",
+            "tooltip": {
+              "shared": true,
+              "value_type": "cumulative",
+              "msResolution": true
+            },
+            "type": "graph",
+            "yaxes": [
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "Bps"
+              },
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            },
+            "interval": "5s"
           }
-        },
+        ],
+        "repeat": "host",
         "title": "New row"
       }
     ],
@@ -1589,8 +1391,8 @@
       "list": []
     },
     "refresh": "5s",
-    "schemaVersion": 8,
-    "version": 2,
+    "schemaVersion": 12,
+    "version": 3,
     "links": []
   }
 }

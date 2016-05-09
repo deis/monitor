@@ -11,6 +11,194 @@
     "sharedCrosshair": false,
     "rows": [
       {
+        "title": "New row",
+        "height": "250px",
+        "editable": true,
+        "collapse": false,
+        "panels": [
+          {
+            "title": "Number of Measurements",
+            "error": false,
+            "span": 6,
+            "editable": true,
+            "type": "singlestat",
+            "isNew": true,
+            "id": 2,
+            "targets": [
+              {
+                "policy": "default",
+                "dsType": "influxdb",
+                "resultFormat": "time_series",
+                "tags": [],
+                "groupBy": [
+                  {
+                    "type": "time",
+                    "params": [
+                      "$interval"
+                    ]
+                  },
+                  {
+                    "type": "fill",
+                    "params": [
+                      "null"
+                    ]
+                  }
+                ],
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "numMeasurements"
+                      ]
+                    },
+                    {
+                      "type": "last",
+                      "params": []
+                    }
+                  ]
+                ],
+                "refId": "A",
+                "measurement": "influxdb_database",
+                "alias": ""
+              }
+            ],
+            "links": [],
+            "datasource": null,
+            "maxDataPoints": 100,
+            "interval": null,
+            "cacheTimeout": null,
+            "format": "none",
+            "prefix": "",
+            "postfix": "",
+            "nullText": null,
+            "valueMaps": [
+              {
+                "value": "null",
+                "op": "=",
+                "text": "N/A"
+              }
+            ],
+            "nullPointMode": "connected",
+            "valueName": "avg",
+            "prefixFontSize": "50%",
+            "valueFontSize": "200%",
+            "postfixFontSize": "50%",
+            "thresholds": "",
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "sparkline": {
+              "show": false,
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "fillColor": "rgba(31, 118, 189, 0.18)"
+            },
+            "gauge": {
+              "show": false,
+              "minValue": 0,
+              "maxValue": 100,
+              "thresholdMarkers": true,
+              "thresholdLabels": false
+            }
+          },
+          {
+            "title": "Number of Series",
+            "error": false,
+            "span": 6,
+            "editable": true,
+            "type": "singlestat",
+            "isNew": true,
+            "id": 3,
+            "targets": [
+              {
+                "policy": "default",
+                "dsType": "influxdb",
+                "resultFormat": "time_series",
+                "tags": [],
+                "groupBy": [
+                  {
+                    "type": "time",
+                    "params": [
+                      "$interval"
+                    ]
+                  },
+                  {
+                    "type": "fill",
+                    "params": [
+                      "null"
+                    ]
+                  }
+                ],
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "numSeries"
+                      ]
+                    },
+                    {
+                      "type": "last",
+                      "params": []
+                    }
+                  ]
+                ],
+                "refId": "A",
+                "measurement": "influxdb_database",
+                "alias": ""
+              }
+            ],
+            "links": [],
+            "datasource": null,
+            "maxDataPoints": 100,
+            "interval": null,
+            "cacheTimeout": null,
+            "format": "none",
+            "prefix": "",
+            "postfix": "",
+            "nullText": null,
+            "valueMaps": [
+              {
+                "value": "null",
+                "op": "=",
+                "text": "N/A"
+              }
+            ],
+            "nullPointMode": "connected",
+            "valueName": "avg",
+            "prefixFontSize": "50%",
+            "valueFontSize": "200%",
+            "postfixFontSize": "50%",
+            "thresholds": "",
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "sparkline": {
+              "show": false,
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "fillColor": "rgba(31, 118, 189, 0.18)"
+            },
+            "gauge": {
+              "show": false,
+              "minValue": 0,
+              "maxValue": 100,
+              "thresholdMarkers": true,
+              "thresholdLabels": false
+            }
+          }
+        ]
+      },
+      {
         "collapse": false,
         "editable": true,
         "height": "250px",
@@ -23,12 +211,6 @@
             "error": false,
             "fill": 1,
             "grid": {
-              "leftLogBase": 1,
-              "leftMax": null,
-              "leftMin": null,
-              "rightLogBase": 1,
-              "rightMax": null,
-              "rightMin": null,
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
               "threshold2": null,
@@ -43,7 +225,7 @@
               "max": false,
               "min": false,
               "rightSide": true,
-              "show": true,
+              "show": false,
               "total": false,
               "values": false
             },
@@ -55,13 +237,24 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "seriesOverrides": [],
+            "seriesOverrides": [
+              {
+                "alias": "/Read/",
+                "color": "#508642",
+                "fill": 4
+              },
+              {
+                "alias": "/Write/",
+                "color": "#65C5DB",
+                "fill": 4
+              }
+            ],
             "span": 12,
             "stack": false,
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_host",
+                "alias": "Read - $tag_host",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -107,26 +300,99 @@
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [],
+                "policy": "default"
+              },
+              {
+                "alias": "Write - $tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "influxdb_httpd",
+                "query": "SELECT non_negative_derivative(last(\"queryReq\"), 1s) FROM \"influxdb_httpd\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "writeReq"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        "1s"
+                      ],
+                      "type": "non_negative_derivative"
+                    }
+                  ]
+                ],
+                "tags": [],
+                "policy": "default"
               }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "HTTP Queries",
+            "title": "HTTP Requests Per Second",
             "tooltip": {
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "cumulative",
+              "msResolution": false
             },
             "type": "graph",
-            "x-axis": true,
-            "y-axis": true,
-            "y_formats": [
-              "ops",
-              "short"
-            ]
+            "yaxes": [
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "ops"
+              },
+              {
+                "show": true,
+                "min": null,
+                "max": null,
+                "logBase": 1,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            },
+            "interval": "1s"
           }
         ],
         "title": "Row"
+      },
+      {
+        "title": "New row",
+        "height": "250px",
+        "editable": true,
+        "collapse": false,
+        "panels": []
       }
     ],
     "time": {
@@ -165,8 +431,8 @@
     "annotations": {
       "list": []
     },
-    "schemaVersion": 8,
-    "version": 1,
+    "schemaVersion": 12,
+    "version": 0,
     "links": []
   }
 }
