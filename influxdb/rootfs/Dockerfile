@@ -1,8 +1,29 @@
-#This dockerfile is based on https://github.com/jalateras/docker-influxdb
-FROM alpine:3.3
-MAINTAINER Jonathan Chauncey "<jchauncey@deis.com>"
+FROM quay.io/deis/base:0.2.0
 
-ENV INFLUX_VERSION 0.12.2
+RUN adduser --system \
+	--shell /bin/bash \
+	--disabled-password \
+	--home /home/influxdb \
+	--group \
+	influxdb
+
+COPY . /
+
+RUN curl -SL -o /home/influxdb/envtpl https://github.com/arschles/envtpl/releases/download/0.2.3/envtpl_linux_amd64 \
+	&& chmod +x /home/influxdb/envtpl \
+	&& curl -SL -o /tmp/influxdb.deb https://dl.influxdata.com/influxdb/releases/influxdb_0.13.0_amd64.deb \
+	&& dpkg -i /tmp/influxdb.deb \
+	&& rm /tmp/influxdb.deb \
+	&& mkdir -p /data \
+	&& chown influxdb:influxdb /data \
+	&& chown -R influxdb:influxdb /home/influxdb \
+	&& chmod +x /home/influxdb/start-influx
+
+VOLUME /data
+
+USER influxdb
+WORKDIR /home/influxdb
+CMD ["./start-influx"]
 
 # Expose the admin port
 EXPOSE 8083
@@ -11,35 +32,4 @@ EXPOSE 8084
 # Expose the http api port
 EXPOSE 8086
 
-RUN \
-  addgroup -S influxdb && \
-  adduser -S -s /bin/bash -G influxdb influxdb
-
-RUN \
-    mkdir -p /usr/local/bin/ && \
-    apk add -U ca-certificates wget curl bash
-
-RUN curl -sSL https://raw.githubusercontent.com/andyshinn/alpine-pkg-glibc/master/andyshinn.rsa.pub -o /etc/apk/keys/andyshinn.rsa.pub && \
-    curl -sSL https://github.com/andyshinn/alpine-pkg-glibc/releases/download/2.23-r1/glibc-2.23-r1.apk -O && \
-    apk add glibc-2.23-r1.apk && rm /glibc-2.23-r1.apk
-
-RUN curl -SL https://dl.influxdata.com/influxdb/releases/influxdb-${INFLUX_VERSION}-1_linux_amd64.tar.gz | tar xzC / && \
-    chown influxdb:influxdb /usr/bin/influx* && \
-    rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
-
-RUN \
-    mkdir -p /data && \
-    chown influxdb:influxdb /data
-
-VOLUME /data
-
-ADD https://github.com/arschles/envtpl/releases/download/0.2.3/envtpl_linux_amd64 /home/influxdb/envtpl
-COPY config.toml.tpl /home/influxdb/config.toml.tpl
-COPY start-influx  /home/influxdb/start-influx
-
-RUN chmod +x /home/influxdb/envtpl
-RUN chmod +x /home/influxdb/start-influx
-
-USER influxdb
-WORKDIR /home/influxdb
-ENTRYPOINT ["./start-influx"]
+ENV WORKFLOW_RELEASE 2.0.0
