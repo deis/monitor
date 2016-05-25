@@ -1,3 +1,11 @@
+### v2.0.0-beta4 -> v2.0.0-rc1
+
+#### Maintenance
+
+ - [`764a34d`](https://github.com/deis/monitor/commit/764a34d944d99499fcc03705f505216c4d4ed413) Dockerfiles: Refactor images to use ubuntu-slim
+ - [`5d770de`](https://github.com/deis/monitor/commit/5d770de67a56166dc8157d527df87d8e72e9d8fa) grafana: Update default dashboards
+ - [`cb02378`](https://github.com/deis/monitor/commit/cb02378feee45cf9dfe697b4118d58ab1808f469) grafana: Update to official 3.0.1 release
+
 ### v2.0.0-beta4
 
 #### Features
