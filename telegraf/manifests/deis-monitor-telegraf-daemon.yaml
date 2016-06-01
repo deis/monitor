@@ -35,6 +35,12 @@ spec:
             value: "true"
           - name: "ENABLE_PROMETHEUS"
             value: "true"
+          - name: "NSQ_CONSUMER_SERVER"
+            value: $(DEIS_NSQD_SERVICE_HOST):$(DEIS_NSQD_SERVICE_PORT_TRANSPORT)
+          - name: "NSQ_CONSUMER_TOPIC"
+            value: "metrics"
+          - name: "NSQ_ENDPOINTS"
+            value: http://$(DEIS_NSQD_SERVICE_HOST):$(DEIS_NSQD_SERVICE_PORT_HTTP)
           volumeMounts:
           - mountPath: /var/run/docker.sock
             name: docker-socket
@@ -60,4 +66,3 @@ spec:
       - name: varrunutmpro
         hostPath:
           path: /var/run/utmp
-          

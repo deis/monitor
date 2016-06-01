@@ -20,32 +20,33 @@ Lastly, Grafana is a stand alone graphing application. It natively supports Infl
 # Architecture Diagram
 
 ```
-                           ┌────────┐                            
-                           │ Router │                            
-                           └────────┘                            
-                               │                    ┌──────┐    
-                           Log File         ┌──────▶│Logger│    
-                               │            │       └──────┘    
-                               ▼            │                   
-┌────────┐                ┌─────────┐       │                   
-│App Logs│───Log file────▶│ fluentd │──UDP/Syslog               
-└────────┘                └─────────┘       │       ┌──────────┐
-                                            │       │ stdout   │
-                                            └──────▶│  metrics │
-┌─────────────┐                                     └──────────┘
-│ HOST        │          ┌───────────┐          Wire      │     
-│  Telegraf   │────┬────▶│ InfluxDB  │◀───────Protocol────┘     
-└─────────────┘    │     └───────────┘                          
-                   │           │                                
-┌─────────────┐    │           │                                
-│ HOST        │    │           ▼                                
-│  Telegraf   │────┤     ┌──────────┐                           
-└─────────────┘    │     │ Grafana  │                           
-                   │     └──────────┘                           
-┌─────────────┐    │                                            
-│ HOST        │    │                                            
-│  Telegraf   │────┘                                            
-└─────────────┘                                                                                                                                                                                         
+                        ┌────────┐                            
+                        │ Router │                  ┌────────┐
+                        └────────┘                  │ Logger │
+                            │                       └────────┘
+                        Log file                        │    
+                            │                           │    
+                            ▼                           ▼    
+┌────────┐             ┌─────────┐    logs/metrics   ┌─────┐
+│App Logs│──Log File──▶│ fluentd │───────topics─────▶│ NSQ │
+└────────┘             └─────────┘                   └─────┘
+                                                        │    
+                                                        │    
+┌─────────────┐                                         │    
+│ HOST        │                                         ▼    
+│  Telegraf   │───┐                                ┌────────┐
+└─────────────┘   │                                │Telegraf│
+                  │                                └────────┘
+┌─────────────┐   │                                    │    
+│ HOST        │   │    ┌───────────┐                   │    
+│  Telegraf   │───┼───▶│ InfluxDB  │◀────Wire ─────────┘    
+└─────────────┘   │    └───────────┘   Protocol       
+                  │          ▲                        
+┌─────────────┐   │          │                        
+│ HOST        │   │          ▼                        
+│  Telegraf   │───┘    ┌──────────┐                   
+└─────────────┘        │ Grafana  │                   
+                       └──────────┘                                        
 ```
 
 

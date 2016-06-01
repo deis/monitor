@@ -11,6 +11,286 @@
     "sharedCrosshair": false,
     "rows": [
       {
+        "title": "New row",
+        "height": "250px",
+        "editable": true,
+        "collapse": false,
+        "panels": [
+          {
+            "title": "Running Pods",
+            "error": false,
+            "span": 6,
+            "editable": true,
+            "type": "singlestat",
+            "isNew": true,
+            "id": 10,
+            "targets": [
+              {
+                "policy": "default",
+                "dsType": "influxdb",
+                "resultFormat": "time_series",
+                "tags": [],
+                "groupBy": [
+                  {
+                    "type": "time",
+                    "params": [
+                      "$interval"
+                    ]
+                  },
+                  {
+                    "type": "fill",
+                    "params": [
+                      "null"
+                    ]
+                  }
+                ],
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "gauge"
+                      ]
+                    },
+                    {
+                      "type": "sum",
+                      "params": []
+                    }
+                  ]
+                ],
+                "refId": "A",
+                "measurement": "kubelet_running_pod_count"
+              }
+            ],
+            "links": [],
+            "datasource": null,
+            "maxDataPoints": 100,
+            "interval": null,
+            "cacheTimeout": null,
+            "format": "none",
+            "prefix": "",
+            "postfix": "",
+            "nullText": null,
+            "valueMaps": [
+              {
+                "value": "null",
+                "op": "=",
+                "text": "N/A"
+              }
+            ],
+            "nullPointMode": "connected",
+            "valueName": "avg",
+            "prefixFontSize": "50%",
+            "valueFontSize": "200%",
+            "postfixFontSize": "50%",
+            "thresholds": "",
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "sparkline": {
+              "show": false,
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "fillColor": "rgba(31, 118, 189, 0.18)"
+            },
+            "gauge": {
+              "show": false,
+              "minValue": 0,
+              "maxValue": 100,
+              "thresholdMarkers": true,
+              "thresholdLabels": false
+            }
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 4,
+            "isNew": true,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": true,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Average",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_docker_operations_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.5\") FROM \"kubelet_docker_operations_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "0.5"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "90th",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_docker_operations_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.9\") FROM \"kubelet_docker_operations_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "0.9"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "99th",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_docker_operations_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.99\") FROM \"kubelet_docker_operations_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "0.99"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Docker Latency",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ]
+      },
+      {
         "collapse": false,
         "editable": true,
         "height": "250px",
@@ -55,7 +335,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "Average - $tag_host",
+                "alias": "Average",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -66,18 +346,13 @@
                   },
                   {
                     "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
                       "null"
                     ],
                     "type": "fill"
                   }
                 ],
                 "measurement": "apiserver_request_latencies_summary",
+                "policy": "default",
                 "query": "SELECT last(\"0.5\") FROM \"apiserver_request_latencies_summary\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
                 "refId": "A",
                 "resultFormat": "time_series",
@@ -95,11 +370,10 @@
                     }
                   ]
                 ],
-                "tags": [],
-                "policy": "default"
+                "tags": []
               },
               {
-                "alias": "90th - $tag_host",
+                "alias": "90th",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -110,18 +384,13 @@
                   },
                   {
                     "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
                       "null"
                     ],
                     "type": "fill"
                   }
                 ],
                 "measurement": "apiserver_request_latencies_summary",
+                "policy": "default",
                 "query": "SELECT last(\"0.9\") FROM \"apiserver_request_latencies_summary\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
                 "rawQuery": false,
                 "refId": "B",
@@ -140,8 +409,7 @@
                     }
                   ]
                 ],
-                "tags": [],
-                "policy": "default"
+                "tags": []
               },
               {
                 "alias": "99th - $tag_host",
@@ -155,18 +423,13 @@
                   },
                   {
                     "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
                       "null"
                     ],
                     "type": "fill"
                   }
                 ],
                 "measurement": "apiserver_request_latencies_summary",
+                "policy": "default",
                 "query": "SELECT last(\"0.99\") FROM \"apiserver_request_latencies_summary\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
                 "rawQuery": false,
                 "refId": "C",
@@ -185,861 +448,37 @@
                     }
                   ]
                 ],
-                "tags": [],
-                "policy": "default"
+                "tags": []
               }
             ],
             "timeFrom": null,
             "timeShift": null,
             "title": "Kubernetes API Latency",
             "tooltip": {
+              "msResolution": false,
               "shared": true,
-              "value_type": "cumulative",
-              "msResolution": false
+              "value_type": "cumulative"
             },
             "type": "graph",
-            "yaxes": [
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "ns"
-              },
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "short"
-              }
-            ],
             "xaxis": {
               "show": true
-            }
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "datasource": null,
-            "editable": true,
-            "error": false,
-            "fill": 1,
-            "grid": {
-              "threshold1": null,
-              "threshold1Color": "rgba(216, 200, 27, 0.27)",
-              "threshold2": null,
-              "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
-            "id": 2,
-            "isNew": true,
-            "legend": {
-              "alignAsTable": true,
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": true,
-              "show": false,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 2,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Average - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "type": "fill",
-                    "params": [
-                      "previous"
-                    ]
-                  }
-                ],
-                "measurement": "kubelet_pod_start_latency_microseconds",
-                "query": "SELECT last(\"0.5\") FROM \"kubelet_pod_start_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.5"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              },
-              {
-                "alias": "90th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "type": "fill",
-                    "params": [
-                      "previous"
-                    ]
-                  }
-                ],
-                "measurement": "kubelet_pod_start_latency_microseconds",
-                "query": "SELECT last(\"0.9\") FROM \"kubelet_pod_start_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.9"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              },
-              {
-                "alias": "99th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "type": "fill",
-                    "params": [
-                      "previous"
-                    ]
-                  }
-                ],
-                "measurement": "kubelet_pod_start_latency_microseconds",
-                "query": "SELECT last(\"0.99\") FROM \"kubelet_pod_start_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "C",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.99"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Kubelet Start Latency",
-            "tooltip": {
-              "shared": true,
-              "value_type": "cumulative",
-              "msResolution": false
-            },
-            "type": "graph",
             "yaxes": [
               {
-                "show": true,
-                "min": null,
-                "max": null,
+                "format": "ns",
                 "logBase": 1,
-                "format": "µs"
+                "max": null,
+                "min": null,
+                "show": true
               },
               {
-                "show": true,
-                "min": null,
-                "max": null,
+                "format": "short",
                 "logBase": 1,
-                "format": "short"
+                "max": null,
+                "min": null,
+                "show": true
               }
-            ],
-            "xaxis": {
-              "show": true
-            }
-          }
-        ],
-        "repeat": "host",
-        "showTitle": false,
-        "title": "Row"
-      },
-      {
-        "collapse": false,
-        "editable": true,
-        "height": "250px",
-        "panels": [
-          {
-            "aliasColors": {},
-            "bars": false,
-            "datasource": null,
-            "editable": true,
-            "error": false,
-            "fill": 1,
-            "grid": {
-              "threshold1": null,
-              "threshold1Color": "rgba(216, 200, 27, 0.27)",
-              "threshold2": null,
-              "threshold2Color": "rgba(234, 112, 112, 0.22)"
-            },
-            "id": 3,
-            "isNew": true,
-            "legend": {
-              "alignAsTable": true,
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": true,
-              "show": false,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 2,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Average - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_container_manager_latency_microseconds",
-                "query": "SELECT last(\"0.5\") FROM \"kubelet_container_manager_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.5"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              },
-              {
-                "alias": "90th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_container_manager_latency_microseconds",
-                "query": "SELECT last(\"0.9\") FROM \"kubelet_container_manager_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.9"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              },
-              {
-                "alias": "99th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_container_manager_latency_microseconds",
-                "query": "SELECT last(\"0.99\") FROM \"kubelet_container_manager_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "C",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.99"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Container Manager Latency",
-            "tooltip": {
-              "shared": true,
-              "value_type": "cumulative",
-              "msResolution": false
-            },
-            "type": "graph",
-            "yaxes": [
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "µs"
-              },
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "short"
-              }
-            ],
-            "xaxis": {
-              "show": true
-            }
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "datasource": null,
-            "editable": true,
-            "error": false,
-            "fill": 1,
-            "grid": {
-              "threshold1": null,
-              "threshold1Color": "rgba(216, 200, 27, 0.27)",
-              "threshold2": null,
-              "threshold2Color": "rgba(234, 112, 112, 0.22)"
-            },
-            "id": 4,
-            "isNew": true,
-            "legend": {
-              "alignAsTable": true,
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": true,
-              "show": false,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 2,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Average - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_docker_operations_latency_microseconds",
-                "query": "SELECT last(\"0.5\") FROM \"kubelet_docker_operations_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.5"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              },
-              {
-                "alias": "90th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_docker_operations_latency_microseconds",
-                "query": "SELECT last(\"0.9\") FROM \"kubelet_docker_operations_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.9"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              },
-              {
-                "alias": "99th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_docker_operations_latency_microseconds",
-                "query": "SELECT last(\"0.99\") FROM \"kubelet_docker_operations_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "C",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.99"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Docker Latency",
-            "tooltip": {
-              "shared": true,
-              "value_type": "cumulative",
-              "msResolution": false
-            },
-            "type": "graph",
-            "yaxes": [
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "µs"
-              },
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "short"
-              }
-            ],
-            "xaxis": {
-              "show": true
-            }
-          }
-        ],
-        "repeat": "host",
-        "title": "New row"
-      },
-      {
-        "collapse": false,
-        "editable": true,
-        "height": "250px",
-        "panels": [
-          {
-            "aliasColors": {},
-            "bars": false,
-            "datasource": null,
-            "editable": true,
-            "error": false,
-            "fill": 1,
-            "grid": {
-              "threshold1": null,
-              "threshold1Color": "rgba(216, 200, 27, 0.27)",
-              "threshold2": null,
-              "threshold2Color": "rgba(234, 112, 112, 0.22)"
-            },
-            "id": 7,
-            "isNew": true,
-            "legend": {
-              "alignAsTable": true,
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "rightSide": true,
-              "show": false,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 2,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "Average - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_pod_worker_latency_microseconds",
-                "query": "SELECT last(\"0.5\") FROM \"kubelet_pod_worker_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.5"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              },
-              {
-                "alias": "90th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_pod_worker_latency_microseconds",
-                "query": "SELECT last(\"0.9\") FROM \"kubelet_pod_worker_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.9"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              },
-              {
-                "alias": "99th - $tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "kubelet_pod_worker_latency_microseconds",
-                "query": "SELECT last(\"0.99\") FROM \"kubelet_pod_worker_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "refId": "C",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "0.99"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    }
-                  ]
-                ],
-                "tags": [],
-                "policy": "default"
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Kubelet Pod Worker Latency",
-            "tooltip": {
-              "shared": true,
-              "value_type": "cumulative",
-              "msResolution": false
-            },
-            "type": "graph",
-            "yaxes": [
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "µs"
-              },
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "short"
-              }
-            ],
-            "xaxis": {
-              "show": true
-            }
+            ]
           },
           {
             "aliasColors": {},
@@ -1102,6 +541,7 @@
                   }
                 ],
                 "measurement": "http_requests_total",
+                "policy": "default",
                 "query": "SELECT non_negative_derivative(last(\"counter\"), 1s) FROM \"http_requests_total\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
                 "refId": "A",
                 "resultFormat": "time_series",
@@ -1125,42 +565,42 @@
                     }
                   ]
                 ],
-                "tags": [],
-                "policy": "default"
+                "tags": []
               }
             ],
             "timeFrom": null,
             "timeShift": null,
             "title": "http requests",
             "tooltip": {
+              "msResolution": false,
               "shared": true,
-              "value_type": "cumulative",
-              "msResolution": false
+              "value_type": "cumulative"
             },
             "type": "graph",
-            "yaxes": [
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "ops"
-              },
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "short"
-              }
-            ],
             "xaxis": {
               "show": true
-            }
+            },
+            "yaxes": [
+              {
+                "format": "ops",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
           }
         ],
         "repeat": "host",
-        "title": "New row"
+        "showTitle": false,
+        "title": "Row"
       },
       {
         "collapse": false,
@@ -1173,14 +613,14 @@
             "datasource": null,
             "editable": true,
             "error": false,
-            "fill": 2,
+            "fill": 1,
             "grid": {
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
               "threshold2": null,
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
-            "id": 8,
+            "id": 3,
             "isNew": true,
             "legend": {
               "alignAsTable": true,
@@ -1201,23 +641,13 @@
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
-            "seriesOverrides": [
-              {
-                "alias": "/Received/",
-                "color": "#0A50A1"
-              },
-              {
-                "alias": "/Sent/",
-                "color": "#890F02",
-                "transform": "negative-Y"
-              }
-            ],
-            "span": 12,
+            "seriesOverrides": [],
+            "span": 6,
             "stack": false,
             "steppedLine": false,
             "targets": [
               {
-                "alias": "Received - $tag_host",
+                "alias": "Average",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1228,20 +658,14 @@
                   },
                   {
                     "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "0"
+                      "null"
                     ],
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_network_receive_bytes_total",
-                "query": "SELECT derivative(last(\"counter\"), 1s) FROM \"container_network_receive_bytes_total\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "rawQuery": false,
+                "measurement": "kubelet_container_manager_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.5\") FROM \"kubelet_container_manager_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
@@ -1249,26 +673,19 @@
                     {
                       "type": "field",
                       "params": [
-                        "counter"
+                        "0.5"
                       ]
                     },
                     {
                       "type": "last",
                       "params": []
-                    },
-                    {
-                      "type": "non_negative_derivative",
-                      "params": [
-                        "5s"
-                      ]
                     }
                   ]
                 ],
-                "tags": [],
-                "policy": "default"
+                "tags": []
               },
               {
-                "alias": "Sent - $tag_host",
+                "alias": "90th",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1279,75 +696,282 @@
                   },
                   {
                     "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "0"
+                      "null"
                     ],
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_network_transmit_bytes_total",
-                "query": "SELECT derivative(last(\"counter\"), 1s) FROM \"container_network_transmit_bytes_total\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
-                "rawQuery": false,
+                "measurement": "kubelet_container_manager_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.9\") FROM \"kubelet_container_manager_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
                 "refId": "B",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
-                        "counter"
-                      ]
+                        "0.9"
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
-                    },
-                    {
-                      "type": "non_negative_derivative",
-                      "params": [
-                        "5s"
-                      ]
+                      "params": [],
+                      "type": "last"
                     }
                   ]
                 ],
-                "tags": [],
-                "policy": "default"
+                "tags": []
+              },
+              {
+                "alias": "99th",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_container_manager_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.99\") FROM \"kubelet_container_manager_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "0.99"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": []
               }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Container Network",
+            "title": "Container Manager Latency",
             "tooltip": {
+              "msResolution": false,
               "shared": true,
-              "value_type": "cumulative",
-              "msResolution": true
+              "value_type": "cumulative"
             },
             "type": "graph",
-            "yaxes": [
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "Bps"
-              },
-              {
-                "show": true,
-                "min": null,
-                "max": null,
-                "logBase": 1,
-                "format": "short"
-              }
-            ],
             "xaxis": {
               "show": true
             },
-            "interval": "5s"
+            "yaxes": [
+              {
+                "format": "µs",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 7,
+            "isNew": true,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "rightSide": true,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Average",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_pod_worker_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.5\") FROM \"kubelet_pod_worker_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "0.5"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "90th",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_pod_worker_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.9\") FROM \"kubelet_pod_worker_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "0.9"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "99th",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_pod_worker_latency_microseconds",
+                "policy": "default",
+                "query": "SELECT last(\"0.99\") FROM \"kubelet_pod_worker_latency_microseconds\" WHERE $timeFilter GROUP BY time($interval), \"host\" fill(null)",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "0.99"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kubelet Pod Worker Latency",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
           }
         ],
         "repeat": "host",
@@ -1392,7 +1016,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 3,
+    "version": 0,
     "links": []
   }
 }
