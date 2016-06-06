@@ -1,9 +1,6 @@
 # InfluxDB
 [![Docker Repository on Quay](https://quay.io/repository/deisci/influxdb/status "Docker Repository on Quay")](https://quay.io/repository/deisci/influxdb)
 
-## Description
-This is an alpine 3.2 based image for running influxdb 0.10.0-rc1. Props goes to @jalatera's alpine image from which this one is based - https://github.com/jalateras/docker-influxdb.
-
 ## Configuration
 Right now the configuration is completely static but eventually I hope to use the [envtpl](https://github.com/arschles/envtpl) project to help provide a more robust solution.
 
