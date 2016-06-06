@@ -1,3 +1,9 @@
+### v2.0.0-rc1 -> v2.0.0-rc2
+
+#### Fixes
+
+- [`800913b`](https://github.com/deis/monitor/commit/800913b2bdb35604cd69513803a61a9f70bf850d) grafana: deis-router dashboard had mislabeled alias
+
 ### v2.0.0-beta4
 
 #### Features
