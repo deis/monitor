@@ -1,8 +1,8 @@
-# Telegraf
+# [Telegraf](https://influxdata.com/time-series-platform/telegraf/)
 [![Docker Repository on Quay](https://quay.io/repository/deisci/telegraf/status "Docker Repository on Quay")](https://quay.io/repository/deisci/telegraf)
 
 ## Description
-This is an alpine based image for running telegraf within a kubernetes cluster.
+Telegraf is a metrics collection daemon from InfluxData. It contains numerous input and output plugins that allows the user to customize what data they collect and where it is sent. This image is based on the official [deis base image](https://github.com/deis/docker-base).
 
 ## Configuration
 Telegraf configuration is based largely on a toml file that is passed in when the binary starts. The issue with doing this in a containerized environment is how can you "dynamically" build this file based on values passed into the container at runtime. Therefore, this image relies on a project called [envtpl](https://github.com/arschles/envtpl) to produce the telegraf configuration file. It can take environment variables and through using go templates produce the necessary stanzas in the toml file to start telegraf. Currently, the go template only supports basic if checks and outputting values that have been set.
