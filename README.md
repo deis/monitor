@@ -17,6 +17,38 @@ Also provided is an Influxdb container which only runs 1 instance of the databas
 
 Lastly, Grafana is a stand alone graphing application. It natively supports Influxdb as a datasource and provides a robust engine for creating dashboards on top of timeseries data. We provide a few out of the box dashboards for monitoring Deis Workflow and Kubernetes but please feel free to use them as a starting point for creating your own dashboards.
 
+# Architecture Diagram
+
+```
+                           ┌────────┐                            
+                           │ Router │                            
+                           └────────┘                            
+                               │                    ┌──────┐    
+                           Log File         ┌──────▶│Logger│    
+                               │            │       └──────┘    
+                               ▼            │                   
+┌────────┐                ┌─────────┐       │                   
+│App Logs│───Log file────▶│ fluentd │──UDP/Syslog               
+└────────┘                └─────────┘       │       ┌──────────┐
+                                            │       │ stdout   │
+                                            └──────▶│  metrics │
+┌─────────────┐                                     └──────────┘
+│ HOST        │          ┌───────────┐          Wire      │     
+│  Telegraf   │────┬────▶│ InfluxDB  │◀───────Protocol────┘     
+└─────────────┘    │     └───────────┘                          
+                   │           │                                
+┌─────────────┐    │           │                                
+│ HOST        │    │           ▼                                
+│  Telegraf   │────┤     ┌──────────┐                           
+└─────────────┘    │     │ Grafana  │                           
+                   │     └──────────┘                           
+┌─────────────┐    │                                            
+│ HOST        │    │                                            
+│  Telegraf   │────┘                                            
+└─────────────┘                                                                                                                                                                                         
+```
+
+
 ## License
 Copyright 2013, 2014, 2015, 2016 Engine Yard, Inc.
 
