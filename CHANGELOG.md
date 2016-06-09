@@ -1,3 +1,11 @@
+### v2.0.0-rc2 -> v2.0.0
+
+#### Documentation
+
+- [`eafb142`](https://github.com/deis/monitor/commit/eafb142499205c4eb986bbee4047365db93e9c54) README: Update readme to remove beta status
+- [`6b979ed`](https://github.com/deis/monitor/commit/6b979edffdd4a8a23aab730817a8025c637b3d2b) CHANGELOG.md: add entry for v2.0.0-rc2
+- [`42f91b2`](https://github.com/deis/monitor/commit/42f91b22465f9851fc089a4118219805c5bb60e5) README: Add architecture diagram
+
 ### v2.0.0-rc1 -> v2.0.0-rc2
 
 #### Fixes
