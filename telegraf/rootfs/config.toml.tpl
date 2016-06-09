@@ -208,6 +208,11 @@
   bearer_token = {{ .PROMETHEUS_BEARER_TOKEN | quote }}
 {{ end }}
 
+{{ if .ENABLE_ETCD }}
+[[inputs.prometheus]]
+  urls = [{{  (default "http://localhost:2379/metrics" .ETCD_URLS) }}]
+{{ end }}
+
 {{ if .RABBITMQ_URL }}
 [[inputs.rabbitmq]]
   url = {{ .RABBITMQ_URL | quote }}
