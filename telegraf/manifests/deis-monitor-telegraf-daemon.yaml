@@ -33,6 +33,8 @@ spec:
             value: "100000"
           - name: "ENABLE_INFLUXDB_INPUT"
             value: "true"
+          - name: "ENABLE_PROMETHEUS"
+            value: "true"
           volumeMounts:
           - mountPath: /var/run/docker.sock
             name: docker-socket
