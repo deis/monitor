@@ -201,7 +201,7 @@
   {{ if .POSTGRESQL_DATABASES }} databases = [{{ .POSTGRESQL_DATABASES }}]  {{ end }}
 {{ end }}
 
-{{ if .PROMETHEUS_URLS }}
+{{ if and .PROMETHEUS_URLS .ENABLE_PROMETHEUS }}
 [[inputs.prometheus]]
   urls = [{{ .PROMETHEUS_URLS }}]
   insecure_skip_verify = {{ default true .PROMETHEUS_INSECURE_SKIP_VERIFY }}
