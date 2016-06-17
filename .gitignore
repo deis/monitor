@@ -8,4 +8,4 @@ influxdb/manifests/*.tmp.yaml
 chronograf/manifests/*.tmp.yaml
 grafana/manifests/*.tmp.yaml
 
-telegraf/rootfs/telegraf
+telegraf/rootfs/bin/telegraf

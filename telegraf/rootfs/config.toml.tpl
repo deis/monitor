@@ -58,7 +58,7 @@
 [[outputs.influxdb]]
   urls = [{{ .INFLUXDB_URLS | quote }}]
   database = {{default "kubernetes" .INFLUXDB_DATABASE | quote }}
-  precision = {{ default "s" .INFLUXDB_PRECISION | quote }}
+  precision = {{ default "ns" .INFLUXDB_PRECISION | quote }}
   timeout = {{ default "5s" .INFLUXDB_TIMEOUT | quote }}
   {{ if .INFLUXDB_USERNAME}} username = {{ .INFLUXDB_USERNAME | quote }} {{ end }}
   {{ if .INFLUXDB_PASSWORD}} password = {{ .INFLUXDB_PASSWORD | quote }} {{ end }}
@@ -124,7 +124,6 @@
 
 [[inputs.net]]
   {{ if .NET_INTERFACES }} interfaces = [{{ .NET_INTERFACES}}] {{ end }}
-
 
 {{ if .APACHE_URLS }}
 [[inputs.apache]]
@@ -192,7 +191,7 @@
 
 {{ if .NSQ_ENDPOINTS }}
 [[inputs.nsq]]
-  endpoints = [{{ .NSQ_ENDPOINTS }}]
+  endpoints = [{{ .NSQ_ENDPOINTS | quote }}]
 {{ end }}
 
 {{ if .POSTGRESQL_ADDRESS }}
@@ -245,6 +244,15 @@
   consumer_group = {{ .KAFKA_CONSUMER_GROUP | quote }}
   point_buffer = {{ .KAFKA_CONSUMER_POINT_BUFFER }}
   offset = {{ .KAFKA_CONSUMER_OFFSET | quote }}
+{{ end }}
+
+{{ if .NSQ_CONSUMER_SERVER }}
+[[inputs.nsq_consumer]]
+  server = {{ .NSQ_CONSUMER_SERVER | quote }}
+  topic = {{ default "telegraf" .NSQ_CONSUMER_TOPIC | quote }}
+  channel = {{ default "consumer" .NSQ_CONSUMER_CHANNEL | quote }}
+  max_in_flight = {{ default 100 .NSQ_CONSUMER_MAX_IN_FLIGHT }}
+  data_format = {{ default "influx" .NSQ_CONSUMER_DATA_FORMAT | quote }}
 {{ end }}
 
 {{ if .STATSD_SERVICE_ADDRESS }}

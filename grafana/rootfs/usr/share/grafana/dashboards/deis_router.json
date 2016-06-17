@@ -36,7 +36,7 @@
               "current": false,
               "max": false,
               "min": false,
-              "show": true,
+              "show": false,
               "total": false,
               "values": false
             },
@@ -76,7 +76,7 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "deis_router_response_time_seconds",
+                "measurement": "deis_router_response_time_ms",
                 "policy": "default",
                 "query": "SELECT last(\"value\") FROM \"deis_router_request_time\" WHERE $timeFilter GROUP BY time($interval), \"app\" fill(null)",
                 "refId": "A",
@@ -100,7 +100,7 @@
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Response Time",
+            "title": "Upstream Response Time",
             "tooltip": {
               "msResolution": false,
               "shared": true,
@@ -183,7 +183,7 @@
                   }
                 ],
                 "hide": false,
-                "measurement": "deis_router_response_time_seconds",
+                "measurement": "deis_router_response_time_ms",
                 "policy": "default",
                 "refId": "B",
                 "resultFormat": "time_series",
@@ -223,7 +223,7 @@
                   }
                 ],
                 "hide": false,
-                "measurement": "deis_router_response_time_seconds",
+                "measurement": "deis_router_response_time_ms",
                 "policy": "default",
                 "refId": "C",
                 "resultFormat": "time_series",
@@ -261,7 +261,7 @@
                   }
                 ],
                 "hide": false,
-                "measurement": "deis_router_response_time_seconds",
+                "measurement": "deis_router_response_time_ms",
                 "policy": "default",
                 "refId": "D",
                 "resultFormat": "time_series",
@@ -299,7 +299,7 @@
                   }
                 ],
                 "hide": false,
-                "measurement": "deis_router_response_time_seconds",
+                "measurement": "deis_router_response_time_ms",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
@@ -322,7 +322,7 @@
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Response Times (Aggregate)",
+            "title": "Upstream Response Times (Aggregate)",
             "tooltip": {
               "msResolution": false,
               "shared": true,
@@ -365,7 +365,7 @@
             "datasource": null,
             "editable": true,
             "error": false,
-            "fill": 3,
+            "fill": 2,
             "grid": {
               "threshold1": null,
               "threshold1Color": "rgba(216, 200, 27, 0.27)",
@@ -380,7 +380,7 @@
               "current": false,
               "max": false,
               "min": false,
-              "show": true,
+              "show": false,
               "total": false,
               "values": false
             },
@@ -394,12 +394,16 @@
             "renderer": "flot",
             "seriesOverrides": [
               {
-                "alias": "/aggregate/",
+                "alias": "/Aggregate/",
                 "color": "#890F02",
-                "fill": 3
+                "linewidth": 3
+              },
+              {
+                "alias": "/.*/",
+                "fill": 0
               }
             ],
-            "span": 6,
+            "span": 12,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -427,7 +431,7 @@
                   }
                 ],
                 "hide": false,
-                "measurement": "deis_router_response_time_seconds",
+                "measurement": "deis_router_response_time_ms",
                 "policy": "default",
                 "query": "SELECT last(\"value\") FROM \"deis_router_request_count\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
                 "refId": "A",
@@ -443,6 +447,57 @@
                     {
                       "params": [],
                       "type": "count"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "Aggregate",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "hide": false,
+                "measurement": "deis_router_response_time_ms",
+                "policy": "default",
+                "query": "SELECT last(\"value\") FROM \"deis_router_request_count\" WHERE $timeFilter GROUP BY time($interval) fill(null)",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "count"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
@@ -455,7 +510,7 @@
             "tooltip": {
               "msResolution": false,
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "individual"
             },
             "type": "graph",
             "xaxis": {
@@ -478,7 +533,15 @@
                 "show": false
               }
             ]
-          },
+          }
+        ],
+        "title": "New row"
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
           {
             "aliasColors": {},
             "bars": false,
@@ -492,7 +555,7 @@
               "threshold2": null,
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
-            "id": 10,
+            "id": 8,
             "interval": "1s",
             "isNew": true,
             "legend": {
@@ -509,7 +572,7 @@
             "links": [],
             "nullPointMode": "connected",
             "percentage": false,
-            "pointradius": 5,
+            "pointradius": 2,
             "points": false,
             "renderer": "flot",
             "seriesOverrides": [],
@@ -518,6 +581,7 @@
             "steppedLine": false,
             "targets": [
               {
+                "alias": "2xx",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -528,12 +592,12 @@
                   },
                   {
                     "params": [
-                      "null"
+                      "none"
                     ],
                     "type": "fill"
                   }
                 ],
-                "measurement": "deis_router_response_time_seconds",
+                "measurement": "deis_router_response_time_ms",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
@@ -548,15 +612,174 @@
                     {
                       "params": [],
                       "type": "count"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [
+                  {
+                    "key": "status_code",
+                    "operator": "=~",
+                    "value": "/2\\d\\d/"
+                  }
+                ]
+              },
+              {
+                "alias": "3xx",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "deis_router_response_time_ms",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "count"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "status_code",
+                    "operator": "=~",
+                    "value": "/3\\d\\d/"
+                  }
+                ]
+              },
+              {
+                "alias": "4xx",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "deis_router_response_time_ms",
+                "policy": "default",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "count"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "status_code",
+                    "operator": "=~",
+                    "value": "/4\\d\\d/"
+                  }
+                ]
+              },
+              {
+                "alias": "5xx",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "deis_router_response_time_ms",
+                "policy": "default",
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "count"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "status_code",
+                    "operator": "=~",
+                    "value": "/5\\d\\d/"
+                  }
+                ]
               }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Request Per Second (Aggregate)",
+            "title": "Status Codes (Aggregate)",
             "tooltip": {
               "msResolution": false,
               "shared": true,
@@ -568,7 +791,7 @@
             },
             "yaxes": [
               {
-                "format": "ops",
+                "format": "short",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -584,15 +807,7 @@
                 "show": true
               }
             ]
-          }
-        ],
-        "title": "New row"
-      },
-      {
-        "collapse": false,
-        "editable": true,
-        "height": "250px",
-        "panels": [
+          },
           {
             "aliasColors": {},
             "bars": false,
@@ -831,248 +1046,6 @@
                 "show": true
               }
             ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "datasource": null,
-            "editable": true,
-            "error": false,
-            "fill": 1,
-            "grid": {
-              "threshold1": null,
-              "threshold1Color": "rgba(216, 200, 27, 0.27)",
-              "threshold2": null,
-              "threshold2Color": "rgba(234, 112, 112, 0.22)"
-            },
-            "id": 8,
-            "interval": "1s",
-            "isNew": true,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 2,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 2,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "2xx",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "deis_router_response_time_seconds",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "count"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "status_code",
-                    "operator": "=~",
-                    "value": "/2\\d\\d/"
-                  }
-                ]
-              },
-              {
-                "alias": "3xx",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "deis_router_response_time_seconds",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "count"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "status_code",
-                    "operator": "=~",
-                    "value": "/3\\d\\d/"
-                  }
-                ]
-              },
-              {
-                "alias": "4xx",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "deis_router_response_time_seconds",
-                "policy": "default",
-                "refId": "C",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "count"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "status_code",
-                    "operator": "=~",
-                    "value": "/4\\d\\d/"
-                  }
-                ]
-              },
-              {
-                "alias": "5xx",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "none"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "deis_router_response_time_seconds",
-                "policy": "default",
-                "refId": "D",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "count"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "status_code",
-                    "operator": "=~",
-                    "value": "/5\\d\\d/"
-                  }
-                ]
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Status Codes (Aggregate)",
-            "tooltip": {
-              "msResolution": false,
-              "shared": true,
-              "value_type": "cumulative"
-            },
-            "type": "graph",
-            "xaxis": {
-              "show": true
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
           }
         ],
         "title": "New row"
@@ -1123,7 +1096,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 1,
+    "version": 4,
     "links": []
   }
 }
