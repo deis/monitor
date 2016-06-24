@@ -18,7 +18,7 @@ docker-build:
 	docker build -t ${IMAGE} rootfs
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
 
-clean: check-docker
+clean:
 	docker rmi $(IMAGE)
 
 update-manifests:
@@ -35,4 +35,3 @@ kube-delete:
 kube-update: update-manifests
 	kubectl delete -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
 	kubectl create -f manifests/deis-monitor-telegraf-daemon.tmp.yaml
-	
