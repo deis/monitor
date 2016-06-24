@@ -18,7 +18,7 @@ docker-build:
 	docker build -t ${IMAGE} rootfs
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
 
-clean: check-docker
+clean:
 	docker rmi $(IMAGE)
 
 update-manifests:
