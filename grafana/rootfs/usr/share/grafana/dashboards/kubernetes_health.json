@@ -1,6 +1,6 @@
 {
   "dashboard": {
-    "id": null,
+    "id": 3,
     "title": "Kubernetes Health",
     "originalTitle": "Kubernetes Health",
     "tags": [],
@@ -11,79 +11,12 @@
     "sharedCrosshair": false,
     "rows": [
       {
-        "title": "New row",
-        "height": "250px",
-        "editable": true,
         "collapse": false,
+        "editable": true,
+        "height": "250px",
         "panels": [
           {
-            "title": "Running Pods",
-            "error": false,
-            "span": 6,
-            "editable": true,
-            "type": "singlestat",
-            "isNew": true,
-            "id": 10,
-            "targets": [
-              {
-                "policy": "default",
-                "dsType": "influxdb",
-                "resultFormat": "time_series",
-                "tags": [],
-                "groupBy": [
-                  {
-                    "type": "time",
-                    "params": [
-                      "$interval"
-                    ]
-                  },
-                  {
-                    "type": "fill",
-                    "params": [
-                      "null"
-                    ]
-                  }
-                ],
-                "select": [
-                  [
-                    {
-                      "type": "field",
-                      "params": [
-                        "gauge"
-                      ]
-                    },
-                    {
-                      "type": "sum",
-                      "params": []
-                    }
-                  ]
-                ],
-                "refId": "A",
-                "measurement": "kubelet_running_pod_count"
-              }
-            ],
-            "links": [],
-            "datasource": null,
-            "maxDataPoints": 100,
-            "interval": null,
             "cacheTimeout": null,
-            "format": "none",
-            "prefix": "",
-            "postfix": "",
-            "nullText": null,
-            "valueMaps": [
-              {
-                "value": "null",
-                "op": "=",
-                "text": "N/A"
-              }
-            ],
-            "nullPointMode": "connected",
-            "valueName": "avg",
-            "prefixFontSize": "50%",
-            "valueFontSize": "200%",
-            "postfixFontSize": "50%",
-            "thresholds": "",
             "colorBackground": false,
             "colorValue": false,
             "colors": [
@@ -91,19 +24,85 @@
               "rgba(237, 129, 40, 0.89)",
               "rgba(50, 172, 45, 0.97)"
             ],
-            "sparkline": {
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
               "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "id": 10,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "span": 6,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
               "full": false,
               "lineColor": "rgb(31, 120, 193)",
-              "fillColor": "rgba(31, 118, 189, 0.18)"
+              "show": false
             },
-            "gauge": {
-              "show": false,
-              "minValue": 0,
-              "maxValue": 100,
-              "thresholdMarkers": true,
-              "thresholdLabels": false
-            }
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubelet_running_pod_count",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "gauge"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": "",
+            "title": "Running Pods",
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "avg"
           },
           {
             "aliasColors": {},
@@ -263,7 +262,7 @@
             "timeShift": null,
             "title": "Docker Latency",
             "tooltip": {
-              "msResolution": false,
+              "msResolution": true,
               "shared": true,
               "value_type": "cumulative"
             },
@@ -288,7 +287,8 @@
               }
             ]
           }
-        ]
+        ],
+        "title": "New row"
       },
       {
         "collapse": false,
@@ -412,7 +412,7 @@
                 "tags": []
               },
               {
-                "alias": "99th - $tag_host",
+                "alias": "99th",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -455,7 +455,7 @@
             "timeShift": null,
             "title": "Kubernetes API Latency",
             "tooltip": {
-              "msResolution": false,
+              "msResolution": true,
               "shared": true,
               "value_type": "cumulative"
             },
@@ -671,14 +671,14 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "0.5"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     }
                   ]
                 ],
@@ -765,7 +765,7 @@
             "timeShift": null,
             "title": "Container Manager Latency",
             "tooltip": {
-              "msResolution": false,
+              "msResolution": true,
               "shared": true,
               "value_type": "cumulative"
             },
@@ -948,7 +948,7 @@
             "timeShift": null,
             "title": "Kubelet Pod Worker Latency",
             "tooltip": {
-              "msResolution": false,
+              "msResolution": true,
               "shared": true,
               "value_type": "cumulative"
             },
@@ -1016,7 +1016,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 0,
+    "version": 1,
     "links": []
   }
 }
