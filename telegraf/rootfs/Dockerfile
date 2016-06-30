@@ -9,5 +9,3 @@ RUN mkdir -p /usr/local/bin/ \
 	&& chmod +x /usr/bin/envtpl
 
 CMD ["/start-telegraf"]
-
-ENV WORKFLOW_RELEASE 2.0.0
