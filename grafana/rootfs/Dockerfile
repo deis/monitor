@@ -18,5 +18,3 @@ RUN apt-get update \
 WORKDIR /usr/share/grafana
 CMD ["./start-grafana"]
 EXPOSE 3000
-
-ENV WORKFLOW_RELEASE 2.0.0
