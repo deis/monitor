@@ -1,9 +1,8 @@
 {
   "dashboard": {
-    "id": 3,
+    "id": null,
     "title": "Kubernetes Health",
-    "originalTitle": "Kubernetes Health",
-    "tags": [],
+    "tags": ["deis"],
     "style": "dark",
     "timezone": "browser",
     "editable": true,
@@ -1016,7 +1015,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 1,
+    "version": 0,
     "links": []
   }
 }

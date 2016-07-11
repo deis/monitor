@@ -13,8 +13,8 @@
   interval = {{ default "10s" .AGENT_INTERVAL | quote }}
   round_interval = {{ default true .AGENT_ROUND_INTERVAL }}
   metric_buffer_limit = {{ default "10000" .AGENT_BUFFER_LIMIT }}
-  collection_jitter = {{ default "0s" .AGENT_COLLECTION_JITTER | quote }}
-  flush_interval = {{ default "10s" .AGENT_FLUSH_INTERVAL | quote }}
+  collection_jitter = {{ default "1s" .AGENT_COLLECTION_JITTER | quote }}
+  flush_interval = {{ default "1s" .AGENT_FLUSH_INTERVAL | quote }}
   flush_jitter = {{ default "0s" .AGENT_FLUSH_JITTER | quote }}
   debug = {{ default false .AGENT_DEBUG }}
   quiet = {{ default false .AGENT_QUIET }}
@@ -192,6 +192,7 @@
 {{ if .NSQ_ENDPOINTS }}
 [[inputs.nsq]]
   endpoints = [{{ .NSQ_ENDPOINTS | quote }}]
+  interval = {{ default "1s" .AGENT_INTERVAL | quote }}
 {{ end }}
 
 {{ if .POSTGRESQL_ADDRESS }}
@@ -223,7 +224,7 @@
 
 {{ if .REDIS_SERVERS }}
 [[inputs.redis]]
-  servers = [{{ .REDIS_SERVERS }}]
+  servers = [{{ .REDIS_SERVERS | quote }}]
 {{ end }}
 
 {{ if .RETHINKDB_SERVERS }}
