@@ -2,8 +2,7 @@
   "dashboard": {
     "id": null,
     "title": "Deis Health",
-    "originalTitle": "Deis Health",
-    "tags": [],
+    "tags": ["deis"],
     "style": "dark",
     "timezone": "browser",
     "editable": true,
@@ -308,7 +307,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 2,
+    "version": 0,
     "links": []
   }
 }

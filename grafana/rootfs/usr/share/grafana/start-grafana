@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Some of the contents of this file came from here - https://github.com/kubernetes/heapster/blob/master/grafana/run.sh
+# Some of the contents of this file came from here - https://github.com/kubernetes/heapster/blob/ed5baadf04ea9f8e48fc7d44dad63a63af34ff9b/grafana/run.sh
 HEADER_CONTENT_TYPE="Content-Type: application/json"
 HEADER_ACCEPT="Accept: application/json"
 

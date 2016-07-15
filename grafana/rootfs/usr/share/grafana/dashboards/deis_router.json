@@ -2,8 +2,7 @@
   "dashboard": {
     "id": null,
     "title": "Deis Router",
-    "originalTitle": "Deis Router",
-    "tags": [],
+    "tags": ["deis"],
     "style": "dark",
     "timezone": "browser",
     "editable": true,
@@ -1049,13 +1048,6 @@
           }
         ],
         "title": "New row"
-      },
-      {
-        "collapse": false,
-        "editable": true,
-        "height": "250px",
-        "panels": [],
-        "title": "New row"
       }
     ],
     "time": {
@@ -1096,7 +1088,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 4,
+    "version": 0,
     "links": []
   }
 }

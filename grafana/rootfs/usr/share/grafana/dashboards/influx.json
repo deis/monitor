@@ -2,8 +2,7 @@
   "dashboard": {
     "id": null,
     "title": "Influx",
-    "originalTitle": "Influx",
-    "tags": [],
+    "tags": ["deis"],
     "style": "dark",
     "timezone": "browser",
     "editable": true,
