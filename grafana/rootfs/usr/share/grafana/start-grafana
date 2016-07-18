@@ -14,7 +14,7 @@ INFLUXDB_DATABASE=${INFLUXDB_DATABASE:-kubernetes}
 INFLUXDB_USER=${INFLUXDB_USER:-admin}
 INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD:-admin}
 
-DASHBOARD_LOCATION=${DASHBOARD_JSON_PATH:-"/usr/share/grafana/dashboards"}
+DASHBOARD_LOCATION=${DASHBOARD_JSON_PATH:-"/usr/share/grafana/api/dashboards"}
 
 echo "Building grafana.ini!"
 ./envtpl -in grafana.ini.tpl >> grafana.ini
