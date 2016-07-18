@@ -3,6 +3,7 @@
     "id": null,
     "title": "Deis Health",
     "tags": ["deis"],
+    "originalTitle": "Deis Health",
     "style": "dark",
     "timezone": "browser",
     "editable": true,
@@ -81,14 +82,14 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "gauge"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     }
                   ]
                 ],
@@ -103,7 +104,7 @@
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Memory Usage",
+            "title": "Memory",
             "tooltip": {
               "msResolution": true,
               "shared": true,
@@ -154,7 +155,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 2,
-            "interval": "",
+            "interval": "1s",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -180,7 +181,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_kubernetes_container_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -191,7 +192,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "kubernetes_container_name"
                     ],
                     "type": "tag"
                   },
@@ -220,7 +221,7 @@
                     },
                     {
                       "params": [
-                        "10s"
+                        "1s"
                       ],
                       "type": "non_negative_derivative"
                     }
@@ -237,7 +238,7 @@
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "CPU Usage",
+            "title": "CPU",
             "tooltip": {
               "msResolution": false,
               "shared": true,
