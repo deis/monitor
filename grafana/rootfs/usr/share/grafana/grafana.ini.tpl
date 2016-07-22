@@ -167,7 +167,7 @@ login_hint = {{ default "email or username" .LOGIN_HINT }}
 enabled = {{ default "false" .ANON_ACCESS }}
 
 # specify organization name that should be used for unauthenticated users
-org_name = {{ default "Main  .ORG_NAMEOrg." }}
+org_name = {{ default "Main Org." .ORG_NAME }}
 
 # specify role for unauthenticated users
 org_role = {{ default "Viewer" .UNAUTHED_USER_ORG_ROLE }}
@@ -205,7 +205,7 @@ allowed_domains = {{ default "" .GOOGLE_AUTH_ALLOWED_DOMAINS }}
 [auth.proxy]
 {{ if .AUTH_PROXY }}
 enabled = {{ .AUTH_PROXY }}
-header_name = {{ default "X- .AUTH_HEADER_NAMEWEBAUTH-USER" }}
+header_name = {{ default "X-WEBAUTH-USER" .AUTH_HEADER_NAME" }}
 header_property = {{ default "username" .AUTH_HEADER_PROPERTY }}
 auto_sign_up = {{ default "true" .AUTH_AUTO_SIGN_UP }}
 {{ end }}
@@ -218,7 +218,7 @@ enabled = {{ default "true" .BASIC_AUTH }}
 [auth.ldap]
 {{ if .LDAP_AUTH }}
 enabled = {{ .LDAP_AUTH }}
-config_file = {{ default "/etc/grafana/ldap.toml" .CONFIG_FILE }}
+config_file = {{ default "/etc/grafana/ldap.toml" .LDAP_AUTH_CONFIG_FILE }}
 {{ end }}
 
 #################################### SMTP / Emailing ##########################
