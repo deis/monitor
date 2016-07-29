@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ -n $DEIS_NSQD_SERVICE_HOST ]; then
+if [ -n "$DEIS_NSQD_SERVICE_HOST" ]; then
   echo "Creating topic with URL: http://$DEIS_NSQD_SERVICE_HOST:$DEIS_NSQD_SERVICE_PORT/topic/create?topic=$NSQ_CONSUMER_TOPIC"
   curl -s -X POST http://$DEIS_NSQD_SERVICE_HOST:$DEIS_NSQD_SERVICE_PORT/topic/create?topic=$NSQ_CONSUMER_TOPIC
 fi
