@@ -205,7 +205,7 @@ allowed_domains = {{ default "" .GOOGLE_AUTH_ALLOWED_DOMAINS }}
 [auth.proxy]
 {{ if .AUTH_PROXY }}
 enabled = {{ .AUTH_PROXY }}
-header_name = {{ default "X-WEBAUTH-USER" .AUTH_HEADER_NAME" }}
+header_name = {{ default "X-WEBAUTH-USER" .AUTH_HEADER_NAME }}
 header_property = {{ default "username" .AUTH_HEADER_PROPERTY }}
 auto_sign_up = {{ default "true" .AUTH_AUTO_SIGN_UP }}
 {{ end }}
