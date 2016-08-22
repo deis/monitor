@@ -1,4 +1,4 @@
-FROM quay.io/deis/base:0.2.0
+FROM quay.io/deis/base:0.3.1
 
 COPY . /
 
