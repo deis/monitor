@@ -22,16 +22,16 @@ clean: check-docker
 	docker rmi $(IMAGE)
 
 update-manifests:
-	sed 's#\(image:\) .*#\1 $(IMAGE)#' manifests/deis-monitor-grafana-rc.yaml > manifests/deis-monitor-grafana-rc.tmp.yaml
+	sed 's#\(image:\) .*#\1 $(IMAGE)#' manifests/deis-monitor-grafana-deployment.yaml > manifests/deis-monitor-grafana-deployment.tmp.yaml
 
 kube-install: update-manifests
 	kubectl create -f manifests/deis-monitor-grafana-svc.yaml
-	kubectl create -f manifests/deis-monitor-grafana-rc.tmp.yaml
+	kubectl create -f manifests/deis-monitor-grafana-deployment.tmp.yaml
 
 kube-delete: update-manifests
 	kubectl delete -f manifests/deis-monitor-grafana-svc.yaml
-	kubectl delete -f manifests/deis-monitor-grafana-rc.tmp.yaml
+	kubectl delete -f manifests/deis-monitor-grafana-deployment.tmp.yaml
 
 kube-update: update-manifests
-	kubectl delete -f manifests/deis-monitor-grafana-rc.tmp.yaml
-	kubectl create -f manifests/deis-monitor-grafana-rc.tmp.yaml
+	kubectl delete -f manifests/deis-monitor-grafana-deployment.tmp.yaml
+	kubectl create -f manifests/deis-monitor-grafana-deployment.tmp.yaml

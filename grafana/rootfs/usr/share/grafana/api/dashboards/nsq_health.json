@@ -2,8 +2,9 @@
   "dashboard": {
     "id": null,
     "title": "NSQ Health",
-    "tags": ["deis"],
-    "originalTitle": "NSQ Health",
+    "tags": [
+      "deis"
+    ],
     "style": "dark",
     "timezone": "browser",
     "editable": true,
@@ -16,130 +17,13 @@
         "height": "200px",
         "panels": [
           {
-            "aliasColors": {},
-            "bars": false,
-            "datasource": null,
-            "editable": true,
-            "error": false,
-            "fill": 1,
-            "grid": {
-              "threshold1": null,
-              "threshold1Color": "rgba(216, 200, 27, 0.27)",
-              "threshold2": null,
-              "threshold2Color": "rgba(234, 112, 112, 0.22)"
-            },
-            "id": 7,
-            "isNew": true,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": false,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 2,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "measurement": "container_cpu_usage_seconds_total",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "counter"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "last"
-                    },
-                    {
-                      "params": [
-                        "10s"
-                      ],
-                      "type": "non_negative_derivative"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "kubernetes_container_name",
-                    "operator": "=",
-                    "value": "deis-nsqd"
-                  }
-                ]
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "CPU",
-            "tooltip": {
-              "msResolution": true,
-              "shared": true,
-              "value_type": "cumulative"
-            },
-            "type": "graph",
-            "xaxis": {
-              "show": true
-            },
-            "yaxes": [
-              {
-                "format": "s",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "title": "Memory",
+            "title": "CPU Usage (Millicores)",
             "error": false,
             "span": 6,
             "editable": true,
             "type": "singlestat",
             "isNew": true,
-            "id": 8,
+            "id": 9,
             "targets": [
               {
                 "policy": "default",
@@ -147,7 +31,7 @@
                 "resultFormat": "time_series",
                 "tags": [
                   {
-                    "key": "kubernetes_container_name",
+                    "key": "name",
                     "operator": "=",
                     "value": "deis-nsqd"
                   }
@@ -171,17 +55,23 @@
                     {
                       "type": "field",
                       "params": [
-                        "gauge"
+                        "cpu_usage_nanocores"
                       ]
                     },
                     {
                       "type": "last",
                       "params": []
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "refId": "A",
-                "measurement": "container_memory_usage_bytes"
+                "measurement": "kubernetes_pod_container"
               }
             ],
             "links": [],
@@ -189,7 +79,7 @@
             "maxDataPoints": 100,
             "interval": null,
             "cacheTimeout": null,
-            "format": "bytes",
+            "format": "none",
             "prefix": "",
             "postfix": "",
             "nullText": null,
@@ -200,8 +90,26 @@
                 "text": "N/A"
               }
             ],
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "rangeMaps": [
+              {
+                "from": "null",
+                "to": "null",
+                "text": "N/A"
+              }
+            ],
+            "mappingType": 1,
             "nullPointMode": "connected",
-            "valueName": "current",
+            "valueName": "avg",
             "prefixFontSize": "50%",
             "valueFontSize": "200%",
             "postfixFontSize": "50%",
@@ -214,7 +122,7 @@
               "rgba(50, 172, 45, 0.97)"
             ],
             "sparkline": {
-              "show": false,
+              "show": true,
               "full": false,
               "lineColor": "rgb(31, 120, 193)",
               "fillColor": "rgba(31, 118, 189, 0.18)"
@@ -226,6 +134,125 @@
               "thresholdMarkers": true,
               "thresholdLabels": false
             }
+          },
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "bytes",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "id": 8,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "span": 6,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false
+            },
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "memory_usage_bytes"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-nsqd"
+                  }
+                ]
+              }
+            ],
+            "thresholds": "",
+            "title": "Memory",
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
           }
         ],
         "title": "New row"
@@ -259,6 +286,17 @@
             "interval": null,
             "isNew": true,
             "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
             "maxDataPoints": 100,
             "nullPointMode": "connected",
             "nullText": null,
@@ -266,6 +304,13 @@
             "postfixFontSize": "50%",
             "prefix": "",
             "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
             "span": 6,
             "sparkline": {
               "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -355,6 +400,17 @@
             "interval": null,
             "isNew": true,
             "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
             "maxDataPoints": 100,
             "nullPointMode": "connected",
             "nullText": null,
@@ -362,6 +418,13 @@
             "postfixFontSize": "50%",
             "prefix": "",
             "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
             "span": 6,
             "sparkline": {
               "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -531,6 +594,7 @@
             "tooltip": {
               "msResolution": true,
               "shared": true,
+              "sort": 0,
               "value_type": "cumulative"
             },
             "type": "graph",
@@ -667,6 +731,7 @@
             "tooltip": {
               "msResolution": true,
               "shared": true,
+              "sort": 0,
               "value_type": "cumulative"
             },
             "type": "graph",
@@ -733,7 +798,8 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 0,
-    "links": []
+    "version": 3,
+    "links": [],
+    "gnetId": null
   }
- }
+}
