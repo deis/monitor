@@ -56,7 +56,7 @@
 
 {{ if .INFLUXDB_URLS}}
 [[outputs.influxdb]]
-  urls = [{{ .INFLUXDB_URLS | quote }}]
+  urls = [{{ .INFLUXDB_URLS }}]
   database = {{default "kubernetes" .INFLUXDB_DATABASE | quote }}
   precision = {{ default "ns" .INFLUXDB_PRECISION | quote }}
   timeout = {{ default "5s" .INFLUXDB_TIMEOUT | quote }}
@@ -68,7 +68,7 @@
 
 {{ if .KAFKA_BROKERS}}
 [[outputs.kafka]]
-  brokers = [{{ .KAFKA_BROKERS | quote }}]
+  brokers = [{{ .KAFKA_BROKERS }}]
   topic = {{ default "telegraf" .KAFKA_TOPIC | quote }}
   routing_tag = {{ .KAFKA_ROUTING_TAG | quote }}
   {{ if .KAFKA_CERTIFICATE }} certificate = {{ .KAFKA_CERTIFICATE | quote }} {{ end }}
@@ -166,7 +166,7 @@
 
 {{ if .ENABLE_INFLUXDB_INPUT }}
 [[inputs.influxdb]]
-  urls = [{{ (print .INFLUXDB_URLS "/debug/vars") | quote }}]
+  urls = [{{ .INFLUXDB_INPUT_URLS }}]
 {{ end }}
 
 {{ if .MEMCACHED_SERVERS }}
@@ -191,7 +191,7 @@
 
 {{ if .NSQ_ENDPOINTS }}
 [[inputs.nsq]]
-  endpoints = [{{ .NSQ_ENDPOINTS | quote }}]
+  endpoints = [{{ .NSQ_ENDPOINTS }}]
   interval = {{ default "1s" .AGENT_INTERVAL | quote }}
 {{ end }}
 
@@ -210,7 +210,7 @@
 
 {{ if .ENABLE_ETCD }}
 [[inputs.prometheus]]
-  urls = [{{  (default "http://localhost:2379/metrics" .ETCD_URLS) }}]
+  urls = [{{ .ETCD_URLS }}]
 {{ end }}
 
 {{ if .RABBITMQ_URL }}
@@ -224,7 +224,7 @@
 
 {{ if .REDIS_SERVERS }}
 [[inputs.redis]]
-  servers = [{{ .REDIS_SERVERS | quote }}]
+  servers = [{{ .REDIS_SERVERS }}]
 {{ end }}
 
 {{ if .RETHINKDB_SERVERS }}
