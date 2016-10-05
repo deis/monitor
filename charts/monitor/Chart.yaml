@@ -1,0 +1,7 @@
+name: monitor
+home: https://github.com/deis/monitor
+version: <Will be populated by the ci before publishing the chart>
+description: Monitoring for Deis Workflow.
+maintainers:
+  - name: Deis Team
+    email: engineering@deis.com
