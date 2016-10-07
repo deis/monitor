@@ -1,20 +1,32 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
+API_URL=${API_URL:-"https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT"}
+NSQ_TOPIC_URL=${NSQ_TOPIC_URL:-"http://$DEIS_NSQD_SERVICE_HOST:$DEIS_NSQD_SERVICE_PORT/topic/create?topic=$NSQ_CONSUMER_TOPIC"}
+
+export BEARER_TOKEN_PATH=/var/run/secrets/kubernetes.io/serviceaccount/token
+export TOKEN=$(cat $BEARER_TOKEN_PATH)
+export NODE_NAME=$(curl -s $API_URL/api/v1/namespaces/$POD_NAMESPACE/pods/$HOSTNAME --header "Authorization: Bearer $TOKEN" --insecure | jq -r '.spec.nodeName')
+echo "Node Name set (${NODE_NAME})"
+export NODE_IP=$(curl -s $API_URL/api/v1/namespaces/$POD_NAMESPACE/pods/$HOSTNAME --header "Authorization: Bearer $TOKEN" --insecure | jq -r '.status.hostIP')
+echo "Node IP set (${NODE_IP})"
+export AGENT_HOSTNAME=$NODE_NAME
+
 if [ -n "$DEIS_NSQD_SERVICE_HOST" ]; then
-  echo "Creating topic with URL: http://$DEIS_NSQD_SERVICE_HOST:$DEIS_NSQD_SERVICE_PORT/topic/create?topic=$NSQ_CONSUMER_TOPIC"
-  curl -s -X POST http://$DEIS_NSQD_SERVICE_HOST:$DEIS_NSQD_SERVICE_PORT/topic/create?topic=$NSQ_CONSUMER_TOPIC
+  echo "Creating topic with URL: ${NSQ_TOPIC_URL}"
+  curl -s -X POST ${NSQ_TOPIC_URL}
 fi
 
-export PROMETHEUS_BEARER_TOKEN=/var/run/secrets/kubernetes.io/serviceaccount/token
-if [ -f $PROMETHEUS_BEARER_TOKEN ]; then
-    export TOKEN=$(cat $PROMETHEUS_BEARER_TOKEN)
-    export POD_API_URL=https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/namespaces/$POD_NAMESPACE/pods/$HOSTNAME
-    export NODE_NAME=$(curl -s $POD_API_URL --header "Authorization: Bearer $TOKEN" --insecure | grep nodeName | cut -c 18- | tr -d '",')
-    export AGENT_HOSTNAME=$NODE_NAME
-    echo "Setting Agent Hostname to: $AGENT_HOSTNAME"
-    export PROMETHEUS_URLS="\"https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/api/v1/proxy/nodes/$NODE_NAME/metrics\", \"https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT/metrics\""
-    echo "Setting PROMETHEUS_URLS to: $PROMETHEUS_URLS"
+if [ -n "$ENABLE_KUBERNETES" ]; then
+  export KUBERNETES_BEARER_TOKEN_PATH=${BEARER_TOKEN_PATH}
+  export KUBERNETES_URL="http://${NODE_IP}:10255"
+  echo "Setting KUBERNETES_URL: $KUBERNETES_URL"
+fi
+
+if [ -n "$ENABLE_PROMETHEUS" ]; then
+  export PROMETHEUS_BEARER_TOKEN_PATH=${BEARER_TOKEN_PATH}
+  export PROMETHEUS_URLS="\"$API_URL/api/v1/proxy/nodes/$NODE_NAME/metrics\", \"$API_URL/metrics\""
+  echo "Setting PROMETHEUS_URLS: $PROMETHEUS_URLS"
 fi
 
 echo "Building config.toml!"

@@ -2,8 +2,9 @@
   "dashboard": {
     "id": null,
     "title": "Influx",
-    "tags": ["deis"],
-    "originalTitle": "Influx",
+    "tags": [
+      "deis"
+    ],
     "style": "dark",
     "timezone": "browser",
     "editable": true,
@@ -103,7 +104,25 @@
                 "value": "null"
               }
             ],
-            "valueName": "avg"
+            "valueName": "avg",
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "rangeMaps": [
+              {
+                "from": "null",
+                "to": "null",
+                "text": "N/A"
+              }
+            ],
+            "mappingType": 1
           },
           {
             "cacheTimeout": null,
@@ -193,7 +212,25 @@
                 "value": "null"
               }
             ],
-            "valueName": "avg"
+            "valueName": "avg",
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "rangeMaps": [
+              {
+                "from": "null",
+                "to": "null",
+                "text": "N/A"
+              }
+            ],
+            "mappingType": 1
           }
         ],
         "title": "New row"
@@ -204,168 +241,120 @@
         "height": "100px",
         "panels": [
           {
-            "title": "Memory",
-            "error": false,
-            "span": 6,
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
             "editable": true,
-            "type": "singlestat",
-            "isNew": true,
+            "error": false,
+            "format": "bytes",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
             "id": 4,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "span": 6,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": true
+            },
             "targets": [
               {
-                "policy": "default",
                 "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
                 "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "memory_usage_bytes"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
                 "tags": [
                   {
-                    "key": "kubernetes_container_name",
+                    "key": "name",
                     "operator": "=",
                     "value": "deis-monitor-influxdb"
                   }
-                ],
-                "groupBy": [
-                  {
-                    "type": "time",
-                    "params": [
-                      "$interval"
-                    ]
-                  },
-                  {
-                    "type": "fill",
-                    "params": [
-                      "null"
-                    ]
-                  }
-                ],
-                "select": [
-                  [
-                    {
-                      "type": "field",
-                      "params": [
-                        "gauge"
-                      ]
-                    },
-                    {
-                      "type": "last",
-                      "params": []
-                    }
-                  ]
-                ],
-                "refId": "A",
-                "measurement": "container_memory_usage_bytes"
+                ]
               }
             ],
-            "links": [],
-            "datasource": null,
-            "maxDataPoints": 100,
-            "interval": null,
-            "cacheTimeout": null,
-            "format": "bytes",
-            "prefix": "",
-            "postfix": "",
-            "nullText": null,
+            "thresholds": "",
+            "title": "Memory",
+            "type": "singlestat",
+            "valueFontSize": "200%",
             "valueMaps": [
               {
-                "value": "null",
                 "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current",
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "rangeMaps": [
+              {
+                "from": "null",
+                "to": "null",
                 "text": "N/A"
               }
             ],
-            "nullPointMode": "connected",
-            "valueName": "current",
-            "prefixFontSize": "50%",
-            "valueFontSize": "200%",
-            "postfixFontSize": "50%",
-            "thresholds": "",
-            "colorBackground": false,
-            "colorValue": false,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
-            "sparkline": {
-              "show": true,
-              "full": false,
-              "lineColor": "rgb(31, 120, 193)",
-              "fillColor": "rgba(31, 118, 189, 0.18)"
-            },
-            "gauge": {
-              "show": false,
-              "minValue": 0,
-              "maxValue": 100,
-              "thresholdMarkers": true,
-              "thresholdLabels": false
-            }
+            "mappingType": 1
           },
           {
-            "title": "Database Size",
-            "error": false,
-            "span": 6,
-            "editable": true,
-            "type": "singlestat",
-            "isNew": true,
-            "id": 5,
-            "targets": [
-              {
-                "policy": "default",
-                "dsType": "influxdb",
-                "resultFormat": "time_series",
-                "tags": [],
-                "groupBy": [
-                  {
-                    "type": "time",
-                    "params": [
-                      "$interval"
-                    ]
-                  },
-                  {
-                    "type": "fill",
-                    "params": [
-                      "null"
-                    ]
-                  }
-                ],
-                "select": [
-                  [
-                    {
-                      "type": "field",
-                      "params": [
-                        "diskBytes"
-                      ]
-                    },
-                    {
-                      "type": "last",
-                      "params": []
-                    }
-                  ]
-                ],
-                "refId": "A",
-                "measurement": "influxdb_shard"
-              }
-            ],
-            "links": [],
-            "datasource": null,
-            "maxDataPoints": 100,
-            "interval": null,
             "cacheTimeout": null,
-            "format": "bytes",
-            "prefix": "",
-            "postfix": "",
-            "nullText": null,
-            "valueMaps": [
-              {
-                "value": "null",
-                "op": "=",
-                "text": "N/A"
-              }
-            ],
-            "nullPointMode": "connected",
-            "valueName": "current",
-            "prefixFontSize": "50%",
-            "valueFontSize": "200%",
-            "postfixFontSize": "50%",
-            "thresholds": "",
             "colorBackground": false,
             "colorValue": false,
             "colors": [
@@ -373,19 +362,103 @@
               "rgba(237, 129, 40, 0.89)",
               "rgba(50, 172, 45, 0.97)"
             ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "bytes",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "id": 5,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "span": 6,
             "sparkline": {
-              "show": true,
+              "fillColor": "rgba(31, 118, 189, 0.18)",
               "full": false,
               "lineColor": "rgb(31, 120, 193)",
-              "fillColor": "rgba(31, 118, 189, 0.18)"
+              "show": true
             },
-            "gauge": {
-              "show": false,
-              "minValue": 0,
-              "maxValue": 100,
-              "thresholdMarkers": true,
-              "thresholdLabels": false
-            }
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "influxdb_shard",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "diskBytes"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": "",
+            "title": "Database Size",
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current",
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "rangeMaps": [
+              {
+                "from": "null",
+                "to": "null",
+                "text": "N/A"
+              }
+            ],
+            "mappingType": 1
           }
         ],
         "title": "New row"
@@ -553,7 +626,8 @@
             "tooltip": {
               "msResolution": false,
               "shared": true,
-              "value_type": "cumulative"
+              "value_type": "cumulative",
+              "sort": 0
             },
             "type": "graph",
             "xaxis": {
@@ -618,6 +692,7 @@
     },
     "schemaVersion": 12,
     "version": 1,
-    "links": []
+    "links": [],
+    "gnetId": null
   }
 }

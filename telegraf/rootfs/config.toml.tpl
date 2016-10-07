@@ -169,6 +169,16 @@
   urls = [{{ .INFLUXDB_INPUT_URLS }}]
 {{ end }}
 
+{{ if and .KUBERNETES_URL .ENABLE_KUBERNETES }}
+[[inputs.kubernetes]]
+  url = {{ .KUBERNETES_URL | quote }}
+  bearer_token = {{ .KUBERNETES_BEARER_TOKEN_PATH | quote }}
+  {{ if .KUBERNETES_SSL_CA }} ssl_ca = {{ .KUBERNETES_SSL_CA | quote }} {{ end }}
+  {{ if .KUBERNETES_SSL_CERT }} ssl_cert = {{ .KUBERNETES_SSL_CERT | quote }} {{ end }}
+  {{ if .KUBERNETES_SSL_KEY }} ssl_key = {{ .KUBERNETES_SSL_KEY | quote }} {{ end }}
+  insecure_skip_verify = {{ default true .KUBERNETES_INSECURE_SKIP_VERIFY }}
+{{ end }}
+
 {{ if .MEMCACHED_SERVERS }}
 [[inputs.memcached]]
   servers = [{{ .MEMCACHED_SERVERS }}]
@@ -205,7 +215,7 @@
 [[inputs.prometheus]]
   urls = [{{ .PROMETHEUS_URLS }}]
   insecure_skip_verify = {{ default true .PROMETHEUS_INSECURE_SKIP_VERIFY }}
-  bearer_token = {{ .PROMETHEUS_BEARER_TOKEN | quote }}
+  bearer_token = {{ .PROMETHEUS_BEARER_TOKEN_PATH | quote }}
 {{ end }}
 
 {{ if .ENABLE_ETCD }}

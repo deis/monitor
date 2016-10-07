@@ -29,8 +29,273 @@
               "threshold2": null,
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
+            "id": 31,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_namespace",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "namespace"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "cpu_usage_nanocores"
+                      ]
+                    },
+                    {
+                      "type": "sum",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace",
+                    "operator": "=",
+                    "value": "deis"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Total CPU Usage",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "Millicores",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "interval": ""
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 32,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_namespace",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "namespace"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "memory_usage_bytes"
+                      ]
+                    },
+                    {
+                      "type": "sum",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace",
+                    "operator": "=",
+                    "value": "deis"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Total Memory Usage",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "bytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "title": "New row"
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
             "id": 1,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -55,7 +320,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -66,7 +331,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -78,35 +343,41 @@
                   }
                 ],
                 "hide": false,
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-controller.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-controller"
                   }
                 ]
               }
@@ -126,8 +397,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -182,7 +453,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -193,7 +464,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -204,29 +475,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-controller.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-controller"
                   }
                 ]
               }
@@ -286,7 +563,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 3,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -311,7 +588,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -322,7 +599,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -333,35 +610,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-builder.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-builder"
                   }
                 ]
               }
@@ -381,8 +664,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -437,7 +720,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -448,7 +731,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -459,29 +742,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        "10"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-builder.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-builder"
                   }
                 ]
               }
@@ -541,7 +830,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 6,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -566,7 +855,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "deis-database-cpu",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -577,7 +866,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_container_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -588,35 +877,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_container_name",
-                    "operator": "=~",
-                    "value": "/deis-database.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-database"
                   }
                 ]
               }
@@ -636,8 +931,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -691,7 +986,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "deis-database-memory",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -702,7 +997,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -713,29 +1008,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_container_name",
-                    "operator": "=~",
-                    "value": "/deis-database.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-database"
                   }
                 ]
               }
@@ -795,7 +1096,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 19,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -820,7 +1121,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -831,7 +1132,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -842,35 +1143,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-logger-fluentd.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-logger-fluentd"
                   }
                 ]
               }
@@ -890,8 +1197,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -945,7 +1252,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -956,7 +1263,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -967,29 +1274,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-logger-fluentd.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-logger-fluentd"
                   }
                 ]
               }
@@ -1049,7 +1362,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 25,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -1074,7 +1387,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1085,7 +1398,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -1096,35 +1409,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-monitor-grafana.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-monitor-grafana"
                   }
                 ]
               }
@@ -1144,8 +1463,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -1199,7 +1518,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1210,7 +1529,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -1221,29 +1540,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-monitor-grafana.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-monitor-grafana"
                   }
                 ]
               }
@@ -1303,7 +1628,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 23,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -1328,7 +1653,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1339,7 +1664,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -1350,35 +1675,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-monitor-influxdb.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-monitor-influxdb"
                   }
                 ]
               }
@@ -1398,8 +1729,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -1453,7 +1784,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1464,7 +1795,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -1475,29 +1806,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-monitor-influxdb.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-monitor-influxdb"
                   }
                 ]
               }
@@ -1557,7 +1894,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 7,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -1582,7 +1919,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1593,7 +1930,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -1604,47 +1941,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_system_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-logger-.*/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "kubernetes_pod_name",
-                    "operator": "!~",
-                    "value": "/deis-logger-fluentd.*/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "kubernetes_pod_name",
-                    "operator": "!~",
-                    "value": "/deis-logger-redis.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-logger"
                   }
                 ]
               }
@@ -1664,8 +1995,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -1719,7 +2050,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1730,7 +2061,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -1741,41 +2072,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-logger.*/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "kubernetes_pod_name",
-                    "operator": "!~",
-                    "value": "/deis-logger-fluentd-.*/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "kubernetes_pod_name",
-                    "operator": "!~",
-                    "value": "/deis-logger-redis-.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-logger"
                   }
                 ]
               }
@@ -1835,7 +2160,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 9,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -1860,7 +2185,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1871,7 +2196,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -1882,35 +2207,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-minio.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-minio"
                   }
                 ]
               }
@@ -1930,8 +2261,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -1985,7 +2316,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1996,7 +2327,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -2007,7 +2338,7 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
@@ -2016,20 +2347,26 @@
                     {
                       "type": "field",
                       "params": [
-                        "gauge"
+                        "memory_usage_bytes"
                       ]
                     },
                     {
                       "type": "last",
                       "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-minio.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-minio"
                   }
                 ]
               }
@@ -2089,7 +2426,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 13,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -2114,7 +2451,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2125,7 +2462,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -2136,35 +2473,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-nsqd.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-nsqd"
                   }
                 ]
               }
@@ -2184,8 +2527,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -2239,7 +2582,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2250,7 +2593,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -2261,29 +2604,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-nsqd.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-nsqd"
                   }
                 ]
               }
@@ -2343,7 +2692,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 27,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -2368,7 +2717,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2379,7 +2728,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -2390,35 +2739,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-logger-redis.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-logger-redis"
                   }
                 ]
               }
@@ -2438,7 +2793,7 @@
             },
             "yaxes": [
               {
-                "format": "s",
+                "format": "short",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -2493,7 +2848,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2504,7 +2859,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -2515,29 +2870,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-logger-redis.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-logger-redis"
                   }
                 ]
               }
@@ -2597,7 +2958,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 11,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -2622,7 +2983,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2633,7 +2994,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -2644,41 +3005,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-registry-.*/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "kubernetes_pod_name",
-                    "operator": "!~",
-                    "value": "/deis-registry-proxy-.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-registry"
                   }
                 ]
               }
@@ -2698,8 +3059,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -2753,7 +3114,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2764,7 +3125,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -2775,35 +3136,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-registry-.*/"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "kubernetes_pod_name",
-                    "operator": "!~",
-                    "value": "/deis-registry-proxy-.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-registry"
                   }
                 ]
               }
@@ -2863,7 +3224,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 16,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -2888,7 +3249,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2899,7 +3260,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -2910,35 +3271,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-registry-proxy.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-registry-proxy"
                   }
                 ]
               }
@@ -2958,8 +3325,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -3013,7 +3380,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3024,7 +3391,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -3035,29 +3402,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-registry-proxy.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-registry-proxy"
                   }
                 ]
               }
@@ -3109,6 +3482,272 @@
             "datasource": null,
             "editable": true,
             "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 29,
+            "interval": "",
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "pod"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "cpu_usage_nanocores"
+                      ]
+                    },
+                    {
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-router"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "Millicores",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 30,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "pod"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "memory_usage_bytes"
+                      ]
+                    },
+                    {
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-router"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "showTitle": true,
+        "title": "Router"
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
             "fill": 2,
             "grid": {
               "threshold1": null,
@@ -3117,7 +3756,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 21,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -3142,7 +3781,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3153,7 +3792,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -3164,35 +3803,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-monitor-telegraf.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-monitor-telegraf"
                   }
                 ]
               }
@@ -3212,8 +3857,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -3267,7 +3912,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3278,7 +3923,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -3289,29 +3934,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_memory_usage_bytes",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "gauge"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-monitor-telegraf.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-monitor-telegraf"
                   }
                 ]
               }
@@ -3371,7 +4022,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 17,
-            "interval": "60s",
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -3396,7 +4047,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3407,7 +4058,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -3418,35 +4069,41 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "cpu_usage_nanocores"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "type": "last",
+                      "params": []
                     },
                     {
+                      "type": "moving_average",
                       "params": [
-                        "1m"
-                      ],
-                      "type": "non_negative_derivative"
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-workflow-manager.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-workflow-manager"
                   }
                 ]
               }
@@ -3466,8 +4123,8 @@
             },
             "yaxes": [
               {
-                "format": "s",
-                "label": null,
+                "format": "short",
+                "label": "Millicores",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -3475,7 +4132,7 @@
               },
               {
                 "format": "short",
-                "label": null,
+                "label": "",
                 "logBase": 1,
                 "max": null,
                 "min": null,
@@ -3505,7 +4162,8 @@
               "min": false,
               "show": false,
               "total": false,
-              "values": false
+              "values": false,
+              "alignAsTable": false
             },
             "lines": true,
             "linewidth": 2,
@@ -3521,7 +4179,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_kubernetes_pod_name",
+                "alias": "$tag_pod",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3532,7 +4190,7 @@
                   },
                   {
                     "params": [
-                      "kubernetes_pod_name"
+                      "pod"
                     ],
                     "type": "tag"
                   },
@@ -3543,29 +4201,35 @@
                     "type": "fill"
                   }
                 ],
-                "measurement": "container_cpu_usage_seconds_total",
+                "measurement": "kubernetes_pod_container",
                 "policy": "default",
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
+                      "type": "field",
                       "params": [
-                        "counter"
-                      ],
-                      "type": "field"
+                        "memory_usage_bytes"
+                      ]
                     },
                     {
-                      "params": [],
-                      "type": "last"
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "kubernetes_pod_name",
-                    "operator": "=~",
-                    "value": "/deis-workflow-manager.*/"
+                    "key": "name",
+                    "operator": "=",
+                    "value": "deis-workflow-manager"
                   }
                 ]
               }
@@ -3600,7 +4264,8 @@
                 "min": null,
                 "show": true
               }
-            ]
+            ],
+            "decimals": 2
           }
         ],
         "showTitle": true,
@@ -3644,7 +4309,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 0,
+    "version": 1,
     "links": [],
     "gnetId": null
   }
