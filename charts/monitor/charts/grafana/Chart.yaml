@@ -1,0 +1,7 @@
+name: grafana
+home: https://github.com/deis/monitor/tree/master/grafana
+version: <Will be populated by the ci before publishing the chart>
+description: Monitoring for Deis Workflow.
+maintainers:
+  - name: Deis Team
+    email: engineering@deis.com
