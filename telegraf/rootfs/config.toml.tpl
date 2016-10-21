@@ -114,9 +114,10 @@
 
 {{ if .ENABLE_ZFS }}[[inputs.zfs]]{{ end }}
 
+{{ if not .DISABLE_DISK }}
 [[inputs.disk]]
   {{ if .DISK_MOUNT_POINTS }} mount_points = [{{ .DISK_MOUNT_POINTS }}] {{ end }}
-
+{{ end }}
 
 [[inputs.diskio]]
   {{ if .DISKIO_DEVICES }} devices = [{{ .DISKIO_DEVICES }}] {{ end }}
