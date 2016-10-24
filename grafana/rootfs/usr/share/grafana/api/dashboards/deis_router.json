@@ -1,5 +1,5 @@
 {
-  "dashboard": {
+  "dashboard":{
     "id": null,
     "title": "Deis Router",
     "tags": [
@@ -109,7 +109,7 @@
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-router"
                   }
@@ -228,7 +228,7 @@
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-router"
                   }

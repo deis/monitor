@@ -40,6 +40,17 @@
             "interval": null,
             "isNew": true,
             "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
             "maxDataPoints": 100,
             "nullPointMode": "connected",
             "nullText": null,
@@ -47,6 +58,13 @@
             "postfixFontSize": "50%",
             "prefix": "",
             "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
             "span": 6,
             "sparkline": {
               "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -104,25 +122,7 @@
                 "value": "null"
               }
             ],
-            "valueName": "avg",
-            "mappingTypes": [
-              {
-                "name": "value to text",
-                "value": 1
-              },
-              {
-                "name": "range to text",
-                "value": 2
-              }
-            ],
-            "rangeMaps": [
-              {
-                "from": "null",
-                "to": "null",
-                "text": "N/A"
-              }
-            ],
-            "mappingType": 1
+            "valueName": "avg"
           },
           {
             "cacheTimeout": null,
@@ -148,6 +148,17 @@
             "interval": null,
             "isNew": true,
             "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
             "maxDataPoints": 100,
             "nullPointMode": "connected",
             "nullText": null,
@@ -155,6 +166,13 @@
             "postfixFontSize": "50%",
             "prefix": "",
             "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
             "span": 6,
             "sparkline": {
               "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -212,25 +230,7 @@
                 "value": "null"
               }
             ],
-            "valueName": "avg",
-            "mappingTypes": [
-              {
-                "name": "value to text",
-                "value": 1
-              },
-              {
-                "name": "range to text",
-                "value": 2
-              }
-            ],
-            "rangeMaps": [
-              {
-                "from": "null",
-                "to": "null",
-                "text": "N/A"
-              }
-            ],
-            "mappingType": 1
+            "valueName": "avg"
           }
         ],
         "title": "New row"
@@ -264,6 +264,17 @@
             "interval": null,
             "isNew": true,
             "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
             "maxDataPoints": 100,
             "nullPointMode": "connected",
             "nullText": null,
@@ -271,6 +282,13 @@
             "postfixFontSize": "50%",
             "prefix": "",
             "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
             "span": 6,
             "sparkline": {
               "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -315,7 +333,7 @@
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-monitor-influxdb"
                   }
@@ -333,25 +351,7 @@
                 "value": "null"
               }
             ],
-            "valueName": "current",
-            "mappingTypes": [
-              {
-                "name": "value to text",
-                "value": 1
-              },
-              {
-                "name": "range to text",
-                "value": 2
-              }
-            ],
-            "rangeMaps": [
-              {
-                "from": "null",
-                "to": "null",
-                "text": "N/A"
-              }
-            ],
-            "mappingType": 1
+            "valueName": "current"
           },
           {
             "cacheTimeout": null,
@@ -377,6 +377,17 @@
             "interval": null,
             "isNew": true,
             "links": [],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
             "maxDataPoints": 100,
             "nullPointMode": "connected",
             "nullText": null,
@@ -384,6 +395,13 @@
             "postfixFontSize": "50%",
             "prefix": "",
             "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
             "span": 6,
             "sparkline": {
               "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -440,25 +458,7 @@
                 "value": "null"
               }
             ],
-            "valueName": "current",
-            "mappingTypes": [
-              {
-                "name": "value to text",
-                "value": 1
-              },
-              {
-                "name": "range to text",
-                "value": 2
-              }
-            ],
-            "rangeMaps": [
-              {
-                "from": "null",
-                "to": "null",
-                "text": "N/A"
-              }
-            ],
-            "mappingType": 1
+            "valueName": "current"
           }
         ],
         "title": "New row"
@@ -626,8 +626,8 @@
             "tooltip": {
               "msResolution": false,
               "shared": true,
-              "value_type": "cumulative",
-              "sort": 0
+              "sort": 0,
+              "value_type": "cumulative"
             },
             "type": "graph",
             "xaxis": {
