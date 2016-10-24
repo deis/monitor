@@ -1,3 +1,4 @@
+{{- if eq .Values.global.grafana_location "on-cluster" }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -36,8 +37,31 @@ spec:
 {{- end}}
 {{- end}}
         env:
+        {{- if eq .Values.global.influxdb_location "off-cluster" }}
+        - name: "INFLUXDB_SERVICE_URL"
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-creds
+              key: url
+        - name: "INFLUXDB_DATABASE"
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-creds
+              key: database
+        - name: "INFLUXDB_USER"
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-creds
+              key: user
+        - name: "INFLUXDB_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: influxdb-creds
+              key: password
+        {{- else }}
         - name: "INFLUXDB_URLS"
           value: http://$(DEIS_MONITOR_INFLUXAPI_SERVICE_HOST):$(DEIS_MONITOR_INFLUXAPI_SERVICE_PORT_TRANSPORT)
+        {{- end }}
         - name: "BIND_PORT"
           value: "3500"
         - name: "DEFAULT_USER"
@@ -47,3 +71,4 @@ spec:
         ports:
         - containerPort: 3500
           name: ui
+{{- end }}
