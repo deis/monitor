@@ -1,3 +1,4 @@
+{{- if eq .Values.global.influxdb_location "on-cluster" }}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -53,3 +54,4 @@ spec:
             port: 8086
           initialDelaySeconds: 1
           timeoutSeconds: 1
+{{- end }}

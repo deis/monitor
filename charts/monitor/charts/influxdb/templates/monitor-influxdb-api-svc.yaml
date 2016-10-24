@@ -1,3 +1,4 @@
+{{- if eq .Values.global.influxdb_location "on-cluster" }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -17,3 +18,4 @@ spec:
     targetPort: transport
   selector:
     app: deis-monitor-influxdb
+{{- end }}
