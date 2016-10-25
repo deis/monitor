@@ -30,6 +30,7 @@
               "threshold2Color": "rgba(234, 112, 112, 0.22)"
             },
             "id": 31,
+            "interval": "",
             "isNew": true,
             "legend": {
               "avg": false,
@@ -83,26 +84,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "sum",
-                      "params": []
+                      "params": [],
+                      "type": "sum"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
@@ -145,8 +146,7 @@
                 "min": null,
                 "show": true
               }
-            ],
-            "interval": ""
+            ]
           },
           {
             "aliasColors": {},
@@ -215,20 +215,20 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "sum",
-                      "params": []
+                      "params": [],
+                      "type": "sum"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
@@ -284,7 +284,7 @@
           {
             "aliasColors": {},
             "bars": false,
-            "datasource": null,
+            "datasource": "influxdb-datasource",
             "editable": true,
             "error": false,
             "fill": 1,
@@ -320,7 +320,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -331,7 +331,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -350,32 +350,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-controller"
                   }
@@ -453,7 +453,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -464,7 +464,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -482,26 +482,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-controller"
                   }
@@ -588,7 +588,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -599,7 +599,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -617,32 +617,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-builder"
                   }
@@ -720,7 +720,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -731,7 +731,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -749,26 +749,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         "10"
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-builder"
                   }
@@ -855,7 +855,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -866,7 +866,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -884,32 +884,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-database"
                   }
@@ -986,7 +986,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -997,7 +997,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -1015,26 +1015,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-database"
                   }
@@ -1121,7 +1121,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1132,7 +1132,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -1150,32 +1150,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-logger-fluentd"
                   }
@@ -1252,7 +1252,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1263,7 +1263,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -1281,26 +1281,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-logger-fluentd"
                   }
@@ -1387,7 +1387,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1398,7 +1398,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -1416,32 +1416,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-monitor-grafana"
                   }
@@ -1518,7 +1518,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1529,7 +1529,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -1547,26 +1547,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-monitor-grafana"
                   }
@@ -1653,7 +1653,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1664,7 +1664,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -1682,32 +1682,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-monitor-influxdb"
                   }
@@ -1784,7 +1784,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1795,7 +1795,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -1813,26 +1813,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-monitor-influxdb"
                   }
@@ -1919,7 +1919,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -1930,7 +1930,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -1948,32 +1948,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-logger"
                   }
@@ -2050,7 +2050,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2061,7 +2061,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -2079,26 +2079,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-logger"
                   }
@@ -2185,7 +2185,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2196,7 +2196,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -2214,32 +2214,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-minio"
                   }
@@ -2316,7 +2316,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2327,7 +2327,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -2345,26 +2345,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-minio"
                   }
@@ -2451,7 +2451,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2462,7 +2462,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -2480,32 +2480,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-nsqd"
                   }
@@ -2582,7 +2582,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2593,7 +2593,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -2611,26 +2611,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-nsqd"
                   }
@@ -2717,7 +2717,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2728,7 +2728,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -2746,32 +2746,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-logger-redis"
                   }
@@ -2848,7 +2848,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2859,7 +2859,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -2877,26 +2877,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-logger-redis"
                   }
@@ -2983,7 +2983,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -2994,7 +2994,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -3012,32 +3012,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-registry"
                   }
@@ -3114,7 +3114,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3125,7 +3125,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -3143,26 +3143,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-registry"
                   }
@@ -3249,7 +3249,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3260,7 +3260,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -3278,32 +3278,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-registry-proxy"
                   }
@@ -3380,7 +3380,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3391,7 +3391,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -3409,26 +3409,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-registry-proxy"
                   }
@@ -3515,7 +3515,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3526,7 +3526,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -3544,32 +3544,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-router"
                   }
@@ -3646,7 +3646,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3657,7 +3657,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -3675,26 +3675,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-router"
                   }
@@ -3781,7 +3781,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -3792,7 +3792,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -3810,32 +3810,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-monitor-telegraf"
                   }
@@ -3923,7 +3923,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -3941,26 +3941,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-monitor-telegraf"
                   }
@@ -4047,7 +4047,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -4058,7 +4058,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -4076,32 +4076,32 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "cpu_usage_nanocores"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     },
                     {
-                      "type": "math",
                       "params": [
                         " / 1000000"
-                      ]
+                      ],
+                      "type": "math"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-workflow-manager"
                   }
@@ -4144,6 +4144,7 @@
             "aliasColors": {},
             "bars": false,
             "datasource": null,
+            "decimals": 2,
             "editable": true,
             "error": false,
             "fill": 1,
@@ -4156,14 +4157,14 @@
             "id": 18,
             "isNew": true,
             "legend": {
+              "alignAsTable": false,
               "avg": false,
               "current": false,
               "max": false,
               "min": false,
               "show": false,
               "total": false,
-              "values": false,
-              "alignAsTable": false
+              "values": false
             },
             "lines": true,
             "linewidth": 2,
@@ -4179,7 +4180,7 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod",
+                "alias": "$tag_pod_name",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -4190,7 +4191,7 @@
                   },
                   {
                     "params": [
-                      "pod"
+                      "pod_name"
                     ],
                     "type": "tag"
                   },
@@ -4208,26 +4209,26 @@
                 "select": [
                   [
                     {
-                      "type": "field",
                       "params": [
                         "memory_usage_bytes"
-                      ]
+                      ],
+                      "type": "field"
                     },
                     {
-                      "type": "last",
-                      "params": []
+                      "params": [],
+                      "type": "last"
                     },
                     {
-                      "type": "moving_average",
                       "params": [
                         10
-                      ]
+                      ],
+                      "type": "moving_average"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-workflow-manager"
                   }
@@ -4264,8 +4265,7 @@
                 "min": null,
                 "show": true
               }
-            ],
-            "decimals": 2
+            ]
           }
         ],
         "showTitle": true,
@@ -4273,7 +4273,7 @@
       }
     ],
     "time": {
-      "from": "now-3h",
+      "from": "now-5m",
       "to": "now"
     },
     "timepicker": {
@@ -4309,7 +4309,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 1,
+    "version": 0,
     "links": [],
     "gnetId": null
   }

@@ -17,79 +17,30 @@
         "height": "200px",
         "panels": [
           {
-            "title": "CPU Usage (Millicores)",
-            "error": false,
-            "span": 6,
-            "editable": true,
-            "type": "singlestat",
-            "isNew": true,
-            "id": 9,
-            "targets": [
-              {
-                "policy": "default",
-                "dsType": "influxdb",
-                "resultFormat": "time_series",
-                "tags": [
-                  {
-                    "key": "name",
-                    "operator": "=",
-                    "value": "deis-nsqd"
-                  }
-                ],
-                "groupBy": [
-                  {
-                    "type": "time",
-                    "params": [
-                      "$interval"
-                    ]
-                  },
-                  {
-                    "type": "fill",
-                    "params": [
-                      "null"
-                    ]
-                  }
-                ],
-                "select": [
-                  [
-                    {
-                      "type": "field",
-                      "params": [
-                        "cpu_usage_nanocores"
-                      ]
-                    },
-                    {
-                      "type": "last",
-                      "params": []
-                    },
-                    {
-                      "type": "math",
-                      "params": [
-                        " / 1000000"
-                      ]
-                    }
-                  ]
-                ],
-                "refId": "A",
-                "measurement": "kubernetes_pod_container"
-              }
-            ],
-            "links": [],
-            "datasource": null,
-            "maxDataPoints": 100,
-            "interval": null,
             "cacheTimeout": null,
-            "format": "none",
-            "prefix": "",
-            "postfix": "",
-            "nullText": null,
-            "valueMaps": [
-              {
-                "value": "null",
-                "op": "=",
-                "text": "N/A"
-              }
+            "colorBackground": false,
+            "colorValue": false,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
             ],
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "format": "none",
+            "gauge": {
+              "maxValue": 100,
+              "minValue": 0,
+              "show": false,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "id": 9,
+            "interval": null,
+            "isNew": true,
+            "links": [],
+            "mappingType": 1,
             "mappingTypes": [
               {
                 "name": "value to text",
@@ -100,40 +51,89 @@
                 "value": 2
               }
             ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
             "rangeMaps": [
               {
                 "from": "null",
-                "to": "null",
-                "text": "N/A"
+                "text": "N/A",
+                "to": "null"
               }
             ],
-            "mappingType": 1,
-            "nullPointMode": "connected",
-            "valueName": "avg",
-            "prefixFontSize": "50%",
-            "valueFontSize": "200%",
-            "postfixFontSize": "50%",
-            "thresholds": "",
-            "colorBackground": false,
-            "colorValue": false,
-            "colors": [
-              "rgba(245, 54, 54, 0.9)",
-              "rgba(237, 129, 40, 0.89)",
-              "rgba(50, 172, 45, 0.97)"
-            ],
+            "span": 6,
             "sparkline": {
-              "show": true,
+              "fillColor": "rgba(31, 118, 189, 0.18)",
               "full": false,
               "lineColor": "rgb(31, 120, 193)",
-              "fillColor": "rgba(31, 118, 189, 0.18)"
+              "show": true
             },
-            "gauge": {
-              "show": false,
-              "minValue": 0,
-              "maxValue": 100,
-              "thresholdMarkers": true,
-              "thresholdLabels": false
-            }
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "cpu_usage_nanocores"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        " / 1000000"
+                      ],
+                      "type": "math"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "deis-nsqd"
+                  }
+                ]
+              }
+            ],
+            "thresholds": "",
+            "title": "CPU Usage (Millicores)",
+            "type": "singlestat",
+            "valueFontSize": "200%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "avg"
           },
           {
             "cacheTimeout": null,
@@ -234,7 +234,7 @@
                 ],
                 "tags": [
                   {
-                    "key": "name",
+                    "key": "container_name",
                     "operator": "=",
                     "value": "deis-nsqd"
                   }
@@ -798,7 +798,7 @@
     },
     "refresh": "5s",
     "schemaVersion": 12,
-    "version": 3,
+    "version": 1,
     "links": [],
     "gnetId": null
   }
