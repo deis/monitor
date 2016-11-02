@@ -655,7 +655,7 @@
       }
     ],
     "time": {
-      "from": "now-5m",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {
@@ -691,7 +691,7 @@
       "list": []
     },
     "schemaVersion": 12,
-    "version": 1,
+    "version": 0,
     "links": [],
     "gnetId": null
   }

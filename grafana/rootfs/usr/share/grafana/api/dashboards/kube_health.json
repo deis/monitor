@@ -1,0 +1,1118 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Kubernetes Health",
+    "tags": [],
+    "style": "dark",
+    "timezone": "browser",
+    "editable": true,
+    "hideControls": false,
+    "sharedCrosshair": false,
+    "rows": [
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 1,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "cpu_usage_nanocores"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    },
+                    {
+                      "params": [
+                        " / 1000000"
+                      ],
+                      "type": "math"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "container_name",
+                    "operator": "=~",
+                    "value": "/^$container_name$/"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "milli-cores",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "showTitle": false,
+        "title": "Row"
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 2,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "memory_usage_bytes"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "container_name",
+                    "operator": "=~",
+                    "value": "/^$container_name$/"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "bytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "title": "New row"
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "content": "# Kubelet",
+            "editable": true,
+            "error": false,
+            "id": 5,
+            "isNew": true,
+            "links": [],
+            "mode": "markdown",
+            "span": 1,
+            "title": "",
+            "transparent": true,
+            "type": "text"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 4,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 11,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_system_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "cpu_usage_nanocores"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    },
+                    {
+                      "params": [
+                        " / 1000000"
+                      ],
+                      "type": "math"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kubelet"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "milli-cores",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "content": "",
+            "editable": true,
+            "error": false,
+            "id": 8,
+            "isNew": true,
+            "links": [],
+            "mode": "markdown",
+            "span": 1,
+            "title": "",
+            "transparent": true,
+            "type": "text"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 6,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "span": 11,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_system_container",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "memory_usage_bytes"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        10
+                      ],
+                      "type": "moving_average"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kubelet"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "bytes",
+                "label": "milli-cores",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "title": "New row"
+      },
+      {
+        "collapse": false,
+        "editable": true,
+        "height": "250px",
+        "panels": [
+          {
+            "content": "# Kube System",
+            "editable": true,
+            "error": false,
+            "id": 7,
+            "isNew": true,
+            "links": [],
+            "mode": "markdown",
+            "span": 1,
+            "title": "",
+            "transparent": true,
+            "type": "text"
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+              "threshold1": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2": null,
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "id": 3,
+            "isNew": true,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 2,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "Received",
+                "color": "#3F6833"
+              },
+              {
+                "alias": "Sent",
+                "color": "#890F02",
+                "transform": "negative-Y"
+              }
+            ],
+            "span": 11,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Received",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_network",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "rx_bytes"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        "10s"
+                      ],
+                      "type": "non_negative_derivative"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace",
+                    "operator": "=",
+                    "value": "kube-system"
+                  }
+                ]
+              },
+              {
+                "alias": "Sent",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "kubernetes_pod_network",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "tx_bytes"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "last"
+                    },
+                    {
+                      "params": [
+                        "10s"
+                      ],
+                      "type": "non_negative_derivative"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace",
+                    "operator": "=",
+                    "value": "kube-system"
+                  }
+                ]
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Network",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "show": true
+            },
+            "yaxes": [
+              {
+                "format": "Bps",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "title": "New row"
+      },
+      {
+        "title": "New row",
+        "height": "250px",
+        "editable": true,
+        "collapse": false,
+        "panels": [
+          {
+            "title": "",
+            "error": false,
+            "span": 1,
+            "editable": true,
+            "type": "text",
+            "isNew": true,
+            "id": 10,
+            "mode": "markdown",
+            "content": "# Nodes",
+            "links": [],
+            "transparent": true
+          },
+          {
+            "title": "CPU",
+            "error": false,
+            "span": 11,
+            "editable": true,
+            "type": "graph",
+            "isNew": true,
+            "id": 9,
+            "targets": [
+              {
+                "policy": "default",
+                "dsType": "influxdb",
+                "resultFormat": "time_series",
+                "tags": [],
+                "groupBy": [
+                  {
+                    "type": "time",
+                    "params": [
+                      "$interval"
+                    ]
+                  },
+                  {
+                    "type": "tag",
+                    "params": [
+                      "node_name"
+                    ]
+                  },
+                  {
+                    "type": "fill",
+                    "params": [
+                      "null"
+                    ]
+                  }
+                ],
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "cpu_usage_nanocores"
+                      ]
+                    },
+                    {
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
+                    },
+                    {
+                      "type": "math",
+                      "params": [
+                        " / 1000000"
+                      ]
+                    }
+                  ]
+                ],
+                "refId": "A",
+                "measurement": "kubernetes_node",
+                "alias": "$tag_node_name"
+              }
+            ],
+            "datasource": null,
+            "renderer": "flot",
+            "yaxes": [
+              {
+                "label": "milli-cores",
+                "show": true,
+                "logBase": 1,
+                "min": null,
+                "max": null,
+                "format": "short"
+              },
+              {
+                "label": null,
+                "show": true,
+                "logBase": 1,
+                "min": null,
+                "max": null,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            },
+            "grid": {
+              "threshold1": null,
+              "threshold2": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "lines": true,
+            "fill": 1,
+            "linewidth": 2,
+            "points": false,
+            "pointradius": 5,
+            "bars": false,
+            "stack": false,
+            "percentage": false,
+            "legend": {
+              "show": false,
+              "values": false,
+              "min": false,
+              "max": false,
+              "current": false,
+              "total": false,
+              "avg": false
+            },
+            "nullPointMode": "connected",
+            "steppedLine": false,
+            "tooltip": {
+              "value_type": "cumulative",
+              "shared": true,
+              "sort": 0,
+              "msResolution": false
+            },
+            "timeFrom": null,
+            "timeShift": null,
+            "aliasColors": {},
+            "seriesOverrides": [],
+            "links": []
+          },
+          {
+            "title": "",
+            "error": false,
+            "span": 1,
+            "editable": true,
+            "type": "text",
+            "isNew": true,
+            "id": 12,
+            "mode": "markdown",
+            "content": "",
+            "links": [],
+            "transparent": true
+          },
+          {
+            "title": "Memory",
+            "error": false,
+            "span": 11,
+            "editable": true,
+            "type": "graph",
+            "isNew": true,
+            "id": 11,
+            "targets": [
+              {
+                "policy": "default",
+                "dsType": "influxdb",
+                "resultFormat": "time_series",
+                "tags": [],
+                "groupBy": [
+                  {
+                    "type": "time",
+                    "params": [
+                      "$interval"
+                    ]
+                  },
+                  {
+                    "type": "tag",
+                    "params": [
+                      "node_name"
+                    ]
+                  },
+                  {
+                    "type": "fill",
+                    "params": [
+                      "null"
+                    ]
+                  }
+                ],
+                "select": [
+                  [
+                    {
+                      "type": "field",
+                      "params": [
+                        "memory_usage_bytes"
+                      ]
+                    },
+                    {
+                      "type": "last",
+                      "params": []
+                    },
+                    {
+                      "type": "moving_average",
+                      "params": [
+                        10
+                      ]
+                    }
+                  ]
+                ],
+                "refId": "A",
+                "measurement": "kubernetes_node",
+                "alias": "$tag_node_name"
+              }
+            ],
+            "datasource": null,
+            "renderer": "flot",
+            "yaxes": [
+              {
+                "label": "",
+                "show": true,
+                "logBase": 1,
+                "min": null,
+                "max": null,
+                "format": "bytes"
+              },
+              {
+                "label": null,
+                "show": true,
+                "logBase": 1,
+                "min": null,
+                "max": null,
+                "format": "short"
+              }
+            ],
+            "xaxis": {
+              "show": true
+            },
+            "grid": {
+              "threshold1": null,
+              "threshold2": null,
+              "threshold1Color": "rgba(216, 200, 27, 0.27)",
+              "threshold2Color": "rgba(234, 112, 112, 0.22)"
+            },
+            "lines": true,
+            "fill": 1,
+            "linewidth": 2,
+            "points": false,
+            "pointradius": 5,
+            "bars": false,
+            "stack": false,
+            "percentage": false,
+            "legend": {
+              "show": false,
+              "values": false,
+              "min": false,
+              "max": false,
+              "current": false,
+              "total": false,
+              "avg": false
+            },
+            "nullPointMode": "connected",
+            "steppedLine": false,
+            "tooltip": {
+              "value_type": "cumulative",
+              "shared": true,
+              "sort": 0,
+              "msResolution": false
+            },
+            "timeFrom": null,
+            "timeShift": null,
+            "aliasColors": {},
+            "seriesOverrides": [],
+            "links": []
+          }
+        ]
+      }
+    ],
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "templating": {
+      "list": [
+        {
+          "allValue": "",
+          "current": {
+            "value": [
+              "kube-proxy"
+            ],
+            "text": "kube-proxy",
+            "tags": []
+          },
+          "datasource": "influxdb-datasource",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Container",
+          "multi": true,
+          "name": "container_name",
+          "options": [
+            {
+              "text": "kube-proxy",
+              "value": "kube-proxy",
+              "selected": true
+            },
+            {
+              "text": "kubedns",
+              "value": "kubedns",
+              "selected": false
+            },
+            {
+              "text": "kubernetes-dashboard",
+              "value": "kubernetes-dashboard",
+              "selected": false
+            }
+          ],
+          "query": "show tag values from kubernetes_pod_container with key in (\"container_name\") where container_name =~ /kube.*/",
+          "refresh": 1,
+          "regex": "",
+          "type": "query"
+        }
+      ]
+    },
+    "annotations": {
+      "list": []
+    },
+    "refresh": "5s",
+    "schemaVersion": 12,
+    "version": 2,
+    "links": [],
+    "gnetId": null
+  }
+}
