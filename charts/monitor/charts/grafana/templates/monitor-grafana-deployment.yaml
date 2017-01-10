@@ -71,4 +71,13 @@ spec:
         ports:
         - containerPort: 3500
           name: ui
+{{- if .Values.persistence.enabled }}
+        volumeMounts:
+        - name: grafana-data
+          mountPath: /var/lib/grafana
+      volumes:
+      - name: grafana-data
+        persistentVolumeClaim:
+          claimName: deis-monitor-grafana
+{{- end }}
 {{- end }}
