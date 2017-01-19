@@ -11,7 +11,7 @@ COPY . /
 
 RUN curl -SL -o /home/influxdb/envtpl https://github.com/arschles/envtpl/releases/download/0.2.3/envtpl_linux_amd64 \
 	&& chmod +x /home/influxdb/envtpl \
-	&& curl -SL -o /tmp/influxdb.deb https://dl.influxdata.com/influxdb/releases/influxdb_1.0.0_amd64.deb \
+	&& curl -SL -o /tmp/influxdb.deb https://dl.influxdata.com/influxdb/releases/influxdb_1.1.1_amd64.deb \
 	&& dpkg -i /tmp/influxdb.deb \
 	&& rm /tmp/influxdb.deb \
 	&& mkdir -p /data \
