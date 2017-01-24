@@ -35,10 +35,10 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
   wal-flush-cold-interval = {{ default "5s" .DATA_WAL_FLUSH_COLD_INTERVAL | quote }}
   wal-partition-size-threshold = {{ default 52428800 .DATA_WAL_PARTITION_SIZE_THRESHOLD }}
   query-log-enabled = {{ default false .DATA_QUERY_LOG_ENABLED }}
-  cache-max-memory-size = {{ default 524288000 .DATA_CACHE_MAX_MEMORY_SIZE }}
+  cache-max-memory-size = {{ default 1048576000 .DATA_CACHE_MAX_MEMORY_SIZE }}
   cache-snapshot-memory-size = {{ default 26214400 .DATA_CACHE_SNAPSHOT_MEMORY_SIZE }}
-  cache-snapshot-write-cold-duration = {{ default "1h0m0s" .DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION | quote }}
-  compact-full-write-cold-duration = {{ default "24h0m0s" .DATA_COMPACT_FULL_WRITE_COLD_DURATION | quote }}
+  cache-snapshot-write-cold-duration = {{ default "10m0s" .DATA_CACHE_SNAPSHOT_WRITE_COLD_DURATION | quote }}
+  compact-full-write-cold-duration = {{ default "4h0m0s" .DATA_COMPACT_FULL_WRITE_COLD_DURATION | quote }}
   max-points-per-block = {{ default 0 .DATA_MAX_POINTS_PER_BLOCK }}
   data-logging-enabled = {{ default false .DATA_LOGGING_ENABLED }}
 
@@ -58,7 +58,7 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
   advance-period = {{ default "30m0s" .SHARD_PRECREATION_ADVANCE_PERIOD | quote }}
 
 [admin]
-  enabled = {{ default true .ADMIN_ENABLED }}
+  enabled = {{ default false .ADMIN_ENABLED }}
   bind-address = {{ default ":8083" .ADMIN_BIND_ADDRESS | quote }}
   https-enabled = {{ default false .ADMIN_HTTPS_ENABLED }}
   https-certificate = {{ default "/etc/ssl/influxdb.pem" .ADMIN_HTTPS_CERTIFICATE | quote }}
@@ -114,4 +114,3 @@ bind-address = {{ default ":8088" .BIND_ADDRESS | quote }}
   batch-timeout = {{ default "1s" .UDP_BATCH_TIMEOUT | quote }}
   batch-pending = {{ default "5" .UDP_BATCH_PENDING }}
   read-buffer ={{ default "0" .UDP_READ_BUFFER }}
-

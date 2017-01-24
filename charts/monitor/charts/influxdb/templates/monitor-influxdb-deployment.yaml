@@ -54,4 +54,16 @@ spec:
             port: 8086
           initialDelaySeconds: 1
           timeoutSeconds: 1
+{{- if .Values.persistence.enabled }}
+        volumeMounts:
+        - name: influxdb-data
+          mountPath: /data
+      # Allow user influxdb to write to /data
+      securityContext:
+        fsGroup: 1001
+      volumes:
+      - name: influxdb-data
+        persistentVolumeClaim:
+          claimName: deis-monitor-influxdb
+{{- end }}
 {{- end }}
