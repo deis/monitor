@@ -15,7 +15,7 @@ uninstall: kube-delete
 upgrade: kube-update
 
 docker-build:
-	docker build -t ${IMAGE} rootfs
+	docker build ${DOCKER_BUILD_FLAGS} -t ${IMAGE} rootfs
 	docker tag ${IMAGE} ${MUTABLE_IMAGE}
 
 clean: check-docker
