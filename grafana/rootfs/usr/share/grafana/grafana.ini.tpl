@@ -17,6 +17,11 @@ data = {{ default "/var/lib/grafana" .DATA_PATH }}
 #
 logs = {{ default "/var/log" .LOG_PATH }}
 
+#
+# Directory where grafana will automatically scan and look for plugins
+#
+plugins = {{ default "/var/lib/grafana/plugins" .PLUGINS_PATH }}
+
 #################################### Server ####################################
 [server]
 # Protocol (http or https)

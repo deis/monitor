@@ -26,6 +26,21 @@ echo "###########################################"
 cat /usr/share/grafana/grafana.ini
 echo "###########################################"
 echo "###########################################"
+
+GF_PATHS_PLUGINS=${PLUGINS_PATH:-"/var/lib/grafana/plugins"}
+if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then
+  echo "Installing Grafana plugins..."
+  OLDIFS=$IFS
+  IFS=','
+  for plugin in ${GF_INSTALL_PLUGINS}; do
+    echo "Installing ${plugin} ..."
+    grafana-cli  --pluginsDir "${GF_PATHS_PLUGINS}" plugins install ${plugin}
+    echo ""
+    echo "Done installing ${plugin}"
+  done
+  IFS=$OLDIFS
+fi
+
 set -m
 echo "Starting Grafana in the background"
 exec /usr/sbin/grafana-server -config /usr/share/grafana/grafana.ini -homepath /usr/share/grafana &
