@@ -100,6 +100,8 @@
 | <a name="amqp_publisher_exchange"></a> [AMQP_PUBLISHER_EXCHANGE](#amqp_publisher_exchange) | no default | AMQP Publisher Exchange |
 | <a name="dashboard_json"></a> [DASHBOARD_JSON](#dashboard_json) | true | Poll a location for json files that contain dashboards |
 | <a name="dashboard_json_path"></a> [DASHBOARD_JSON_PATH](#dashboard_json_path) | /usr/share/grafana/dashboards | Location to scan for json dashboards |
+| <a name="plugins_path"></a> [PLUGINS_PATH](#plugins_path) | /var/lib/grafana/plugins | Path to where grafana can install plugins |
+| <a name="gf_install_plugins"></a> [GF_INSTALL_PLUGINS](#gf_install_plugins) | no default | Pass the plugins as a comma seperated list |
 
 ## Development
 The provided `Makefile` has various targets to help support building and publishing new images into a kubernetes cluster.
