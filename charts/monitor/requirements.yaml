@@ -1,0 +1,9 @@
+  # dependencies:
+  #   - name: influxdb
+  #     version: "0.4.0"
+  #     repository: https://kubernetes-charts.storage.googleapis.com
+
+  dependencies:
+  - name: influxdb
+    version: "0.4.1"
+    repository: http://127.0.0.1:8879

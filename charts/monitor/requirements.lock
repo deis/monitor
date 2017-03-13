@@ -1,0 +1,10 @@
+dependencies:
+- condition: ""
+  enabled: false
+  import-values: null
+  name: influxdb
+  repository: http://127.0.0.1:8879
+  tags: null
+  version: 0.4.1
+digest: sha256:b034be0df67d05c3f222f01f996fed5d2a70bbc4033500cb5dfd82b5b84651d2
+generated: 2017-04-20T13:08:49.746407575-04:00

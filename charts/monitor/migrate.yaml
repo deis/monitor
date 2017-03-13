@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deis-monitor-migrate-data
+  annotations:
+    "helm.sh/hook": "pre-upgrade"
+    "helm.sh/hook-weight": "0"
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: deis-monitor-migrate-data
+        image: "lachlanevenson/k8s-kubectl"
+        command: ["/bin/sh", "-c"]
+        args: ["(if [ -d /var/lib/influxdb/data/_internal ]; then \
+                  echo 'Nothing to migrate!'; \
+                else \
+                  echo Creating directories; \
+                  mkdir /var/lib/influxdb/data; \
+                  (if [ -d /var/lib/influxdb/db/wal ]; then \
+                    echo 'Moving data from /db/wal'; \
+                    mv /var/lib/influxdb/db/wal /var/lib/influxdb; \
+                  else \
+                    echo 'Directory /var/lib/influxdb/db/wal does not exist!'; \
+                  fi); \
+                  (if [ -d /var/lib/influxdb/db/_internal ]; then \
+                    echo 'Moving data from /db/*'; \
+                    mv /var/lib/influxdb/db/* /var/lib/influxdb/data; \
+                  else \
+                    echo 'Directory /var/lib/influxdb/db does not exist!'; \
+                  fi);
+                fi)"]
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/influxdb
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: deis-monitor-influxdb

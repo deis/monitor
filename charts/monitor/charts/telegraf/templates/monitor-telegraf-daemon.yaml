@@ -55,9 +55,9 @@ spec:
                 key: password
           {{- else }}
           - name: "INFLUXDB_URLS"
-            value: "\"http://$(DEIS_MONITOR_INFLUXAPI_SERVICE_HOST):$(DEIS_MONITOR_INFLUXAPI_SERVICE_PORT_TRANSPORT)\""
+            value: "\"http://{{.Release.Name}}-influxdb.{{.Release.Namespace}}.svc.cluster.local:8086\""
           - name: "INFLUXDB_INPUT_URLS"
-            value: "\"http://$(DEIS_MONITOR_INFLUXAPI_SERVICE_HOST):$(DEIS_MONITOR_INFLUXAPI_SERVICE_PORT_TRANSPORT)/debug/vars\""
+            value: "\"http://{{.Release.Name}}-influxdb.{{.Release.Namespace}}.svc.cluster.local:8086/debug/vars\""
           - name: "ENABLE_INFLUXDB_INPUT"
             value: "true"
           {{- end }}

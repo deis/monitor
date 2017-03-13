@@ -8,20 +8,7 @@ grafana:
     enabled: false
     accessMode: ReadWriteOnce
     size: 5Gi
-influxdb:
-  org: "deisci"
-  pull_policy: "Always"
-  docker_tag: canary
-  # limits_cpu: "100m"
-  # limits_memory: "50Mi"
-  url: "my.influx.url"
-  database: "kubernetes"
-  user: "user"
-  password: "password"
-  persistence:
-    enabled: false
-    accessMode: ReadWriteOnce
-    size: 20Gi
+
 telegraf:
   org: "deisci"
   pull_policy: "Always"
@@ -29,6 +16,19 @@ telegraf:
   # limits_cpu: "100m"
   # limits_memory: "50Mi"
 
+influxdb:
+  # Configure the following ONLY if using an off-cluster Influx database
+  url: "my.influx.url"
+  database: "kubernetes"
+  user: "user"
+  password: "password"
+  # Configure the following ONLY if you want persistence for on-cluster influxdb
+  # GCP PDs and EBS volumes are supported only
+  persistence:
+    enabled: false # Set to true to enable persistence
+    name: deis-monitor-influxdb
+    size: 20Gi # PVC size
+    
 global:
   # Set the location of Workflow's influxdb cluster
   #
