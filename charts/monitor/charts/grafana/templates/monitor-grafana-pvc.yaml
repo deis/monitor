@@ -6,7 +6,11 @@ metadata:
   labels:
     heritage: deis
   annotations:
-    volume.beta.kubernetes.io/storage-class: {{ .Values.persistence.storageClass }}
+  {{- if .Values.persistence.storageClass }}
+    volume.beta.kubernetes.io/storage-class: {{ .Values.persistence.storageClass | quote }}
+  {{- else }}
+    volume.alpha.kubernetes.io/storage-class: default
+  {{- end }}
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode | quote }}
