@@ -34,7 +34,7 @@ if [ ! -z "${GF_INSTALL_PLUGINS}" ]; then
   IFS=','
   for plugin in ${GF_INSTALL_PLUGINS}; do
     echo "Installing ${plugin} ..."
-    grafana-cli  --pluginsDir "${GF_PATHS_PLUGINS}" plugins install ${plugin}
+    grafana-cli  --pluginsDir "${GF_PATHS_PLUGINS}" plugins install "${plugin}"
     echo ""
     echo "Done installing ${plugin}"
   done
@@ -45,7 +45,7 @@ set -m
 echo "Starting Grafana in the background"
 exec /usr/sbin/grafana-server -config /usr/share/grafana/grafana.ini -homepath /usr/share/grafana &
 echo "Waiting for Grafana to come up..."
-until $(curl -q --fail --output /dev/null --silent http://${GRAFANA_USER}:${GRAFANA_PASSWD}@localhost:${GRAFANA_PORT}/api/org); do
+until curl -q --fail --output /dev/null --silent "http://${GRAFANA_USER}:${GRAFANA_PASSWD}@localhost:${GRAFANA_PORT}/api/org"; do
   printf "."
   sleep 2
 done
