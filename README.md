@@ -1,4 +1,5 @@
 # Deis Monitor v2
+[![Build Status](https://ci.deis.io/job/monitor/badge/icon)](https://ci.deis.io/job/monitor)
 [![Docker Repository on Quay](https://quay.io/repository/deisci/grafana/status "Docker Repository on Quay")](https://quay.io/repository/deisci/grafana)
 [![Docker Repository on Quay](https://quay.io/repository/deisci/influxdb/status "Docker Repository on Quay")](https://quay.io/repository/deisci/influxdb)
 [![Docker Repository on Quay](https://quay.io/repository/deisci/telegraf/status "Docker Repository on Quay")](https://quay.io/repository/deisci/telegraf)
