@@ -42,3 +42,9 @@ global:
   # - on-cluster: Run Grafana within the Kubernetes cluster
   # - off-cluster: Grafana is running outside of the cluster
   grafana_location: "on-cluster"
+  # Set the location of Workflow's logger-specific Redis instance
+  #
+  # Valid values are:
+  # - on-cluster: Run Redis within the Kubernetes cluster
+  # - off-cluster: Run Redis outside the Kubernetes cluster (configure in loggerRedis section)
+  logger_redis_location: "on-cluster"
