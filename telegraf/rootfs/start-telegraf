@@ -29,6 +29,11 @@ if [ -n "$ENABLE_PROMETHEUS" ]; then
   echo "Setting PROMETHEUS_URLS: $PROMETHEUS_URLS"
 fi
 
+# if the influxdb url does not start with a quote, assume it's singular and quote it
+if [ ${INFLUXDB_URLS:0:1} != "\"" ]; then
+  export INFLUXDB_URLS="\"$INFLUXDB_URLS\""
+fi
+
 echo "Building config.toml!"
 envtpl -in config.toml.tpl | sed  '/^$/d' > config.toml
 
