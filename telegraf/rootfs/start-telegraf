@@ -4,17 +4,18 @@ set -e
 API_URL=${API_URL:-"https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT"}
 NSQ_TOPIC_URL=${NSQ_TOPIC_URL:-"http://$DEIS_NSQD_SERVICE_HOST:$DEIS_NSQD_SERVICE_PORT/topic/create?topic=$NSQ_CONSUMER_TOPIC"}
 
-export BEARER_TOKEN_PATH=/var/run/secrets/kubernetes.io/serviceaccount/token
-export TOKEN=$(cat $BEARER_TOKEN_PATH)
-export NODE_NAME=$(curl -s $API_URL/api/v1/namespaces/$POD_NAMESPACE/pods/$HOSTNAME --header "Authorization: Bearer $TOKEN" --insecure | jq -r '.spec.nodeName')
+export BEARER_TOKEN_PATH TOKEN NODE_NAME NODE_IP AGENT_HOSTNAME
+BEARER_TOKEN_PATH=/var/run/secrets/kubernetes.io/serviceaccount/token
+TOKEN="$(cat $BEARER_TOKEN_PATH)"
+NODE_NAME="$(curl -s "$API_URL/api/v1/namespaces/$POD_NAMESPACE/pods/$HOSTNAME" --header "Authorization: Bearer $TOKEN" --insecure | jq -r '.spec.nodeName')"
 echo "Node Name set (${NODE_NAME})"
-export NODE_IP=$(curl -s $API_URL/api/v1/namespaces/$POD_NAMESPACE/pods/$HOSTNAME --header "Authorization: Bearer $TOKEN" --insecure | jq -r '.status.hostIP')
+NODE_IP="$(curl -s "$API_URL/api/v1/namespaces/$POD_NAMESPACE/pods/$HOSTNAME" --header "Authorization: Bearer $TOKEN" --insecure | jq -r '.status.hostIP')"
 echo "Node IP set (${NODE_IP})"
-export AGENT_HOSTNAME=$NODE_NAME
+AGENT_HOSTNAME=$NODE_NAME
 
 if [ -n "$DEIS_NSQD_SERVICE_HOST" ]; then
   echo "Creating topic with URL: ${NSQ_TOPIC_URL}"
-  curl -s -X POST ${NSQ_TOPIC_URL}
+  curl -s -X POST "${NSQ_TOPIC_URL}"
 fi
 
 if [ -n "$ENABLE_KUBERNETES" ]; then

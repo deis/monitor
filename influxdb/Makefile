@@ -1,39 +1,5 @@
-SHELL = /bin/bash
-
-DOCKER_HOST = $(shell echo $$DOCKER_HOST)
-BUILD_TAG ?= git-$(shell git rev-parse --short HEAD)
 SHORT_NAME ?= influxdb
-DEIS_REGISTRY ?= ${DEV_REGISTRY}
-IMAGE_PREFIX ?= deis
+RESOURCE_TYPE := deployment
+SHELL_SCRIPTS = rootfs/home/influxdb/start-influx
 
-include versioning.mk
-
-build: docker-build
-push: docker-push
-install: kube-install
-uninstall: kube-delete
-upgrade: kube-update
-
-docker-build:
-	docker build ${DOCKER_BUILD_FLAGS} -t ${IMAGE} rootfs
-	docker tag ${IMAGE} ${MUTABLE_IMAGE}
-
-clean: check-docker
-	docker rmi $(IMAGE)
-
-update-manifests:
-	sed 's#\(image:\) .*#\1 $(IMAGE)#' manifests/deis-monitor-influxdb-rc.yaml > manifests/deis-monitor-influxdb-rc.tmp.yaml
-
-kube-install: update-manifests
-	kubectl create -f manifests/deis-monitor-influxdb-api-svc.yaml
-	kubectl create -f manifests/deis-monitor-influxdb-ui-svc.yaml
-	kubectl create -f manifests/deis-monitor-influxdb-rc.tmp.yaml
-
-kube-delete: update-manifests
-	kubectl delete -f manifests/deis-monitor-influxdb-api-svc.yaml
-	kubectl delete -f manifests/deis-monitor-influxdb-ui-svc.yaml
-	kubectl delete -f manifests/deis-monitor-influxdb-rc.tmp.yaml
-
-kube-update: update-manifests
-	kubectl delete -f manifests/deis-monitor-influxdb-rc.tmp.yaml
-	kubectl create -f manifests/deis-monitor-influxdb-rc.tmp.yaml
+include ../default.mk
