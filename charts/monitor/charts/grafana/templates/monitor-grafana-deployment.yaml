@@ -68,6 +68,8 @@ spec:
           value: {{.Values.user}}
         - name: "DEFAULT_USER_PASSWORD"
           value: {{.Values.password}}
+        - name: "ALLOW_SIGN_UP"
+          value: {{.Values.allow_sign_up | quote}}
         ports:
         - containerPort: 3500
           name: ui

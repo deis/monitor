@@ -2,6 +2,7 @@ grafana:
   org: "deisci"
   pull_policy: "Always"
   docker_tag: canary
+  allow_sign_up: "true"
   # limits_cpu: "100m"
   # limits_memory: "50Mi"
   persistence:
