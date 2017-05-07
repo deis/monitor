@@ -1,0 +1,18 @@
+{{- if (.Values.global.use_rbac) -}}
+{{- if (.Capabilities.APIVersions.Has (include "rbacAPIVersion" .)) -}}
+kind: RoleBinding
+apiVersion: {{ template "rbacAPIVersion" . }}
+metadata:
+  name: deis-monitor-telegraf
+  labels:
+    app: deis-monitor-telegraf
+    heritage: deis
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: deis-monitor-telegraf
+subjects:
+- kind: ServiceAccount
+  name: deis-monitor-telegraf
+{{- end -}}
+{{- end -}}

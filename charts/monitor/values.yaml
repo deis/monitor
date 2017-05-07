@@ -49,3 +49,5 @@ global:
   # - on-cluster: Run Redis within the Kubernetes cluster
   # - off-cluster: Run Redis outside the Kubernetes cluster (configure in loggerRedis section)
   logger_redis_location: "on-cluster"
+  # Role-Based Access Control for Kubernetes >= 1.5
+  use_rbac: false
