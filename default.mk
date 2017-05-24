@@ -8,12 +8,13 @@ IMAGE_PREFIX ?= deis
 
 include ../includes.mk
 include ../versioning.mk
+include ../deploy.mk
 
 TEST_ENV_PREFIX := docker run --rm -v ${CURDIR}:/bash -w /bash quay.io/deis/shell-dev
 
 build: docker-build
 push: docker-push
-deploy: check-kubectl docker-build docker-push upgrade
+deploy: check-kubectl docker-build docker-push install
 
 docker-build:
 	docker build ${DOCKER_BUILD_FLAGS} -t ${IMAGE} rootfs
@@ -21,24 +22,20 @@ docker-build:
 
 clean: check-docker
 	docker rmi $(IMAGE)
-
-KD = kubectl --namespace=deis
-upgrade:
-	${KD} patch ${RESOURCE_TYPE} deis-monitor-${SHORT_NAME} \
-		--type='json' \
-		-p='[ \
-			{"op": "replace", "path": "/spec/strategy", "value":{"type":"Recreate"}}, \
-			{"op": "replace", "path": "/spec/template/spec/containers/0/image", "value":"$(IMAGE)"}, \
-			{"op": "replace", "path": "/spec/template/spec/containers/0/imagePullPolicy", "value":"Always"} \
-		]'
-	@if [ "${RESOURCE_TYPE}" == "daemonset" ]; then \
-		echo "Deleting daemonset pods as they aren't yet recreated when daemonset is patched..."; \
-		${KD} delete $$(${KD} get pod -o name | grep "${SHORT_NAME}"); \
-	fi
-
+	
 test: test-style
 
 test-style:
 	${TEST_ENV_PREFIX} shellcheck $(SHELL_SCRIPTS)
 
 .PHONY: build push docker-build clean upgrade deploy test test-style
+
+build-all:
+	docker build ${DOCKER_BUILD_FLAGS} -t ${DEIS_REGISTRY}${IMAGE_PREFIX}/grafana:${VERSION} ../grafana/rootfs
+	docker build ${DOCKER_BUILD_FLAGS} -t ${DEIS_REGISTRY}${IMAGE_PREFIX}/influxdb:${VERSION} ../influxdb/rootfs
+	docker build ${DOCKER_BUILD_FLAGS} -t ${DEIS_REGISTRY}${IMAGE_PREFIX}/telegraf:${VERSION} ../telegraf/rootfs
+
+push-all:
+	docker push ${DEIS_REGISTRY}${IMAGE_PREFIX}/grafana:${VERSION}
+	docker push ${DEIS_REGISTRY}${IMAGE_PREFIX}/influxdb:${VERSION}
+	docker push ${DEIS_REGISTRY}${IMAGE_PREFIX}/telegraf:${VERSION}
