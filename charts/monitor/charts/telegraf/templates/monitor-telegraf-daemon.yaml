@@ -7,6 +7,10 @@ metadata:
   annotations:
     component.deis.io/version: {{ .Values.docker_tag }}
 spec:
+  {{- if ge .Capabilities.KubeVersion.Minor "6" }}
+  updateStrategy:
+    type: RollingUpdate
+  {{- end }}
   template:
     metadata:
       labels:
