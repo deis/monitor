@@ -1,0 +1,36 @@
+{{- if eq .Values.global.influxdb_location "off-cluster" }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deis-monitor-delete-influxdb-deployment-{{ randAlphaNum 5 | lower }}
+  labels:
+    app: "deis-monitor-delete-influxdb-deployment"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+  annotations:
+    "helm.sh/hook": post-install,post-upgrade
+    "helm.sh/hook-weight": "-10"
+spec:
+  template:
+    metadata:
+      name: "{{.Release.Name}}"
+      labels:
+        app: "deis-monitor-delete-influxdb-deployment"
+        heritage: "{{ .Release.Service }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: deis-monitor-delete-influxdb-deployment
+        image: "lachlanevenson/k8s-kubectl"
+        command: ["/bin/sh", "-c"]
+        args: ["(kubectl delete deploy {{.Release.Name}}-influxdb) \
+                || \
+                true"]
+      - name: deis-monitor-delete-telegraf-pods
+        image: "lachlanevenson/k8s-kubectl"
+        command: ["/bin/sh", "-c"]
+        args: ["kubectl get pods | grep deis-monitor-telegraf | awk '{print $1}' | xargs kubectl delete pod \
+                || \
+                true"]
+{{- end }}

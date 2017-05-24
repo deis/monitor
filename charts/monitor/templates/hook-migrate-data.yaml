@@ -1,0 +1,57 @@
+{{ $tillerVersion := semver .Capabilities.TillerVersion.SemVer }}
+{{ $comparingVersion := semver "2.3.0" }}
+
+{{- if gt ($tillerVersion | $comparingVersion.Compare) -1 }}
+{{- if .Values.influxdb.persistence.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deis-monitor-migrate-data-{{ randAlphaNum 5 | lower }}
+  labels:
+    app: "deis-monitor-migrate-data"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "0"
+spec:
+  template:
+    metadata:
+      name: "{{.Release.Name}}"
+      labels:
+        app: "deis-monitor-migrate-data"
+        heritage: "{{ .Release.Service }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: deis-monitor-migrate-data
+        image: "lachlanevenson/k8s-kubectl"
+        command: ["/bin/sh", "-c"]
+        args: ["(if [ -d {{ .Values.influxdb.config.storage_directory }}/data/_internal ]; then \
+                  echo 'Nothing to migrate!'; \
+                else \
+                  echo Creating directories; \
+                  mkdir {{ .Values.influxdb.config.storage_directory }}/data; \
+                  (if [ -d {{ .Values.influxdb.config.storage_directory }}/db/wal ]; then \
+                    echo 'Moving data from /db/wal'; \
+                    mv {{ .Values.influxdb.config.storage_directory }}/db/wal {{ .Values.influxdb.config.storage_directory }}; \
+                  else \
+                    echo 'Directory {{ .Values.influxdb.config.storage_directory }}/db/wal does not exist!'; \
+                  fi); \
+                  (if [ -d {{ .Values.influxdb.config.storage_directory }}/db/_internal ]; then \
+                    echo 'Moving data from /db/*'; \
+                    mv {{ .Values.influxdb.config.storage_directory }}/db/* {{ .Values.influxdb.config.storage_directory }}/data; \
+                  else \
+                    echo 'Directory {{ .Values.influxdb.config.storage_directory }}/db does not exist!'; \
+                  fi);
+                fi)"]
+        volumeMounts:
+        - name: data
+          mountPath: {{ .Values.influxdb.config.storage_directory }}
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: deis-monitor-influxdb
+{{- end }}
+{{- end }}

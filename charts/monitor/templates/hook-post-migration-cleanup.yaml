@@ -1,0 +1,37 @@
+{{ $tillerVersion := semver .Capabilities.TillerVersion.SemVer }}
+{{ $comparingVersion := semver "2.3.0" }}
+
+{{- if gt ($tillerVersion | $comparingVersion.Compare) -1 }}
+{{- if .Values.influxdb.persistence.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: deis-monitor-migration-cleanup-{{ randAlphaNum 5 | lower }}
+  labels:
+    app: "deis-monitor-migration-cleanup"
+    heritage: "{{ .Release.Service }}"
+    release: "{{ .Release.Name }}"
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "10"
+spec:
+  template:
+    metadata:
+      name: "{{.Release.Name}}"
+      labels:
+        app: "deis-monitor-migration-cleanup"
+        heritage: "{{ .Release.Service }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: deis-monitor-migration-cleanup
+        image: "lachlanevenson/k8s-kubectl"
+        command: ["/bin/sh", "-c"]
+        args: ["kubectl delete svc deis-monitor-influxui \
+                || \
+                kubectl delete svc deis-monitor-influxapi \
+                || \
+                true"]
+{{- end }}
+{{- end }}                

@@ -59,8 +59,8 @@ spec:
               name: influxdb-creds
               key: password
         {{- else }}
-        - name: "INFLUXDB_URLS"
-          value: http://$(DEIS_MONITOR_INFLUXAPI_SERVICE_HOST):$(DEIS_MONITOR_INFLUXAPI_SERVICE_PORT_TRANSPORT)
+        - name: DEIS_MONITOR_INFLUXAPI_SERVICE_HOST
+          value: {{.Release.Name}}-influxdb.{{.Release.Namespace}}.svc.cluster.local
         {{- end }}
         - name: "BIND_PORT"
           value: "3500"
