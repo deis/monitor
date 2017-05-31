@@ -1,0 +1,15 @@
+{{- if (.Values.global.use_rbac) -}}
+{{- if (.Capabilities.APIVersions.Has (include "rbacAPIVersion" .)) -}}
+kind: Role
+apiVersion: {{ template "rbacAPIVersion" . }}
+metadata:
+  name: deis-monitor-telegraf
+  labels:
+    app: deis-monitor-telegraf
+    heritage: deis
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get"]
+{{- end -}}
+{{- end -}}
