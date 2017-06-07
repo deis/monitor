@@ -56,7 +56,7 @@
 
 {{ if .INFLUXDB_URLS}}
 [[outputs.influxdb]]
-  urls = [{{ .INFLUXDB_URLS }}]
+  urls = [{{ .INFLUXDB_URLS | quote }}]
   database = {{default "kubernetes" .INFLUXDB_DATABASE | quote }}
   precision = {{ default "ns" .INFLUXDB_PRECISION | quote }}
   timeout = {{ default "5s" .INFLUXDB_TIMEOUT | quote }}
