@@ -6,7 +6,7 @@ RUN apt-get update && \
 	apt-get install -y libfontconfig && \
 	curl -fsSL -o /usr/share/grafana/envtpl https://github.com/arschles/envtpl/releases/download/0.2.3/envtpl_linux_amd64 && \
 	chmod +x /usr/share/grafana/envtpl && \
-	curl -fsSo /tmp/grafana.deb https://grafanarel.s3.amazonaws.com/builds/grafana_4.0.2-1481203731_amd64.deb && \
+	curl -fsSo /tmp/grafana.deb https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.3.2_amd64.deb && \
 	dpkg -i /tmp/grafana.deb && \
 	rm /tmp/grafana.deb && \
 	rm /etc/grafana/grafana.ini && \
